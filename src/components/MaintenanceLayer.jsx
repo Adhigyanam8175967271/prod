@@ -11,7 +11,7 @@ const MaintenanceLayer = () => {
           </Link>
           <Link to='/sysadmin' className='btn btn-primary-600 px-24 flex-shrink-0 d-flex align-items-center justify-content-center gap-8'>
             {" "}
-            Employee Extranet{" "}
+            Extranet{" "}
           </Link>
         </div>
         <div className='py-res-120'>

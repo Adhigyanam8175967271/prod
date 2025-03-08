@@ -1,20 +1,36 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import RouteScrollToTop from "./helper/RouteScrollToTop";
+import React, { Suspense } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 import ErrorPage from "./site/ErrorPage";
 import SignInPage from "./site/SignInPage";
 import MaintenancePage from "./site/MaintenancePage";
+import Dashboard from "./site/Dashboard-Sysadmin/Dashboard";
 
 function App() {
+  const [cookies] = useCookies(["token"]);
+  const isAuthenticated = cookies.token !== undefined;
+
   return (
-    <BrowserRouter>
-      <RouteScrollToTop />
-      <Routes>
-        <Route exact path='/' element={<MaintenancePage />} />
-        <Route exact path='/sysadmin' element={<SignInPage />} />
-        <Route exact path='*' element={<ErrorPage />} />
-      </Routes>
-    </BrowserRouter>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Router basename="/">
+        <Routes>
+          {/* Correct way to handle authentication-based navigation */}
+          <Route
+            path="/dashboard"
+            element={isAuthenticated ? <Dashboard /> : <Navigate to="/sysadmin" />}
+          />
+
+          <Route
+            path="/sysadmin"
+            element={isAuthenticated ? <Navigate to="/dashboard" /> : <SignInPage />}
+          />
+
+          <Route path="/" element={<MaintenancePage />} />
+          <Route path="*" element={<ErrorPage />} />
+        </Routes>
+      </Router>
+    </Suspense>
   );
 }
 

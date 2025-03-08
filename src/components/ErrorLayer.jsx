@@ -8,7 +8,7 @@ const ErrorLayer = () => {
         <img src='siteimages/284270.png' alt='' className='mb-24' />
         <h5 className='mb-16'>Page not Found</h5>
         <p className='text-secondary-light'>
-          Sorry, the page you are looking for doesn’t exist.<br/>It may have been renamed or permanently removed from the system.
+          Sorry, the page you are looking for doesn’t exist on our network.<br/>It may have been renamed or permanently removed from the system.
         </p>
         <Link to='/' className='btn btn-primary-600 radius-8 px-20 py-11'>
           Back to Home
