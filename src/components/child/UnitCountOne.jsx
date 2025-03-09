@@ -1,15 +1,17 @@
 import React from 'react'
+import { NavLink } from "react-router-dom";
 import { Icon } from '@iconify/react';
 const UnitCountOne = () => {
     return (
         <div className="row row-cols-xxxl-5 row-cols-lg-3 row-cols-sm-2 row-cols-1 gy-4">
             <div className="col">
                 <div className="card shadow-none border bg-gradient-start-1 h-100">
+                <NavLink to='/dashboardame'>
                     <div className="card-body p-20">
                         <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
                             <div>
-                                <p className="fw-medium text-primary-light mb-1">Total Users</p>
-                                <h6 className="mb-0">20,000</h6>
+                                <p className="fw-medium text-primary-light mb-1">Listed Astrolgers</p>
+                                <h6 className="mb-0">03</h6>
                             </div>
                             <div className="w-50-px h-50-px bg-cyan rounded-circle d-flex justify-content-center align-items-center">
                                 <Icon
@@ -18,121 +20,261 @@ const UnitCountOne = () => {
                                 />
                             </div>
                         </div>
-                        <p className="fw-medium text-sm text-primary-light mt-12 mb-0 d-flex align-items-center gap-2">
-                            <span className="d-inline-flex align-items-center gap-1 text-success-main">
-                                <Icon icon="bxs:up-arrow" className="text-xs" /> +5000
-                            </span>
-                            Last 30 days users
-                        </p>
                     </div>
+                    </NavLink>
                 </div>
                 {/* card end */}
             </div>
             <div className="col">
                 <div className="card shadow-none border bg-gradient-start-2 h-100">
+                <NavLink to='/dashboardmru'>
                     <div className="card-body p-20">
                         <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
                             <div>
                                 <p className="fw-medium text-primary-light mb-1">
-                                    Total Subscription
+                                    Registered Users
                                 </p>
-                                <h6 className="mb-0">15,000</h6>
+                                <h6 className="mb-0">15</h6>
                             </div>
-                            <div className="w-50-px h-50-px bg-purple rounded-circle d-flex justify-content-center align-items-center">
-                                <Icon
-                                    icon="fa-solid:award"
+                            <div className="w-50-px h-50-px bg-cyan rounded-circle d-flex justify-content-center align-items-center">
+                            <Icon
+                                    icon="gridicons:multiple-users"
                                     className="text-white text-2xl mb-0"
                                 />
                             </div>
                         </div>
-                        <p className="fw-medium text-sm text-primary-light mt-12 mb-0 d-flex align-items-center gap-2">
-                            <span className="d-inline-flex align-items-center gap-1 text-danger-main">
-                                <Icon icon="bxs:down-arrow" className="text-xs" /> -800
-                            </span>
-                            Last 30 days subscription
-                        </p>
+                        
                     </div>
+                    </NavLink>
                 </div>
                 {/* card end */}
             </div>
             <div className="col">
                 <div className="card shadow-none border bg-gradient-start-3 h-100">
+                <NavLink to='/dashboardbc'>
                     <div className="card-body p-20">
                         <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
                             <div>
                                 <p className="fw-medium text-primary-light mb-1">
-                                    Total Free Users
+                                    Blog Categories
                                 </p>
-                                <h6 className="mb-0">5,000</h6>
+                                <h6 className="mb-0">05</h6>
                             </div>
-                            <div className="w-50-px h-50-px bg-info rounded-circle d-flex justify-content-center align-items-center">
+                            <div className="w-50-px h-50-px bg-success-main rounded-circle d-flex justify-content-center align-items-center">
                                 <Icon
-                                    icon="fluent:people-20-filled"
+                                    icon="simple-line-icons:vector"
                                     className="text-white text-2xl mb-0"
                                 />
                             </div>
                         </div>
-                        <p className="fw-medium text-sm text-primary-light mt-12 mb-0 d-flex align-items-center gap-2">
-                            <span className="d-inline-flex align-items-center gap-1 text-success-main">
-                                <Icon icon="bxs:up-arrow" className="text-xs" /> +200
-                            </span>
-                            Last 30 days users
-                        </p>
                     </div>
+                    </NavLink>
                 </div>
                 {/* card end */}
             </div>
             <div className="col">
                 <div className="card shadow-none border bg-gradient-start-4 h-100">
+                <NavLink to='/dashboardbla'>
                     <div className="card-body p-20">
                         <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
                             <div>
-                                <p className="fw-medium text-primary-light mb-1">Total Income</p>
-                                <h6 className="mb-0">$42,000</h6>
+                                <p className="fw-medium text-primary-light mb-1">Blog Articles</p>
+                                <h6 className="mb-0">12</h6>
                             </div>
                             <div className="w-50-px h-50-px bg-success-main rounded-circle d-flex justify-content-center align-items-center">
                                 <Icon
-                                    icon="solar:wallet-bold"
+                                    icon="simple-line-icons:vector"
                                     className="text-white text-2xl mb-0"
                                 />
                             </div>
                         </div>
-                        <p className="fw-medium text-sm text-primary-light mt-12 mb-0 d-flex align-items-center gap-2">
-                            <span className="d-inline-flex align-items-center gap-1 text-success-main">
-                                <Icon icon="bxs:up-arrow" className="text-xs" /> +$20,000
-                            </span>
-                            Last 30 days income
-                        </p>
+                       
                     </div>
+                    </NavLink>
                 </div>
                 {/* card end */}
             </div>
             <div className="col">
                 <div className="card shadow-none border bg-gradient-start-5 h-100">
+                <NavLink to='/dashboardmt'>
                     <div className="card-body p-20">
                         <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
                             <div>
-                                <p className="fw-medium text-primary-light mb-1">Total Expense</p>
-                                <h6 className="mb-0">$30,000</h6>
+                                <p className="fw-medium text-primary-light mb-1">Testimonials</p>
+                                <h6 className="mb-0">10</h6>
                             </div>
                             <div className="w-50-px h-50-px bg-red rounded-circle d-flex justify-content-center align-items-center">
                                 <Icon
-                                    icon="fa6-solid:file-invoice-dollar"
+                                    icon="bi:chat-dots"
                                     className="text-white text-2xl mb-0"
                                 />
                             </div>
                         </div>
-                        <p className="fw-medium text-sm text-primary-light mt-12 mb-0 d-flex align-items-center gap-2">
-                            <span className="d-inline-flex align-items-center gap-1 text-success-main">
-                                <Icon icon="bxs:up-arrow" className="text-xs" /> +$5,000
-                            </span>
-                            Last 30 days expense
-                        </p>
+                       
                     </div>
+                    </NavLink>
+                </div>
+                {/* card end */}
+            </div>
+            <div className="col">
+                <div className="card shadow-none border bg-gradient-start-5 h-100">
+                <NavLink to='/dashboardpb'>
+                    <div className="card-body p-20">
+                        <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
+                            <div>
+                                <p className="fw-medium text-primary-light mb-1">Primary Banners</p>
+                                <h6 className="mb-0">10</h6>
+                            </div>
+                            <div className="w-50-px h-50-px bg-purple rounded-circle d-flex justify-content-center align-items-center">
+                                <Icon
+                                    icon="solar:gallery-wide-linear"
+                                    className="text-white text-2xl mb-0"
+                                />
+                            </div>
+                        </div>
+                       
+                    </div>
+                    </NavLink>
+                </div>
+                {/* card end */}
+            </div>
+            <div className="col">
+                <div className="card shadow-none border bg-gradient-start-4 h-100">
+                <NavLink to='/dashboardsb'>
+                    <div className="card-body p-20">
+                        <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
+                            <div>
+                                <p className="fw-medium text-primary-light mb-1">Secondary Banners</p>
+                                <h6 className="mb-0">12</h6>
+                            </div>
+                            <div className="w-50-px h-50-px bg-purple rounded-circle d-flex justify-content-center align-items-center">
+                                <Icon
+                                    icon="solar:gallery-wide-linear"
+                                    className="text-white text-2xl mb-0"
+                                />
+                            </div>
+                        </div>
+                       
+                    </div>
+                    </NavLink>
+                </div>
+                {/* card end */}
+            </div>
+            <div className="col">
+                <div className="card shadow-none border bg-gradient-start-3 h-100">
+                <NavLink to='/dashboardob'>
+                    <div className="card-body p-20">
+                        <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
+                            <div>
+                                <p className="fw-medium text-primary-light mb-1">
+                                    Offer Banners
+                                </p>
+                                <h6 className="mb-0">05</h6>
+                            </div>
+                            <div className="w-50-px h-50-px bg-purple rounded-circle d-flex justify-content-center align-items-center">
+                                <Icon
+                                    icon="solar:gallery-wide-linear"
+                                    className="text-white text-2xl mb-0"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    </NavLink>
+                </div>
+                {/* card end */}
+            </div>
+            <div className="col">
+                <div className="card shadow-none border bg-gradient-start-2 h-100">
+                <NavLink to='/dashboardms'>
+                    <div className="card-body p-20">
+                        <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
+                            <div>
+                                <p className="fw-medium text-primary-light mb-1">
+                                    Core Services
+                                </p>
+                                <h6 className="mb-0">15</h6>
+                            </div>
+                            <div className="w-50-px h-50-px bg-orange rounded-circle d-flex justify-content-center align-items-center">
+                                <Icon
+                                    icon="mingcute:storage-line"
+                                    className="text-white text-2xl mb-0"
+                                />
+                            </div>
+                        </div>
+                        
+                    </div>
+                    </NavLink>
+                </div>
+                {/* card end */}
+            </div>
+            <div className="col">
+                <div className="card shadow-none border bg-gradient-start-1 h-100">
+                <NavLink to='/dashboardmss'>
+                    <div className="card-body p-20">
+                        <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
+                            <div>
+                                <p className="fw-medium text-primary-light mb-1">Sub Services</p>
+                                <h6 className="mb-0">20</h6>
+                            </div>
+                            <div className="w-50-px h-50-px bg-orange rounded-circle d-flex justify-content-center align-items-center">
+                                <Icon
+                                    icon="mingcute:storage-line"
+                                    className="text-white text-2xl mb-0"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    </NavLink>
+                </div>
+                {/* card end */}
+            </div>
+            <div className="col">
+                <div className="card shadow-none border bg-gradient-start-1 h-100">
+                <NavLink to='/bashboardhc'>
+                    <div className="card-body p-20">
+                        <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
+                            <div>
+                                <p className="fw-medium text-primary-light mb-1">Horoscope Categories</p>
+                                <h6 className="mb-0">20</h6>
+                            </div>
+                            <div className="w-50-px h-50-px bg-yellow rounded-circle d-flex justify-content-center align-items-center">
+                                <Icon
+                                    icon="fe:vector"
+                                    className="text-white text-2xl mb-0"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    </NavLink>
+                </div>
+                {/* card end */}
+            </div>
+            <div className="col">
+                <div className="card shadow-none border bg-gradient-start-2 h-100">
+                <NavLink to='/dashboardhla'>
+                    <div className="card-body p-20">
+                        <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
+                            <div>
+                                <p className="fw-medium text-primary-light mb-1">
+                                    Horoscope Predictions
+                                </p>
+                                <h6 className="mb-0">15</h6>
+                            </div>
+                            <div className="w-50-px h-50-px bg-yellow rounded-circle d-flex justify-content-center align-items-center">
+                                <Icon
+                                    icon="fe:vector"
+                                    className="text-white text-2xl mb-0"
+                                />
+                            </div>
+                        </div>
+                        
+                    </div>
+                    </NavLink>
                 </div>
                 {/* card end */}
             </div>
         </div>
+        
 
     )
 }

@@ -3,6 +3,9 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import ThemeToggleButton from "../helper/ThemeToggleButton";
 
+import { Button } from "reactstrap"
+import {useCookies } from 'react-cookie';
+
 const MasterLayout = ({ children }) => {
   let [sidebarActive, seSidebarActive] = useState(false);
   let [mobileMenu, setMobileMenu] = useState(false);
@@ -70,6 +73,9 @@ const MasterLayout = ({ children }) => {
     openActiveDropdown();
 
     // Cleanup event listeners on unmount
+
+   
+
     return () => {
       dropdownTriggers.forEach((trigger) => {
         trigger.removeEventListener("click", handleDropdownClick);
@@ -84,6 +90,16 @@ const MasterLayout = ({ children }) => {
   let mobileMenuControl = () => {
     setMobileMenu(!mobileMenu);
   };
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [cookies, setCookies, removeCookie] = useCookies(['token']);
+  const myCookieValue = cookies.token;
+
+function logout() {
+  removeCookie('token');
+  setIsAuthenticated(false);
+  window.location.href = "/loggedout";
+}
 
   return (
     <section className={mobileMenu ? "overlay active" : "overlay "}>
@@ -139,190 +155,6 @@ const MasterLayout = ({ children }) => {
             </li>
            
         
-           
-
-               {/* Invoice Dropdown */}
-               <li className='dropdown'>
-              <Link to='#'>
-              <Icon icon='solar:gallery-wide-linear' className='menu-icon' />
-                <span>Display Banners</span>
-              </Link>
-              <ul className='sidebar-submenu'>
-              
-               
-                <li>
-                  <NavLink
-                    to='/a1'
-                    className={(navData) =>
-                      navData.isActive ? "active-page" : ""
-                    }
-                  >
-                    <i className='ri-circle-fill circle-icon text-info-main w-auto' />{" "}
-                    Primary Banners
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to='/a2'
-                    className={(navData) =>
-                      navData.isActive ? "active-page" : ""
-                    }
-                  >
-                    <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
-                    Secondary Banners
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to='/a3'
-                    className={(navData) =>
-                      navData.isActive ? "active-page" : ""
-                    }
-                  >
-                    <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
-                    Offer Banners
-                  </NavLink>
-                </li>
-              </ul>
-            </li>
-
-            {/* Invoice Dropdown */}
-            <li className='dropdown'>
-              <Link to='#'>
-                <Icon icon='fe:vector' className='menu-icon' />
-                <span>Horoscopes</span>
-              </Link>
-              
-              <ul className='sidebar-submenu'>
-              
-               
-                <li>
-                  <NavLink
-                    to='/a4'
-                    className={(navData) =>
-                      navData.isActive ? "active-page" : ""
-                    }
-                  >
-                    <i className='ri-circle-fill circle-icon text-info-main w-auto' />{" "}
-                    Categories
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to='/a5'
-                    className={(navData) =>
-                      navData.isActive ? "active-page" : ""
-                    }
-                  >
-                    <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
-                    Add New
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to='/a6'
-                    className={(navData) =>
-                      navData.isActive ? "active-page" : ""
-                    }
-                  >
-                    <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
-                    List All
-                  </NavLink>
-                </li>
-              </ul>
-            </li>
-
-               {/* Invoice Dropdown */}
-               <li className='dropdown'>
-              <Link to='#'>
-                <Icon icon='simple-line-icons:vector' className='menu-icon' />
-                <span>Blog Articles</span>
-              </Link>
-              <ul className='sidebar-submenu'>
-              
-               
-                <li>
-                  <NavLink
-                    to='/a7'
-                    className={(navData) =>
-                      navData.isActive ? "active-page" : ""
-                    }
-                  >
-                    <i className='ri-circle-fill circle-icon text-info-main w-auto' />{" "}
-                    Categories
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to='/a8'
-                    className={(navData) =>
-                      navData.isActive ? "active-page" : ""
-                    }
-                  >
-                    <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
-                    Add New
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to='/a9'
-                    className={(navData) =>
-                      navData.isActive ? "active-page" : ""
-                    }
-                  >
-                    <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
-                    List All
-                  </NavLink>
-                </li>
-              </ul>
-            </li>
-
-             {/* Invoice Dropdown */}
-             <li className='dropdown'>
-              <Link to='#'>
-                <Icon icon='mingcute:storage-line' className='menu-icon' />
-                <span>Miscellaneos</span>
-              </Link>
-              <ul className='sidebar-submenu'>
-              
-               
-                <li>
-                  <NavLink
-                    to='/a10'
-                    className={(navData) =>
-                      navData.isActive ? "active-page" : ""
-                    }
-                  >
-                    <i className='ri-circle-fill circle-icon text-info-main w-auto' />{" "}
-                    Services
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to='/a11'
-                    className={(navData) =>
-                      navData.isActive ? "active-page" : ""
-                    }
-                  >
-                    <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
-                    Sub Services
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to='/a12'
-                    className={(navData) =>
-                      navData.isActive ? "active-page" : ""
-                    }
-                  >
-                    <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
-                    Testimonials
-                  </NavLink>
-                </li>
-              </ul>
-            </li>
-            
-
             <li className='dropdown'>
               <Link to='#'>
               <i class="ri-user-settings-line text-xl me-6 d-flex w-auto"></i>
@@ -333,7 +165,7 @@ const MasterLayout = ({ children }) => {
                
                 <li>
                   <NavLink
-                    to='/a13'
+                    to='/dashboardacn'
                     className={(navData) =>
                       navData.isActive ? "active-page" : ""
                     }
@@ -344,7 +176,7 @@ const MasterLayout = ({ children }) => {
                 </li>
                 <li>
                   <NavLink
-                    to='/a14'
+                    to='/dashboardame'
                     className={(navData) =>
                       navData.isActive ? "active-page" : ""
                     }
@@ -355,7 +187,7 @@ const MasterLayout = ({ children }) => {
                 </li>
                 <li>
                   <NavLink
-                    to='/a15'
+                    to='/dashboardasd'
                     className={(navData) =>
                       navData.isActive ? "active-page" : ""
                     }
@@ -369,37 +201,201 @@ const MasterLayout = ({ children }) => {
 
             <li className='dropdown'>
               <Link to='#'>
-                <Icon icon='icon-park-outline:setting-two' className='menu-icon' />
-                <span>Settings</span>
+                <Icon icon='fe:vector' className='menu-icon' />
+                <span>Horoscopes</span>
+              </Link>
+              
+              <ul className='sidebar-submenu'>
+              
+               
+                <li>
+                  <NavLink
+                    to='/bashboardhc'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-info-main w-auto' />{" "}
+                    Categories
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to='/dashboardhan'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
+                    Add New
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to='/dashboardhla'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
+                    List All
+                  </NavLink>
+                </li>
+              </ul>
+            </li>
+
+              
+               <li className='dropdown'>
+              <Link to='#'>
+              <Icon icon='solar:gallery-wide-linear' className='menu-icon' />
+                <span>Display Banners</span>
               </Link>
               <ul className='sidebar-submenu'>
               
                
                 <li>
                   <NavLink
-                    to='/a14'
+                    to='/dashboardpb'
                     className={(navData) =>
                       navData.isActive ? "active-page" : ""
                     }
                   >
                     <i className='ri-circle-fill circle-icon text-info-main w-auto' />{" "}
-                    Credentials
+                    Primary Banners
                   </NavLink>
                 </li>
                 <li>
                   <NavLink
-                    to='/a15'
+                    to='/dashboardsb'
                     className={(navData) =>
                       navData.isActive ? "active-page" : ""
                     }
                   >
                     <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
-                    Logout
+                    Secondary Banners
                   </NavLink>
                 </li>
-                
+                <li>
+                  <NavLink
+                    to='/dashboardob'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
+                    Offer Banners
+                  </NavLink>
+                </li>
               </ul>
             </li>
+
+           
+        
+
+              
+               <li className='dropdown'>
+              <Link to='#'>
+                <Icon icon='simple-line-icons:vector' className='menu-icon' />
+                <span>Blog</span>
+              </Link>
+              <ul className='sidebar-submenu'>
+              
+               
+                <li>
+                  <NavLink
+                    to='/dashboardbc'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-info-main w-auto' />{" "}
+                    Categories
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to='/dashboardban'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
+                    Add New
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to='/dashboardbla'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
+                    List All
+                  </NavLink>
+                </li>
+              </ul>
+            </li>
+
+            
+             <li className='dropdown'>
+              <Link to='#'>
+                <Icon icon='mingcute:storage-line' className='menu-icon' />
+                <span>Miscellaneos</span>
+              </Link>
+              <ul className='sidebar-submenu'>
+              
+               
+                <li>
+                  <NavLink
+                    to='/dashboardms'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-info-main w-auto' />{" "}
+                    Astro Services
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to='/dashboardmss'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
+                    Astro Sub Services
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to='/dashboardmt'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
+                    Testimonials
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to='/dashboardmru'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-info-main w-auto' />{" "}
+                    Registered Users
+                  </NavLink>
+                </li>
+              </ul>
+            </li>
+            
+
+           
+
             
 
           
@@ -468,7 +464,7 @@ const MasterLayout = ({ children }) => {
                         Sauntesthyam LLP
                         </h6>
                         <span className='text-secondary-light fw-medium text-sm'>
-                          System Admin
+                        {myCookieValue}
                         </span>
                       </div>
                       <button type='button' className='hover-text-danger'>
@@ -484,7 +480,7 @@ const MasterLayout = ({ children }) => {
                       <li>
                         <Link
                           className='dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-primary d-flex align-items-center gap-3'
-                          to='/company'
+                          to='/dashboardsc'
                         >
                           <Icon
                             icon='icon-park-outline:setting-two'
@@ -494,13 +490,11 @@ const MasterLayout = ({ children }) => {
                         </Link>
                       </li>
                       <li>
-                        <Link
-                          className='dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-danger d-flex align-items-center gap-3'
-                          to='#'
-                        >
-                          <Icon icon='lucide:power' className='icon text-xl' />{" "}
-                          Log Out
-                        </Link>
+                       
+                        <Button  className='dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-danger d-flex align-items-center gap-3' type="submit" onClick={logout}>
+                        <Icon icon='lucide:power' className='icon text-xl' />{" "}
+                        Log Out
+                                        </Button>
                       </li>
                     </ul>
                   </div>

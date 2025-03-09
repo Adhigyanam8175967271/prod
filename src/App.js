@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import { useCookies } from "react-cookie";
 
 import ErrorPage from "./site/ErrorPage";
+import LoggedOut from "./site/LoggedOut";
 import SignInPage from "./site/SignInPage";
 import MaintenancePage from "./site/MaintenancePage";
 import Dashboard from "./site/Dashboard-Sysadmin/Dashboard";
@@ -27,6 +28,7 @@ function App() {
           />
 
           <Route path="/" element={<MaintenancePage />} />
+          <Route path="/loggedout" element={<LoggedOut />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </Router>
