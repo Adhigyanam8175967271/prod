@@ -112,7 +112,7 @@ const handleDelete = (clientId) => {
                                </p>
       <section className="auth forgot-password-page bg-base d-flex flex-wrap">
      
-      <div className="auth-left py-32 px-24 d-flex flex-column" style={{background:"none"}}>
+      <div className="auth-left py-32 px-24 d-flex flex-column" style={{background:"none",width:"auto"}}>
                     <div className="max-w-464-px mx-auto w-100">
                     <div>
                            
@@ -166,22 +166,16 @@ const handleDelete = (clientId) => {
                                <p className="mb-32 text-secondary-light text-lg">
                                    Use the following modify / remove listed display banners.
                                </p>
-                               <table style={{ 
-    width: '100%', 
-    marginTop: '20px', 
-    borderCollapse: 'collapse', 
-    borderRadius: '8px', 
-    overflow: 'hidden', 
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' 
-}}>
-  <thead>
-    <tr style={{ backgroundColor: "#4CAF50", color: "white", textAlign: "left" }}>
-    <th style={{ padding: "5px 10px", fontSize: "1rem", fontWeight: "bold", borderBottom: "2px solid #ddd" }}>Id</th>
-      <th style={{ padding: "5px 10px", fontSize: "1rem", fontWeight: "bold", borderBottom: "2px solid #ddd" }}>S No.</th>
-      <th style={{ padding: "5px 10px", fontSize: "1rem", fontWeight: "bold", borderBottom: "2px solid #ddd" }}>Banner</th>
-      <th style={{ padding: "5px 10px", fontSize: "1rem", fontWeight: "bold", borderBottom: "2px solid #ddd" }}>Actions</th>
-    </tr>
-  </thead>
+                               <table className="table bordered-table sm-table mb-0">
+                            <thead>
+                                        <tr>
+                                        <th scope="col">Id</th>
+                                            <th scope="col">S No.</th>
+                                            <th scope="col">Banner</th>
+                                            <th scope="col">Options</th>
+                                            
+                                        </tr>
+                                    </thead>
   <tbody>
     {clients.map(client => (
       <tr key={client.Id} style={{ borderBottom: "1px solid #ddd", backgroundColor: "#f9f9f9", transition: "0.3s" }}>

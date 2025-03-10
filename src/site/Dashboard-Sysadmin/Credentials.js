@@ -9,6 +9,7 @@ import validationnew from '../../Validations/Login-Password.js';
 import cookies, {useCookies} from "react-cookie";
 
 
+
 const Credentials = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -78,8 +79,8 @@ const Credentials = () => {
                                            <b>You are here</b>: <NavLink to="/dashboard" style={{color:'blueviolet'}}>Dashboard</NavLink> | Credentials Mnagement
                                        </p>
       <section className="auth forgot-password-page bg-base d-flex flex-wrap">
-                   
-                     <div className="auth-right py-32 px-24 d-flex flex-column">
+     
+                     <div className="auth-left py-32 px-24 d-flex flex-column" style={{background:"none",width:"auto"}}>
                          <div className="max-w-464-px mx-auto w-100">
                              <div>
                             
@@ -124,6 +125,11 @@ const Credentials = () => {
                                                      </Button>
                              </form>
                          </div>
+                     </div>
+                     <div className="auth-right py-32 px-24 d-flex flex-column align-items-center" style={{textAlign:'center'}}>
+                     <div>
+                     <img src='siteimages/shield.png' style={{borderRadius:"5px",margin:"auto",padding:"auto",maxWidth:"80%"}} alt='' />
+                     </div>
                      </div>
                  </section>
         <BlankPageLayer />

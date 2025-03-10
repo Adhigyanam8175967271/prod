@@ -1,8 +1,24 @@
-import { Icon } from '@iconify/react/dist/iconify.js'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
+import axios from "axios";
 
 const LatestRegisteredOne = () => {
+    const [clients, setClients] = useState([]);
+
+const fetchClients = () => {
+  axios.get('https://adhigyanam-e92bf1bbbdb1.herokuapp.com/astrologers')
+    .then(response => {
+      setClients(response.data);
+    })
+    .catch(error => {
+      console.error('Error fetching data:', error);
+    });
+};
+
+// Fetch clients on component mount
+useEffect(() => {
+  fetchClients();
+}, []);
     return (
         <div className="col-xxl-12 col-xl-12">
             <div className="card h-100">
@@ -69,6 +85,7 @@ const LatestRegisteredOne = () => {
                             tabIndex={0}
                         >
                             <div className="table-responsive scroll-sm">
+                            
                                 <table className="table bordered-table sm-table mb-0">
                                     <thead>
                                         <tr>
@@ -92,6 +109,7 @@ const LatestRegisteredOne = () => {
                                     </tbody>
                                 </table>
                             </div>
+                          
                         </div>
                         <div
                             className="tab-pane fade"
@@ -101,22 +119,25 @@ const LatestRegisteredOne = () => {
                             tabIndex={0}
                         >
                             <div className="table-responsive scroll-sm">
-                                <table className="table bordered-table sm-table mb-0">
-                                    <thead>
+                            <table className="table bordered-table sm-table mb-0">
+                            <thead>
                                         <tr>
-                                        <th scope="col">Full Name</th>
+                                        <th scope="col">Id</th>
+                                            <th scope="col">S No.</th>
+                                            <th scope="col">Full Name</th>
                                             <th scope="col">Registered On</th>
                                             <th scope="col">Type</th>
-                                            <th scope="col">Contact No.</th>
-                                            <th scope="col" className="text-left">
-                                                Status
-                                            </th>
+                                            <th scope="col">Contact No</th>
+                                            <th scope="col">Status</th>
+                                            
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                    <tr>
-                                            <td>
-                                                <div className="d-flex align-items-center">
+  <tbody>
+    {clients.map(client => (
+      <tr key={client.Id} style={{ borderBottom: "1px solid #ddd", backgroundColor: "#f9f9f9", transition: "0.3s" }}>
+      <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333" }}>{client.Id}</td>
+        <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333" }}>{client.Sno}</td>
+        <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333" }}><div className="d-flex align-items-center">
                                                     <img
                                                         src="assets/images/users/user1.png"
                                                         alt=""
@@ -124,109 +145,32 @@ const LatestRegisteredOne = () => {
                                                     />
                                                     <div className="flex-grow-1">
                                                         <h6 className="text-md mb-0 fw-medium">
-                                                            Arjun Chaudhary
+                                                        {client.Named}
                                                         </h6>
                                                         <span className="text-sm text-secondary-light fw-medium">
-                                                            arjun@adhigyanam.com
+                                                        {client.Email}
                                                         </span>
                                                     </div>
-                                                </div>
-                                            </td>
-                                            <td>27 Mar 2024</td>
-                                            <td>Full Time</td>
-                                            <td>91-1234567890</td>
-                                            <td>
-                                            <div className="d-flex align-items-center">
+                                                </div></td>
+        <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333" }}>{client.Regdate}</td>
+        <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333" }}>{client.Ctype}</td>
+        <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333" }}>{client.Cno}</td>
+        <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333" }}><div className="d-flex align-items-center">
                                                 
-                                                    <div className="flex-grow-1">
-                                                        <h6 className="text-md mb-0 fw-medium">
-                                                            Activated
-                                                        </h6>
-                                                        <NavLink className="text-sm text-secondary-light fw-medium">
-                                                            Manage Profile
-                                                        </NavLink>
-                                                    </div>
+                                                <div className="flex-grow-1">
+                                                    <h6 className="text-md mb-0 fw-medium">
+                                                    {client.Astatus}
+                                                    </h6>
+                                                    <NavLink className="text-sm text-secondary-light fw-medium">
+                                                        Manage Profile
+                                                    </NavLink>
                                                 </div>
-                                                </td>
-                                            {/* <td className="text-center">
-                                                <span className="bg-success text-light px-24 py-4 rounded-pill fw-medium text-sm">
-                                                    Activated
-                                                </span>
-                                            </td> */}
-                                        </tr>
-                                    <tr>
-                                            <td>
-                                                <div className="d-flex align-items-center">
-                                                    <img
-                                                        src="assets/images/users/user1.png"
-                                                        alt=""
-                                                        className="w-40-px h-40-px rounded-circle flex-shrink-0 me-12 overflow-hidden"
-                                                    />
-                                                    <div className="flex-grow-1">
-                                                        <h6 className="text-md mb-0 fw-medium">
-                                                            Saurabh Singh
-                                                        </h6>
-                                                        <span className="text-sm text-secondary-light fw-medium">
-                                                            saurabhnet.0907@gmail.com
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>01 Mar 2024</td>
-                                            <td>Full Time</td>
-                                            <td>91-4564564567</td>
-                                            <td>
-                                            <div className="d-flex align-items-center">
-                                                
-                                                    <div className="flex-grow-1">
-                                                        <h6 className="text-md mb-0 fw-medium">
-                                                            Suspended
-                                                        </h6>
-                                                        <NavLink className="text-sm text-secondary-light fw-medium">
-                                                            Manage Profile
-                                                        </NavLink>
-                                                    </div>
-                                                </div>
-                                                </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div className="d-flex align-items-center">
-                                                    <img
-                                                        src="assets/images/users/user1.png"
-                                                        alt=""
-                                                        className="w-40-px h-40-px rounded-circle flex-shrink-0 me-12 overflow-hidden"
-                                                    />
-                                                    <div className="flex-grow-1">
-                                                        <h6 className="text-md mb-0 fw-medium">
-                                                            Rishabh Jain
-                                                        </h6>
-                                                        <span className="text-sm text-secondary-light fw-medium">
-                                                            mrjain20@gmail.com
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>01 July 2024</td>
-                                            <td>Part Time</td>
-                                            <td>91-1231231230</td>
-                                            <td>
-                                            <div className="d-flex align-items-center">
-                                                
-                                                    <div className="flex-grow-1">
-                                                        <h6 className="text-md mb-0 fw-medium">
-                                                            Deactivated
-                                                        </h6>
-                                                        <NavLink className="text-sm text-secondary-light fw-medium">
-                                                            Manage Profile
-                                                        </NavLink>
-                                                    </div>
-                                                </div>
-                                                </td>
-                                        </tr>
-                                       
-                                    </tbody>
-                                </table>
+                                            </div></td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+                               
                             </div>
                         </div>
                     </div>

@@ -128,7 +128,7 @@ function logout() {
               className='light-logo'
             />
             <img
-              src='siteimages/logo.png'
+              src='siteimages/logowhite.png'
               alt='site logo'
               className='dark-logo'
             />
