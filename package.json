@@ -23,6 +23,7 @@
     "apexcharts": "^4.3.0",
     "axios": "^1.8.2",
     "bootstrap": "^5.3.3",
+    "crypto-js": "^4.2.0",
     "datatables.net": "^2.1.8",
     "datatables.net-dt": "^2.1.8",
     "flatpickr": "^4.6.13",

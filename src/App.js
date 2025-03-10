@@ -8,6 +8,11 @@ import SignInPage from "./site/SignInPage";
 import MaintenancePage from "./site/MaintenancePage";
 import Dashboard from "./site/Dashboard-Sysadmin/Dashboard";
 
+import Credentials from "./site/Dashboard-Sysadmin/Credentials";
+import Obanners from "./site/Dashboard-Sysadmin/Obanners";
+import Pbanners from "./site/Dashboard-Sysadmin/Pbanners";
+import Sbanners from "./site/Dashboard-Sysadmin/Sbanners";
+
 function App() {
   const [cookies] = useCookies(["token"]);
   const isAuthenticated = cookies.token !== undefined;
@@ -25,6 +30,23 @@ function App() {
           <Route
             path="/sysadmin"
             element={isAuthenticated ? <Navigate to="/dashboard" /> : <SignInPage />}
+          />
+
+          <Route
+            path="/dashboardsc"
+            element={isAuthenticated ? <Credentials /> : <Navigate to="/sysadmin" />}
+          />
+          <Route
+            path="/dashboardob"
+            element={isAuthenticated ? <Obanners /> : <Navigate to="/sysadmin" />}
+          />
+           <Route
+            path="/dashboardpb"
+            element={isAuthenticated ? <Pbanners /> : <Navigate to="/sysadmin" />}
+          />
+           <Route
+            path="/dashboardsb"
+            element={isAuthenticated ? <Sbanners /> : <Navigate to="/sysadmin" />}
           />
 
           <Route path="/" element={<MaintenancePage />} />

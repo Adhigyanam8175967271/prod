@@ -1,7 +1,145 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from "axios";
 import { NavLink } from "react-router-dom";
 import { Icon } from '@iconify/react';
 const UnitCountOne = () => {
+    const [count, setCount] = useState(0);
+    const [count1, setCount1] = useState(0);
+    const [count2, setCount2] = useState(0);
+
+    const [count3, setCount3] = useState(0);
+    const [count4, setCount4] = useState(0);
+    const [count5, setCount5] = useState(0);
+    const [count6, setCount6] = useState(0);
+
+    const [count7, setCount7] = useState(0);
+    const [count8, setCount8] = useState(0);
+    const [count9, setCount9] = useState(0);
+    const [count10, setCount10] = useState(0);
+    const [count11, setCount11] = useState(0);
+  
+    useEffect(() => {
+      const fetchCount = async () => {
+        try {
+          const response = await axios.get("https://adhigyanam-e92bf1bbbdb1.herokuapp.com/countPbanners"); // Adjust URL if needed
+          setCount(response.data.count);
+        } catch (err) {
+          console.error("Error fetching count:", err);
+        }
+      };
+
+      const fetchCount1 = async () => {
+        try {
+          const response = await axios.get("https://adhigyanam-e92bf1bbbdb1.herokuapp.com/countSbanners"); // Adjust URL if needed
+          setCount1(response.data.count);
+        } catch (err) {
+          console.error("Error fetching count:", err);
+        }
+      };
+
+      const fetchCount2 = async () => {
+        try {
+          const response = await axios.get("https://adhigyanam-e92bf1bbbdb1.herokuapp.com/countObanners"); // Adjust URL if needed
+          setCount2(response.data.count);
+        } catch (err) {
+          console.error("Error fetching count:", err);
+        }
+      };
+
+      const fetchCount3 = async () => {
+        try {
+          const response = await axios.get("https://adhigyanam-e92bf1bbbdb1.herokuapp.com/countHcategory"); // Adjust URL if needed
+          setCount3(response.data.count);
+        } catch (err) {
+          console.error("Error fetching count:", err);
+        }
+      };
+
+      const fetchCount4 = async () => {
+        try {
+          const response = await axios.get("https://adhigyanam-e92bf1bbbdb1.herokuapp.com/countBcategory"); // Adjust URL if needed
+          setCount4(response.data.count);
+        } catch (err) {
+          console.error("Error fetching count:", err);
+        }
+      };
+
+      const fetchCount5 = async () => {
+        try {
+          const response = await axios.get("https://adhigyanam-e92bf1bbbdb1.herokuapp.com/countAcategory"); // Adjust URL if needed
+          setCount5(response.data.count);
+        } catch (err) {
+          console.error("Error fetching count:", err);
+        }
+      };
+
+      const fetchCount6 = async () => {
+        try {
+          const response = await axios.get("https://adhigyanam-e92bf1bbbdb1.herokuapp.com/countAscategory"); // Adjust URL if needed
+          setCount6(response.data.count);
+        } catch (err) {
+          console.error("Error fetching count:", err);
+        }
+      };
+
+      const fetchCount7 = async () => {
+        try {
+          const response = await axios.get("https://adhigyanam-e92bf1bbbdb1.herokuapp.com/countBarticles"); // Adjust URL if needed
+          setCount7(response.data.count);
+        } catch (err) {
+          console.error("Error fetching count:", err);
+        }
+      };
+
+      const fetchCount8 = async () => {
+        try {
+          const response = await axios.get("https://adhigyanam-e92bf1bbbdb1.herokuapp.com/countTestimonials"); // Adjust URL if needed
+          setCount8(response.data.count);
+        } catch (err) {
+          console.error("Error fetching count:", err);
+        }
+      };
+
+      const fetchCount9 = async () => {
+        try {
+          const response = await axios.get("https://adhigyanam-e92bf1bbbdb1.herokuapp.com/countPredictions"); // Adjust URL if needed
+          setCount9(response.data.count);
+        } catch (err) {
+          console.error("Error fetching count:", err);
+        }
+      };
+
+      const fetchCount10 = async () => {
+        try {
+          const response = await axios.get("https://adhigyanam-e92bf1bbbdb1.herokuapp.com/countAstrolgers"); // Adjust URL if needed
+          setCount10(response.data.count);
+        } catch (err) {
+          console.error("Error fetching count:", err);
+        }
+      };
+
+      const fetchCount11 = async () => {
+        try {
+          const response = await axios.get("https://adhigyanam-e92bf1bbbdb1.herokuapp.com/countCustomers"); // Adjust URL if needed
+          setCount11(response.data.count);
+        } catch (err) {
+          console.error("Error fetching count:", err);
+        }
+      };
+  
+      fetchCount();
+      fetchCount1();
+      fetchCount2();
+      fetchCount3();
+      fetchCount4();
+      fetchCount5();
+      fetchCount6();
+      fetchCount7();
+      fetchCount8();
+      fetchCount9();
+      fetchCount10();
+      fetchCount11();
+    }, []); // Runs only once on component mount
     return (
         <div className="row row-cols-xxxl-5 row-cols-lg-3 row-cols-sm-2 row-cols-1 gy-4">
             <div className="col">
@@ -11,7 +149,7 @@ const UnitCountOne = () => {
                         <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
                             <div>
                                 <p className="fw-medium text-primary-light mb-1">Listed Astrolgers</p>
-                                <h6 className="mb-0">03</h6>
+                                <h6 className="mb-0">{count10}</h6>
                             </div>
                             <div className="w-50-px h-50-px bg-cyan rounded-circle d-flex justify-content-center align-items-center">
                                 <Icon
@@ -34,7 +172,7 @@ const UnitCountOne = () => {
                                 <p className="fw-medium text-primary-light mb-1">
                                     Registered Users
                                 </p>
-                                <h6 className="mb-0">15</h6>
+                                <h6 className="mb-0">{count11}</h6>
                             </div>
                             <div className="w-50-px h-50-px bg-cyan rounded-circle d-flex justify-content-center align-items-center">
                             <Icon
@@ -58,7 +196,7 @@ const UnitCountOne = () => {
                                 <p className="fw-medium text-primary-light mb-1">
                                     Blog Categories
                                 </p>
-                                <h6 className="mb-0">05</h6>
+                                <h6 className="mb-0">{count4}</h6>
                             </div>
                             <div className="w-50-px h-50-px bg-success-main rounded-circle d-flex justify-content-center align-items-center">
                                 <Icon
@@ -79,7 +217,7 @@ const UnitCountOne = () => {
                         <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
                             <div>
                                 <p className="fw-medium text-primary-light mb-1">Blog Articles</p>
-                                <h6 className="mb-0">12</h6>
+                                <h6 className="mb-0">{count7}</h6>
                             </div>
                             <div className="w-50-px h-50-px bg-success-main rounded-circle d-flex justify-content-center align-items-center">
                                 <Icon
@@ -101,7 +239,7 @@ const UnitCountOne = () => {
                         <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
                             <div>
                                 <p className="fw-medium text-primary-light mb-1">Testimonials</p>
-                                <h6 className="mb-0">10</h6>
+                                <h6 className="mb-0">{count8}</h6>
                             </div>
                             <div className="w-50-px h-50-px bg-red rounded-circle d-flex justify-content-center align-items-center">
                                 <Icon
@@ -123,7 +261,7 @@ const UnitCountOne = () => {
                         <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
                             <div>
                                 <p className="fw-medium text-primary-light mb-1">Primary Banners</p>
-                                <h6 className="mb-0">10</h6>
+                                <h6 className="mb-0">{count}</h6>
                             </div>
                             <div className="w-50-px h-50-px bg-purple rounded-circle d-flex justify-content-center align-items-center">
                                 <Icon
@@ -145,7 +283,7 @@ const UnitCountOne = () => {
                         <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
                             <div>
                                 <p className="fw-medium text-primary-light mb-1">Secondary Banners</p>
-                                <h6 className="mb-0">12</h6>
+                                <h6 className="mb-0">{count1}</h6>
                             </div>
                             <div className="w-50-px h-50-px bg-purple rounded-circle d-flex justify-content-center align-items-center">
                                 <Icon
@@ -169,7 +307,7 @@ const UnitCountOne = () => {
                                 <p className="fw-medium text-primary-light mb-1">
                                     Offer Banners
                                 </p>
-                                <h6 className="mb-0">05</h6>
+                                <h6 className="mb-0">{count2}</h6>
                             </div>
                             <div className="w-50-px h-50-px bg-purple rounded-circle d-flex justify-content-center align-items-center">
                                 <Icon
@@ -190,9 +328,9 @@ const UnitCountOne = () => {
                         <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
                             <div>
                                 <p className="fw-medium text-primary-light mb-1">
-                                    Core Services
+                                    Astro Services
                                 </p>
-                                <h6 className="mb-0">15</h6>
+                                <h6 className="mb-0">{count5}</h6>
                             </div>
                             <div className="w-50-px h-50-px bg-orange rounded-circle d-flex justify-content-center align-items-center">
                                 <Icon
@@ -213,8 +351,8 @@ const UnitCountOne = () => {
                     <div className="card-body p-20">
                         <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
                             <div>
-                                <p className="fw-medium text-primary-light mb-1">Sub Services</p>
-                                <h6 className="mb-0">20</h6>
+                                <p className="fw-medium text-primary-light mb-1">Astro Sub Services</p>
+                                <h6 className="mb-0">{count6}</h6>
                             </div>
                             <div className="w-50-px h-50-px bg-orange rounded-circle d-flex justify-content-center align-items-center">
                                 <Icon
@@ -235,7 +373,7 @@ const UnitCountOne = () => {
                         <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
                             <div>
                                 <p className="fw-medium text-primary-light mb-1">Horoscope Categories</p>
-                                <h6 className="mb-0">20</h6>
+                                <h6 className="mb-0">{count3}</h6>
                             </div>
                             <div className="w-50-px h-50-px bg-yellow rounded-circle d-flex justify-content-center align-items-center">
                                 <Icon
@@ -258,7 +396,7 @@ const UnitCountOne = () => {
                                 <p className="fw-medium text-primary-light mb-1">
                                     Horoscope Predictions
                                 </p>
-                                <h6 className="mb-0">15</h6>
+                                <h6 className="mb-0">{count9}</h6>
                             </div>
                             <div className="w-50-px h-50-px bg-yellow rounded-circle d-flex justify-content-center align-items-center">
                                 <Icon
