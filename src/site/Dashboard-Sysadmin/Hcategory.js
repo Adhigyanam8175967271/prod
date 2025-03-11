@@ -3,11 +3,8 @@ import MasterLayout from "../../masterLayout/MasterLayout";
 import BlankPageLayer from "../../components/BlankPageLayer";
 import { NavLink } from 'react-router-dom'
 import React, { useState, useEffect } from 'react'
-import { Col, Container, Row } from "reactstrap"
 import { Button } from "reactstrap";
 import axios from "axios";
-import CryptoJS from 'crypto-js';
-import validation from '../../Validations/Image.js';
 import validationnew from '../../Validations/Field.js';
 
 
@@ -18,9 +15,7 @@ const [messageerror, setMessageerror] = useState("");
 
 const [isSubmitting, setIsSubmitting] = useState(false);
 
-const [errors, setErrors] = useState({});
-const [errorsnew, setErrorsnew] = useState({});
-const [errorsnew1, setErrorsnew1] = useState({});
+const [errorsfield, setErrorsfield] = useState({});
 
 const [sno, setSno] = useState("");
 const [title, setTitle] = useState("");
@@ -54,45 +49,49 @@ const handleFileChange = (event, imageNumber) => {
 
 const handleSubmit = (event) => {
   event.preventDefault();
-  setErrors(validation(values));
-  setErrorsnew(validationnew(sno));
-  setErrorsnew1(validationnew(title));
 
-  if (values.image1) {
-    setIsSubmitting(true);
-    const formData = new FormData();
-    formData.append('image1', values.image1);
-    formData.append('sno', sno);
-    formData.append('title', title);
+  // Validate all fields including file upload
+  const newErrors = {
+    ...validationnew("sno", sno),
+    ...validationnew("title", title),
+  };
 
-    axios.post('https://adhigyanam-e92bf1bbbdb1.herokuapp.com/uploadhoroscopecategory', formData)
-      .then(res => {
-        if (res.data === "Success") {
-          setMessage("Operation was Successful! Uploaded successfully");
-          setMessageerror("");
-          setSno(""); // Reset Serial Number
-          setTitle("");
-          setValues({ image1: null }); // Reset File Input
-          setIsSubmitting(false); 
-          event.target.reset();
-          fetchClients();
-        }
-      })
-      .catch(err => {
-        if (err.response && err.response.data.error === "A record with this title already exists!") {
-          setMessageerror("Error: The title already exists. Please use a different one.");
-        } else {
-          setMessageerror("An error occurred! Please recheck or try again.");
-        }
-        setMessage("");
-        setIsSubmitting(false);
-      });
-  } else {
-    setErrors(prev => ({
-      ...prev,
-      image1: !values.image1 ? "Please select a valid Image" : "",
-    }));
+  if (!values.image1) {
+    newErrors.image1 = "Please select a valid image";
   }
+
+  setErrorsfield(newErrors);
+
+  // Prevent form submission if there are any validation errors
+  if (Object.keys(newErrors).length > 0) {
+    return;
+  }
+
+  // Proceed with submission if validation passes
+  setIsSubmitting(true);
+  const formData = new FormData();
+  formData.append('image1', values.image1);
+  formData.append('sno', sno);
+  formData.append('title', title);
+
+  axios.post('https://adhigyanam-e92bf1bbbdb1.herokuapp.com/uploadhoroscopecategory', formData)
+    .then(res => {
+      if (res.data === "Success") {
+        setMessage("Operation was Successful! Uploaded successfully");
+        setMessageerror("");
+        setSno(""); // Reset Serial Number
+        setTitle("");
+        setValues({ image1: null }); // Reset File Input
+        setIsSubmitting(false); 
+        event.target.reset();
+        fetchClients();
+      }
+    })
+    .catch(err => {
+      setMessageerror("An error occurred! Please recheck or try again.");
+      setMessage("");
+      setIsSubmitting(false);
+    });
 };
    
 const handleDelete = (clientId) => {
@@ -141,7 +140,7 @@ const handleDelete = (clientId) => {
                                          className="form-control h-56-px bg-neutral-50 radius-12"
                                        
                                      />
-                                      {errorsnew.sno && <span className="text-danger" style={{ fontSize: "0.8rem", fontWeight: "bolder" }}>{errorsnew.sno}</span>}
+                                      {errorsfield.sno && <span className="text-danger" style={{ fontSize: "0.8rem", fontWeight: "bolder" }}>{errorsfield.sno}</span>}
                                  </div>
                                  <div  style={{marginTop:"15px"}}>
 
@@ -155,7 +154,7 @@ placeholder="Enter Category Title"
     className="form-control h-56-px bg-neutral-50 radius-12"
   
 />
- {errorsnew1.title && <span className="text-danger" style={{ fontSize: "0.8rem", fontWeight: "bolder" }}>{errorsnew1.title}</span>}
+ {errorsfield.title && <span className="text-danger" style={{ fontSize: "0.8rem", fontWeight: "bolder" }}>{errorsfield.title}</span>}
 </div>
                                <div style={{marginTop:"15px"}}>
                       <input onChange={(e) => handleFileChange(e, 1)}
@@ -165,7 +164,7 @@ placeholder="Enter Category Title"
                         accept="image/*" 
                        className="form-control h-56-px bg-neutral-50 radius-12"
                       />
-                      {errors.image1 && <span className="text-danger" style={{ fontSize: "0.8rem", fontWeight: "bolder" }}>{errors.image1}</span>}
+                      {errorsfield.image1 && <span className="text-danger" style={{ fontSize: "0.8rem", fontWeight: "bolder" }}>{errorsfield.image1}</span>}
                     </div>
                     <div>
                                         <Button type="submit" disabled={isSubmitting} className="btn btn-primary text-sm btn-sm px-12 py-16 w-100 radius-12 mt-32">

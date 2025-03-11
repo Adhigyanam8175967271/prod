@@ -15,6 +15,8 @@ import Sbanners from "./site/Dashboard-Sysadmin/Sbanners";
 import Hcategory from "./site/Dashboard-Sysadmin/Hcategory";
 import Bcategory from "./site/Dashboard-Sysadmin/Bcategory";
 import Acategory from "./site/Dashboard-Sysadmin/Acategory";
+import Testimonials from "./site/Dashboard-Sysadmin/Testimonials";
+import Userdata from "./site/Dashboard-Sysadmin/Userdata";
 
 function App() {
   const [cookies] = useCookies(["token"]);
@@ -62,6 +64,14 @@ function App() {
            <Route
             path="/dashboardms"
             element={isAuthenticated ? <Acategory /> : <Navigate to="/sysadmin" />}
+          />
+          <Route
+            path="/dashboardmt"
+            element={isAuthenticated ? <Testimonials /> : <Navigate to="/sysadmin" />}
+          />
+          <Route
+            path="/dashboardmru"
+            element={isAuthenticated ? <Userdata /> : <Navigate to="/sysadmin" />}
           />
 
           <Route path="/" element={<MaintenancePage />} />

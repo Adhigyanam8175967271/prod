@@ -1,21 +1,11 @@
-function validationnew(sno)
-{
-    let error = {}
+const validationnew = (fieldName, value) => {
+    let errorsfield = {};
     
+    if (!value.trim()) {
+        errorsfield[fieldName] = "This field is required";
+    }
 
-        if(sno === "")
-        {
-            error.sno = "Field cannot be empty"
-        }
-        else
-        {
-            error.sno = ""
-        }
-        
-      
-
-        return error;
-
-}
+    return errorsfield;
+};
 
 export default validationnew;
