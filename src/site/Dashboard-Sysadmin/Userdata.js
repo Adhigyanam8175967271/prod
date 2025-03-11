@@ -51,7 +51,7 @@ const Userdata = () => {
   return (
     <MasterLayout>
       <p className="mb-12 text-secondary-light" style={{ fontSize: "15px" }}>
-        <b>You are here</b>: <NavLink to="/dashboard" style={{ color: 'blueviolet' }}>Dashboard</NavLink> | Registered Users
+        <b>You are here</b>: <NavLink to="/dashboard" style={{ color: 'blueviolet', textDecoration:"underline"}}>Dashboard</NavLink> | Registered Users
       </p>
       <div className="col-xxl-12 col-xl-12">
         <div className="card h-100">

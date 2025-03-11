@@ -76,7 +76,7 @@ const Credentials = () => {
       <MasterLayout>
         {/* Breadcrumb */}
          <p className="mb-12 text-secondary-light" style={{fontSize:"15px"}}>
-                                           <b>You are here</b>: <NavLink to="/dashboard" style={{color:'blueviolet'}}>Dashboard</NavLink> | Credentials Mnagement
+                                           <b>You are here</b>: <NavLink to="/dashboard" style={{color:'blueviolet', textDecoration:"underline"}}>Dashboard</NavLink> | Credentials Mnagement
                                        </p>
       <section className="auth forgot-password-page bg-base d-flex flex-wrap">
      

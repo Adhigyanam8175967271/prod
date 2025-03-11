@@ -102,7 +102,7 @@ const Testimonials = () => {
       <MasterLayout>
         {/* Breadcrumb */}
          <p className="mb-12 text-secondary-light" style={{fontSize:"15px"}}>
-                                           <b>You are here</b>: <NavLink to="/dashboard" style={{color:'blueviolet'}}>Dashboard</NavLink> | Testimonials
+                                           <b>You are here</b>: <NavLink to="/dashboard" style={{color:'blueviolet', textDecoration:"underline"}}>Dashboard</NavLink> | Testimonials
                                        </p>
                                        <div className="col-xxl-12 col-xl-12">
                                                    <div className="card h-100">
@@ -277,10 +277,10 @@ const Testimonials = () => {
   <tbody>
     {clients.map(client => (
       <tr key={client.Id} style={{ borderBottom: "1px solid #ddd", backgroundColor: "#f9f9f9", transition: "0.3s" }}>
-      <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333" }}>{client.Id}</td>
-        <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333" }}>{client.Sno}</td>
-        <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333" }}>{client.Named}<br/>{client.Jobtitle}</td>
-        <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333" }}>{client.Descriptions}</td>
+      <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor:"white" }}>{client.Id}</td>
+        <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor:"white" }}>{client.Sno}</td>
+        <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor:"white" }}>{client.Named}<br/>{client.Jobtitle}</td>
+        <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor:"white" }}>{client.Descriptions}</td>
         <td style={{ padding: "10px" }}>
           <Button 
             className="btn-success btn-small" 

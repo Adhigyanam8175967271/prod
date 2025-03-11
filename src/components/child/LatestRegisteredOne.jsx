@@ -43,7 +43,16 @@ const LatestRegisteredOne = () => {
         XLSX.utils.book_append_sheet(workbook, worksheet, "AstrologersData");
         XLSX.writeFile(workbook, "Astrologers_Data.xlsx");
     };
-
+ const [count10, setCount10] = useState(0);
+    const fetchCount10 = async () => {
+        try {
+          const response = await axios.get("https://adhigyanam-e92bf1bbbdb1.herokuapp.com/countAstrologers"); // Adjust URL if needed
+          setCount10(response.data.count);
+        } catch (err) {
+          console.error("Error fetching count:", err);
+        }
+      };
+      fetchCount10();
     return (
         <div className="col-xxl-12 col-xl-12">
             <div className="card h-100">
@@ -57,7 +66,7 @@ const LatestRegisteredOne = () => {
                                     role="tab" aria-controls="pills-to-do-list" aria-selected="true">
                                     Astrologers
                                     <span className="text-sm fw-semibold py-6 px-12 bg-neutral-500 rounded-pill text-white line-height-1 ms-12 notification-alert">
-                                        03
+                                    {count10}
                                     </span>
                                 </button>
                             </li>

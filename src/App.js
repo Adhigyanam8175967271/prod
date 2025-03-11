@@ -17,6 +17,7 @@ import Bcategory from "./site/Dashboard-Sysadmin/Bcategory";
 import Acategory from "./site/Dashboard-Sysadmin/Acategory";
 import Testimonials from "./site/Dashboard-Sysadmin/Testimonials";
 import Userdata from "./site/Dashboard-Sysadmin/Userdata";
+import Ascategory from "./site/Dashboard-Sysadmin/Ascategory";
 
 function App() {
   const [cookies] = useCookies(["token"]);
@@ -73,7 +74,10 @@ function App() {
             path="/dashboardmru"
             element={isAuthenticated ? <Userdata /> : <Navigate to="/sysadmin" />}
           />
-
+           <Route
+            path="/dashboardmss"
+            element={isAuthenticated ? <Ascategory /> : <Navigate to="/sysadmin" />}
+          />
           <Route path="/" element={<MaintenancePage />} />
           <Route path="/loggedout" element={<LoggedOut />} />
           <Route path="*" element={<ErrorPage />} />

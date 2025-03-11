@@ -111,7 +111,7 @@ const UnitCountOne = () => {
 
       const fetchCount10 = async () => {
         try {
-          const response = await axios.get("https://adhigyanam-e92bf1bbbdb1.herokuapp.com/countAstrolgers"); // Adjust URL if needed
+          const response = await axios.get("https://adhigyanam-e92bf1bbbdb1.herokuapp.com/countAstrologers"); // Adjust URL if needed
           setCount10(response.data.count);
         } catch (err) {
           console.error("Error fetching count:", err);

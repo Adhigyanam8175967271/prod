@@ -8,7 +8,7 @@ import axios from "axios";
 import validationnew from '../../Validations/Field.js';
 
 
-const Acategory = () => {
+const Ascategory = () => {
 
 const [message, setMessage] = useState("");
 const [messageerror, setMessageerror] = useState("");
@@ -18,15 +18,22 @@ const [isSubmitting, setIsSubmitting] = useState(false);
 const [errorsfield, setErrorsfield] = useState({});
 
 const [sno, setSno] = useState("");
+
 const [title, setTitle] = useState("");
+const [clientnew, setClientnew] = useState(""); 
+const [clientAid, setClientAid] = useState("");  // Stores Aid (Id)
+const [clientAname, setClientAname] = useState(""); // Stores Aname (Named)
 const [values, setValues] = useState({
   image1: null, 
 });
 
+
+
+
 const [clients, setClients] = useState([]);
 
 const fetchClients = () => {
-  axios.get('https://adhigyanam-e92bf1bbbdb1.herokuapp.com/astrocategories')
+  axios.get('https://adhigyanam-e92bf1bbbdb1.herokuapp.com/subastrocategories')
     .then(response => {
       setClients(response.data);
     })
@@ -50,12 +57,18 @@ const handleFileChange = (event, imageNumber) => {
 const handleSubmit = (event) => {
   event.preventDefault();
 
-  // Validate all fields including file upload
+  // Validate all fields including dropdown selection
   const newErrors = {
     ...validationnew("sno", sno),
     ...validationnew("title", title),
   };
 
+  // Dropdown Validation (Check if both Aid and Aname are selected)
+  if (!clientAid || !clientAname) {
+    newErrors.clientnew = "Please select a valid category";
+  }
+
+  // Image validation
   if (!values.image1) {
     newErrors.image1 = "Please select a valid image";
   }
@@ -70,24 +83,29 @@ const handleSubmit = (event) => {
   // Proceed with submission if validation passes
   setIsSubmitting(true);
   const formData = new FormData();
-  formData.append('image1', values.image1);
-  formData.append('sno', sno);
-  formData.append('title', title);
+  formData.append("image1", values.image1);
+  formData.append("sno", sno);
+  formData.append("title", title);
+  formData.append("clientAid", clientAid); // Aid (Id)
+  formData.append("clientAname", clientAname); // Aname (Named)
 
-  axios.post('https://adhigyanam-e92bf1bbbdb1.herokuapp.com/uploadastrocategory', formData)
-    .then(res => {
+  axios
+    .post("https://adhigyanam-e92bf1bbbdb1.herokuapp.com/uploadsubastrocategory", formData)
+    .then((res) => {
       if (res.data === "Success") {
         setMessage("Operation was Successful! Uploaded successfully");
         setMessageerror("");
-        setSno(""); // Reset Serial Number
+        setSno("");
         setTitle("");
-        setValues({ image1: null }); // Reset File Input
-        setIsSubmitting(false); 
+        setClientAid(""); // Reset Aid
+        setClientAname(""); // Reset Aname
+        setValues({ image1: null });
+        setIsSubmitting(false);
         event.target.reset();
         fetchClients();
       }
     })
-    .catch(err => {
+    .catch((err) => {
       setMessageerror("An error occurred! Please recheck or try again.");
       setMessage("");
       setIsSubmitting(false);
@@ -96,16 +114,32 @@ const handleSubmit = (event) => {
    
 const handleDelete = (clientId) => {
   // Make an API call to delete the client
-  axios.delete(`https://adhigyanam-e92bf1bbbdb1.herokuapp.com/deleteastrocategory/${clientId}`)
+  axios.delete(`https://adhigyanam-e92bf1bbbdb1.herokuapp.com/deletesubastrocategory/${clientId}`)
     .then(response => {
       // If deletion is successful, update the clients array to remove the deleted client
       setClients(clients.filter(client => client.Id !== clientId));
     })
     .catch(error => {
-      console.error('Error deleting Category:', error);
+      console.error('Error deleting Sub Category:', error);
       // Handle error, such as displaying an error message
     });
 };
+
+const [options, setOptions] = useState([]);
+
+useEffect(() => {
+
+  axios.get('https://adhigyanam-e92bf1bbbdb1.herokuapp.com/astrocategories')
+    .then(response => {
+      setOptions(response.data.map(item => ({ value: item.Id, label: item.Named })));
+    })
+    .catch(error => {
+      console.error('Error fetching data:', error);
+    });
+
+   
+
+}, []); 
 
 
     return (
@@ -113,7 +147,7 @@ const handleDelete = (clientId) => {
       {/* MasterLayout */}
       <MasterLayout>
       <p className="mb-12 text-secondary-light" style={{fontSize:"15px"}}>
-                                   <b>You are here</b>: <NavLink to="/dashboard" style={{color:'blueviolet', textDecoration:"underline"}}>Dashboard</NavLink> | Astrology Services
+                                   <b>You are here</b>: <NavLink to="/dashboard" style={{color:'blueviolet', textDecoration:"underline"}}>Dashboard</NavLink> | <NavLink to="/dashboardms" style={{color:'blueviolet', textDecoration:"underline"}}>Astro Services</NavLink> | Sub Services
                                </p>
       <section className="auth forgot-password-page bg-base d-flex flex-wrap">
      
@@ -121,9 +155,9 @@ const handleDelete = (clientId) => {
                     <div className="max-w-464-px mx-auto w-100">
                     <div>
                            
-                               <p className="mb-6" style={{fontWeight:'bold',fontSize:"18px"}}>A. Create New Service</p>
+                               <p className="mb-6" style={{fontWeight:'bold',fontSize:"18px"}}>A. Create New Sub Service</p>
                                <p className="mb-32 text-secondary-light text-lg">
-                                   Use the following form to add a new astrology service to the website.<br/> <b>Recommended Resolution: 500 X 500</b>
+                                   Use the following form to add a new astro sub service to the website.<br/> <b>Recommended Resolution: 500 X 500</b>
                                </p>
                                {message && <p style={{padding:5, backgroundColor:"green", color:"white", borderRadius:2}}>{message}</p>}
                                  {messageerror && <p style={{padding:5, backgroundColor:"red", color:"white", borderRadius:2}}>{messageerror}</p>}
@@ -150,11 +184,35 @@ type="text"
 id="title"
 name="title"
 value={title}
-placeholder="Enter Service Title"
+placeholder="Enter Sub Service Title"
     className="form-control h-56-px bg-neutral-50 radius-12"
   
 />
  {errorsfield.title && <span className="text-danger" style={{ fontSize: "0.8rem", fontWeight: "bolder" }}>{errorsfield.title}</span>}
+</div>
+ <div  style={{marginTop:"15px"}}>
+
+ <select
+  id="clientnew"
+  name="clientnew"
+  className="form-control h-56-px bg-neutral-50 radius-12"
+  onChange={(e) => {
+    const selectedIndex = e.target.selectedIndex;
+    const selectedAid = e.target.value; // Gets Aid (Id)
+    const selectedAname = e.target.options[selectedIndex].getAttribute("data-name"); // Gets Named (Aname)
+    
+    setClientAid(selectedAid);
+    setClientAname(selectedAname);
+  }}
+>
+  <option value="">Select Parent Category</option>
+  {options.map((option) => (
+    <option key={option.value} value={option.value} data-name={option.label}>
+      {option.value} - {option.label} {/* Aid - Aname */}
+    </option>
+  ))}
+</select>
+      {errorsfield.clientnew && <span className="text-danger" style={{fontSize:"0.8rem", fontWeight:"bolder"}}>{errorsfield.clientnew}</span>}
 </div>
                                <div style={{marginTop:"15px"}}>
                       <input onChange={(e) => handleFileChange(e, 1)}
@@ -168,7 +226,7 @@ placeholder="Enter Service Title"
                     </div>
                     <div>
                                         <Button type="submit" disabled={isSubmitting} className="btn btn-primary text-sm btn-sm px-12 py-16 w-100 radius-12 mt-32">
-                                        {isSubmitting ? 'Please Wait...' : 'Create Service'}
+                                        {isSubmitting ? 'Please Wait...' : 'Create Sub Service'}
                                         </Button>
                                         
                                       </div>
@@ -181,16 +239,17 @@ placeholder="Enter Service Title"
                        <div className="max-w-464-px mx-auto w-100">
                            <div>
                                
-                           <p className="mb-6" style={{fontWeight:'bold',fontSize:"18px"}}>B. Manage Listed Services</p>
+                           <p className="mb-6" style={{fontWeight:'bold',fontSize:"18px"}}>B. Manage Listed Sub Services</p>
                                <p className="mb-32 text-secondary-light text-lg">
-                                   Use the following modify / remove listed services.
+                                   Use the following modify / remove listed sub services.
                                </p>
                                <table className="table bordered-table sm-table mb-0">
                             <thead>
                                         <tr>
                                         <th scope="col">Id</th>
                                             <th scope="col">S No.</th>
-                                            <th scope="col">Service</th>
+                                            <th scope="col">Sub Service</th>
+                                            <th scope="col">Parent</th>
                                             <th scope="col">Options</th>
                                             
                                         </tr>
@@ -200,8 +259,9 @@ placeholder="Enter Service Title"
       <tr key={client.Id} style={{ borderBottom: "1px solid #ddd", backgroundColor: "#f9f9f9", transition: "0.3s" }}>
       <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor:"white" }}>{client.Id}</td>
         <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor:"white" }}>{client.Sno}</td>
+        
         <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor:"white" }}>{client.Named}<br/> <img src={client.Path1} alt="Not found" style={{ width: "150px", height: "auto", borderRadius: "4px", boxShadow: "0 2px 4px rgba(0,0,0,0.2)" }} /></td>
-      
+        <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor:"white" }}>{client.Aid} - {client.Aname}</td>
         <td style={{ padding: "10px" }}>
           <Button 
             className="btn-success btn-small" 
@@ -251,4 +311,4 @@ placeholder="Enter Service Title"
     )
 }
 
-export default Acategory
+export default Ascategory
