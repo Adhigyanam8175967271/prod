@@ -12,6 +12,9 @@ import Credentials from "./site/Dashboard-Sysadmin/Credentials";
 import Obanners from "./site/Dashboard-Sysadmin/Obanners";
 import Pbanners from "./site/Dashboard-Sysadmin/Pbanners";
 import Sbanners from "./site/Dashboard-Sysadmin/Sbanners";
+import Hcategory from "./site/Dashboard-Sysadmin/Hcategory";
+import Bcategory from "./site/Dashboard-Sysadmin/Bcategory";
+import Acategory from "./site/Dashboard-Sysadmin/Acategory";
 
 function App() {
   const [cookies] = useCookies(["token"]);
@@ -47,6 +50,18 @@ function App() {
            <Route
             path="/dashboardsb"
             element={isAuthenticated ? <Sbanners /> : <Navigate to="/sysadmin" />}
+          />
+           <Route
+            path="/dashboardhc"
+            element={isAuthenticated ? <Hcategory /> : <Navigate to="/sysadmin" />}
+          />
+          <Route
+            path="/dashboardbc"
+            element={isAuthenticated ? <Bcategory /> : <Navigate to="/sysadmin" />}
+          />
+           <Route
+            path="/dashboardms"
+            element={isAuthenticated ? <Acategory /> : <Navigate to="/sysadmin" />}
           />
 
           <Route path="/" element={<MaintenancePage />} />

@@ -210,7 +210,7 @@ function logout() {
                
                 <li>
                   <NavLink
-                    to='/bashboardhc'
+                    to='/dashboardhc'
                     className={(navData) =>
                       navData.isActive ? "active-page" : ""
                     }
