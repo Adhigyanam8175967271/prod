@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from "axios";
 import { NavLink } from "react-router-dom";
 import { Icon } from '@iconify/react';
+import { auto } from '@popperjs/core';
 const UnitCountOne = () => {
     const [count, setCount] = useState(0);
     const [count1, setCount1] = useState(0);
@@ -143,12 +144,12 @@ const UnitCountOne = () => {
     return (
         <div className="row row-cols-xxxl-5 row-cols-lg-3 row-cols-sm-2 row-cols-1 gy-4">
             <div className="col">
-                <div className="card shadow-none border bg-gradient-start-1 h-100">
-                <NavLink to='/dashboardame'>
-                    <div className="card-body p-20">
+                <div className="card shadow-none border bg-gradient-start-1" style={{height:auto}}>
+                <NavLink to='/dashboardala'>
+                    <div className="card-body" style={{padding:"5px 10px"}}>
                         <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
                             <div>
-                                <p className="fw-medium text-primary-light mb-1">Listed Astrolgers</p>
+                                <p className="fw-medium text-primary-light mb-0">Listed Astrolgers</p>
                                 <h6 className="mb-0">{count10}</h6>
                             </div>
                             <div className="w-50-px h-50-px bg-cyan rounded-circle d-flex justify-content-center align-items-center">
@@ -164,12 +165,12 @@ const UnitCountOne = () => {
                 {/* card end */}
             </div>
             <div className="col">
-                <div className="card shadow-none border bg-gradient-start-2 h-100">
+            <div className="card shadow-none border bg-gradient-start-1" style={{height:auto}}>
                 <NavLink to='/dashboardmru'>
-                    <div className="card-body p-20">
+                <div className="card-body" style={{padding:"5px 10px"}}>
                         <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
                             <div>
-                                <p className="fw-medium text-primary-light mb-1">
+                                <p className="fw-medium text-primary-light mb-0">
                                     Registered Users
                                 </p>
                                 <h6 className="mb-0">{count11}</h6>
@@ -188,12 +189,12 @@ const UnitCountOne = () => {
                 {/* card end */}
             </div>
             <div className="col">
-                <div className="card shadow-none border bg-gradient-start-3 h-100">
+            <div className="card shadow-none border bg-gradient-start-1" style={{height:auto}}>
                 <NavLink to='/dashboardbc'>
-                    <div className="card-body p-20">
+                <div className="card-body" style={{padding:"5px 10px"}}>
                         <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
                             <div>
-                                <p className="fw-medium text-primary-light mb-1">
+                                <p className="fw-medium text-primary-light mb-0">
                                     Blog Categories
                                 </p>
                                 <h6 className="mb-0">{count4}</h6>
@@ -211,12 +212,12 @@ const UnitCountOne = () => {
                 {/* card end */}
             </div>
             <div className="col">
-                <div className="card shadow-none border bg-gradient-start-4 h-100">
-                <NavLink to='/dashboardbla'>
-                    <div className="card-body p-20">
+            <div className="card shadow-none border bg-gradient-start-1" style={{height:auto}}>
+                <NavLink to='/dashboardbb'>
+                <div className="card-body" style={{padding:"5px 10px"}}>
                         <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
                             <div>
-                                <p className="fw-medium text-primary-light mb-1">Blog Articles</p>
+                                <p className="fw-medium text-primary-light mb-0">Blog Articles</p>
                                 <h6 className="mb-0">{count7}</h6>
                             </div>
                             <div className="w-50-px h-50-px bg-success-main rounded-circle d-flex justify-content-center align-items-center">
@@ -233,12 +234,12 @@ const UnitCountOne = () => {
                 {/* card end */}
             </div>
             <div className="col">
-                <div className="card shadow-none border bg-gradient-start-5 h-100">
+            <div className="card shadow-none border bg-gradient-start-1" style={{height:auto}}>
                 <NavLink to='/dashboardmt'>
-                    <div className="card-body p-20">
+                <div className="card-body" style={{padding:"5px 10px"}}>
                         <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
                             <div>
-                                <p className="fw-medium text-primary-light mb-1">Testimonials</p>
+                                <p className="fw-medium text-primary-light mb-0">Testimonials</p>
                                 <h6 className="mb-0">{count8}</h6>
                             </div>
                             <div className="w-50-px h-50-px bg-red rounded-circle d-flex justify-content-center align-items-center">
@@ -255,12 +256,12 @@ const UnitCountOne = () => {
                 {/* card end */}
             </div>
             <div className="col">
-                <div className="card shadow-none border bg-gradient-start-5 h-100">
+            <div className="card shadow-none border bg-gradient-start-1" style={{height:auto}}>
                 <NavLink to='/dashboardpb'>
-                    <div className="card-body p-20">
+                <div className="card-body" style={{padding:"5px 10px"}}>
                         <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
                             <div>
-                                <p className="fw-medium text-primary-light mb-1">Primary Banners</p>
+                                <p className="fw-medium text-primary-light mb-0">Primary Banners</p>
                                 <h6 className="mb-0">{count}</h6>
                             </div>
                             <div className="w-50-px h-50-px bg-purple rounded-circle d-flex justify-content-center align-items-center">
@@ -277,12 +278,12 @@ const UnitCountOne = () => {
                 {/* card end */}
             </div>
             <div className="col">
-                <div className="card shadow-none border bg-gradient-start-4 h-100">
+            <div className="card shadow-none border bg-gradient-start-1" style={{height:auto}}>
                 <NavLink to='/dashboardsb'>
-                    <div className="card-body p-20">
+                <div className="card-body" style={{padding:"5px 10px"}}>
                         <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
                             <div>
-                                <p className="fw-medium text-primary-light mb-1">Secondary Banners</p>
+                                <p className="fw-medium text-primary-light mb-0">Secondary Banners</p>
                                 <h6 className="mb-0">{count1}</h6>
                             </div>
                             <div className="w-50-px h-50-px bg-purple rounded-circle d-flex justify-content-center align-items-center">
@@ -299,12 +300,12 @@ const UnitCountOne = () => {
                 {/* card end */}
             </div>
             <div className="col">
-                <div className="card shadow-none border bg-gradient-start-3 h-100">
+            <div className="card shadow-none border bg-gradient-start-1" style={{height:auto}}>
                 <NavLink to='/dashboardob'>
-                    <div className="card-body p-20">
+                <div className="card-body" style={{padding:"5px 10px"}}>
                         <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
                             <div>
-                                <p className="fw-medium text-primary-light mb-1">
+                                <p className="fw-medium text-primary-light mb-0">
                                     Offer Banners
                                 </p>
                                 <h6 className="mb-0">{count2}</h6>
@@ -322,12 +323,12 @@ const UnitCountOne = () => {
                 {/* card end */}
             </div>
             <div className="col">
-                <div className="card shadow-none border bg-gradient-start-2 h-100">
+            <div className="card shadow-none border bg-gradient-start-1" style={{height:auto}}>
                 <NavLink to='/dashboardms'>
-                    <div className="card-body p-20">
+                <div className="card-body" style={{padding:"5px 10px"}}>
                         <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
                             <div>
-                                <p className="fw-medium text-primary-light mb-1">
+                                <p className="fw-medium text-primary-light mb-0">
                                     Astro Services
                                 </p>
                                 <h6 className="mb-0">{count5}</h6>
@@ -346,12 +347,12 @@ const UnitCountOne = () => {
                 {/* card end */}
             </div>
             <div className="col">
-                <div className="card shadow-none border bg-gradient-start-1 h-100">
+            <div className="card shadow-none border bg-gradient-start-1" style={{height:auto}}>
                 <NavLink to='/dashboardmss'>
-                    <div className="card-body p-20">
+                <div className="card-body" style={{padding:"5px 10px"}}>
                         <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
                             <div>
-                                <p className="fw-medium text-primary-light mb-1">Astro Sub Services</p>
+                                <p className="fw-medium text-primary-light mb-0">Astro Sub Services</p>
                                 <h6 className="mb-0">{count6}</h6>
                             </div>
                             <div className="w-50-px h-50-px bg-orange rounded-circle d-flex justify-content-center align-items-center">
@@ -367,12 +368,12 @@ const UnitCountOne = () => {
                 {/* card end */}
             </div>
             <div className="col">
-                <div className="card shadow-none border bg-gradient-start-1 h-100">
+            <div className="card shadow-none border bg-gradient-start-1" style={{height:auto}}>
                 <NavLink to='/dashboardhc'>
-                    <div className="card-body p-20">
+                <div className="card-body" style={{padding:"5px 10px"}}>
                         <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
                             <div>
-                                <p className="fw-medium text-primary-light mb-1">Horoscope Categories</p>
+                                <p className="fw-medium text-primary-light mb-0">Horoscope Categories</p>
                                 <h6 className="mb-0">{count3}</h6>
                             </div>
                             <div className="w-50-px h-50-px bg-yellow rounded-circle d-flex justify-content-center align-items-center">
@@ -388,12 +389,12 @@ const UnitCountOne = () => {
                 {/* card end */}
             </div>
             <div className="col">
-                <div className="card shadow-none border bg-gradient-start-2 h-100">
-                <NavLink to='/dashboardhla'>
-                    <div className="card-body p-20">
+            <div className="card shadow-none border bg-gradient-start-1" style={{height:auto}}>
+                <NavLink to='/dashboardhp'>
+                <div className="card-body" style={{padding:"5px 10px"}}>
                         <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
                             <div>
-                                <p className="fw-medium text-primary-light mb-1">
+                                <p className="fw-medium text-primary-light mb-0">
                                     Horoscope Predictions
                                 </p>
                                 <h6 className="mb-0">{count9}</h6>

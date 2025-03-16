@@ -169,7 +169,6 @@ const handleDelete = (clientId) => {
                                <table className="table bordered-table sm-table mb-0">
                             <thead>
                                         <tr>
-                                        <th scope="col">Id</th>
                                             <th scope="col">S No.</th>
                                             <th scope="col">Banner</th>
                                             <th scope="col">Options</th>
@@ -179,7 +178,6 @@ const handleDelete = (clientId) => {
   <tbody>
     {clients.map(client => (
       <tr key={client.Id} style={{ borderBottom: "1px solid #ddd", backgroundColor: "#f9f9f9", transition: "0.3s" }}>
-      <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor:"white" }}>{client.Id}</td>
         <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor:"white" }}>{client.Sno}</td>
         <td style={{ padding: "10px", backgroundColor:"white" }}>
           <img src={client.Path1} alt="Not found" style={{ width: "150px", height: "auto", borderRadius: "4px", boxShadow: "0 2px 4px rgba(0,0,0,0.2)" }} />

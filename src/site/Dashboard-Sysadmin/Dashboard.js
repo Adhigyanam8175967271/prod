@@ -7,7 +7,7 @@ import BlankPageLayer from "../../components/BlankPageLayer";
 
 
 
-import LatestRegisteredOne from '../../components/child/LatestRegisteredOne';
+// import LatestRegisteredOne from '../../components/child/LatestRegisteredOne';
 
 import UnitCountOne from '../../components/child/UnitCountOne';
 
@@ -27,7 +27,7 @@ const DashBoardLayerOne = () => {
               
 
                 {/* LatestRegisteredOne */}
-                <LatestRegisteredOne />
+                {/* <LatestRegisteredOne /> */}
 
                 
 

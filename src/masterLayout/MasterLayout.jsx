@@ -165,37 +165,27 @@ function logout() {
                
                 <li>
                   <NavLink
-                    to='/dashboardacn'
+                    to='/dashboardala'
                     className={(navData) =>
                       navData.isActive ? "active-page" : ""
                     }
                   >
                     <i className='ri-circle-fill circle-icon text-info-main w-auto' />{" "}
+                    All Astrologers
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to='/dashboardacn'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
                     Create New
                   </NavLink>
                 </li>
-                <li>
-                  <NavLink
-                    to='/dashboardame'
-                    className={(navData) =>
-                      navData.isActive ? "active-page" : ""
-                    }
-                  >
-                    <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
-                    Manage Existing
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to='/dashboardasd'
-                    className={(navData) =>
-                      navData.isActive ? "active-page" : ""
-                    }
-                  >
-                    <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
-                    Suspend / Delete
-                  </NavLink>
-                </li>
+                
               </ul>
             </li>
 
@@ -221,26 +211,16 @@ function logout() {
                 </li>
                 <li>
                   <NavLink
-                    to='/dashboardhan'
+                    to='/dashboardhp'
                     className={(navData) =>
                       navData.isActive ? "active-page" : ""
                     }
                   >
                     <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
-                    Add New
+                    Predictions
                   </NavLink>
                 </li>
-                <li>
-                  <NavLink
-                    to='/dashboardhla'
-                    className={(navData) =>
-                      navData.isActive ? "active-page" : ""
-                    }
-                  >
-                    <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
-                    List All
-                  </NavLink>
-                </li>
+               
               </ul>
             </li>
 
@@ -314,24 +294,13 @@ function logout() {
                 </li>
                 <li>
                   <NavLink
-                    to='/dashboardban'
+                    to='/dashboardbb'
                     className={(navData) =>
                       navData.isActive ? "active-page" : ""
                     }
                   >
                     <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
-                    Add New
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to='/dashboardbla'
-                    className={(navData) =>
-                      navData.isActive ? "active-page" : ""
-                    }
-                  >
-                    <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
-                    List All
+                    Blogs
                   </NavLink>
                 </li>
               </ul>

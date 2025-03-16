@@ -7,7 +7,7 @@ import axios from "axios";
 import validationnew from '../../Validations/Field.js';
 
 
-const Testimonials = () => {
+const Horoscopes = () => {
 
   const [message, setMessage] = useState("");
   const [messageerror, setMessageerror] = useState("");
@@ -20,14 +20,19 @@ const Testimonials = () => {
   
   const [sno, setSno] = useState("");
   const [title, setTitle] = useState("");
-  const [jobtitle, setJobTitle] = useState("");
+  const [dated, setDated] = useState("");
   const [description, setDescription] = useState("");
+  const [clientnew, setClientnew] = useState(""); 
+  const [clientAid, setClientAid] = useState("");  // Stores Aid (Id)
+  const [clientAname, setClientAname] = useState(""); // Stores Aname (Named)
+
+  
   
   
   const [clients, setClients] = useState([]);
   
   const fetchClients = () => {
-    axios.get('https://adhigyanam-e92bf1bbbdb1.herokuapp.com/testimonials')
+    axios.get('https://adhigyanam-e92bf1bbbdb1.herokuapp.com/predictions')
       .then(response => {
         setClients(response.data);
       })
@@ -48,9 +53,14 @@ const Testimonials = () => {
     const newErrors = {
         ...validationnew("sno", sno),
         ...validationnew("title", title),
-        ...validationnew("jobtitle", jobtitle),
+        ...validationnew("dated", dated),
         ...validationnew("description", description),
     };
+
+    // Dropdown Validation (Check if both Aid and Aname are selected)
+  if (!clientAid || !clientAname) {
+    newErrors.clientnew = "Please select a valid category";
+  }
 
     setErrorsfield(newErrors);
     if (Object.keys(newErrors).length > 0) return;
@@ -58,8 +68,8 @@ const Testimonials = () => {
     setIsSubmitting(true);
 
     axios.post(
-        'https://adhigyanam-e92bf1bbbdb1.herokuapp.com/createtestimonial',
-        { sno, title, jobtitle, description },  // Sending as JSON
+        'https://adhigyanam-e92bf1bbbdb1.herokuapp.com/createprediction',
+        { sno, title, dated, description, clientAid, clientAname },  // Sending as JSON
         { headers: { 'Content-Type': 'application/json' } } // Set JSON header
     )
     .then(res => {
@@ -68,8 +78,10 @@ const Testimonials = () => {
             setMessageerror("");
             setSno(""); 
             setTitle("");
-            setJobTitle("");
+            setDated("");
             setDescription("");
+            setClientAid(""); // Reset Aid
+            setClientAname(""); // Reset Aname
             setIsSubmitting(false);
             fetchClients();
         }
@@ -83,7 +95,7 @@ const Testimonials = () => {
      
   const handleDelete = (clientId) => {
     // Make an API call to delete the client
-    axios.delete(`https://adhigyanam-e92bf1bbbdb1.herokuapp.com/deletetestimonial/${clientId}`)
+    axios.delete(`https://adhigyanam-e92bf1bbbdb1.herokuapp.com/deleteprediction/${clientId}`)
       .then(response => {
         // If deletion is successful, update the clients array to remove the deleted client
         setClients(clients.filter(client => client.Id !== clientId));
@@ -94,7 +106,32 @@ const Testimonials = () => {
       });
   };
   
-  
+  const [options, setOptions] = useState([]);
+
+useEffect(() => {
+
+  axios.get('https://adhigyanam-e92bf1bbbdb1.herokuapp.com/horoscopecategories')
+    .then(response => {
+      setOptions(response.data.map(item => ({ value: item.Id, label: item.Named })));
+    })
+    .catch(error => {
+      console.error('Error fetching data:', error);
+    });
+
+   
+
+}, []); 
+
+const [filterDate, setFilterDate] = useState(""); 
+const [filterCategory, setFilterCategory] = useState("");
+
+// Function to filter displayed predictions
+const filteredClients = clients.filter(client => {
+  return (
+    (!filterDate || client.Dated === filterDate) &&
+    (!filterCategory || client.Hid.toString() === filterCategory)
+  );
+});
 
     return (
       <>
@@ -102,7 +139,7 @@ const Testimonials = () => {
       <MasterLayout>
         {/* Breadcrumb */}
          <p className="mb-12 text-secondary-light" style={{fontSize:"15px"}}>
-                                           <b>You are here</b>: <NavLink to="/dashboard" style={{color:'blueviolet', textDecoration:"underline"}}>Dashboard</NavLink> | Testimonials
+                                           <b>You are here</b>: <NavLink to="/dashboard" style={{color:'blueviolet', textDecoration:"underline"}}>Dashboard</NavLink> | <NavLink to="/dashboardhc" style={{color:'blueviolet', textDecoration:"underline"}}>Categories</NavLink>  | Predictions
                                        </p>
                                        <div className="col-xxl-12 col-xl-12">
                                                    <div className="card h-100">
@@ -124,7 +161,7 @@ const Testimonials = () => {
                                                                            aria-controls="pills-to-do-list"
                                                                            aria-selected="true"
                                                                        >
-                                                                            A. Add New Testimonial
+                                                                            A. Add New Horoscope
                                                                        </button>
                                                                    </li>
                                                                    <li className="nav-item" role="presentation">
@@ -170,7 +207,7 @@ const Testimonials = () => {
              <div>
            
                                            <p className="mb-32 text-secondary-light text-lg">
-                                               <b>Use the following form</b><br/>to add a new testimonial / customer feedback to the website.
+                                               <b>Use the following form</b><br/>to add a new horoscope prediction assigned by date and category to the website.
                                            </p>
                                            {message && <p style={{padding:5, backgroundColor:"green", color:"white", borderRadius:2}}>{message}</p>}
                                              {messageerror && <p style={{padding:5, backgroundColor:"red", color:"white", borderRadius:2}}>{messageerror}</p>}
@@ -189,6 +226,33 @@ const Testimonials = () => {
                                                  />
                                                   {errorsfield.sno && <span className="text-danger" style={{ fontSize: "0.8rem", fontWeight: "bolder" }}>{errorsfield.sno}</span>}
                                              </div>
+
+                                             <div  style={{marginTop:"15px"}}>
+
+<select
+ id="clientnew"
+ name="clientnew"
+ className="form-control h-56-px bg-neutral-50 radius-12"
+ onChange={(e) => {
+   const selectedIndex = e.target.selectedIndex;
+   const selectedAid = e.target.value; // Gets Aid (Id)
+   const selectedAname = e.target.options[selectedIndex].getAttribute("data-name"); // Gets Named (Aname)
+   
+   setClientAid(selectedAid);
+   setClientAname(selectedAname);
+ }}
+>
+ <option value="">Select Horoscope Category</option>
+ {options.map((option) => (
+   <option key={option.value} value={option.value} data-name={option.label}>
+     {option.value} - {option.label} {/* Aid - Aname */}
+   </option>
+ ))}
+</select>
+     {errorsfield.clientnew && <span className="text-danger" style={{fontSize:"0.8rem", fontWeight:"bolder"}}>{errorsfield.clientnew}</span>}
+</div>
+
+
                                              <div  style={{marginTop:"15px"}}>
             
             <input
@@ -197,7 +261,7 @@ const Testimonials = () => {
             id="title"
             name="title"
             value={title}
-            placeholder="Enter Full Name"
+            placeholder="Enter Prediction Title"
                 className="form-control h-56-px bg-neutral-50 radius-12"
               
             />
@@ -206,16 +270,16 @@ const Testimonials = () => {
             <div  style={{marginTop:"15px"}}>
             
             <input
-                onChange={(e) => setJobTitle(e.target.value)}
-            type="text"
-            id="jobtitle"
-            name="jobtitle"
-            value={jobtitle}
-            placeholder="Enter Job Title"
+                onChange={(e) => setDated(e.target.value)}
+            type="date"
+            id="dated"
+            name="dated"
+            value={dated}
+            placeholder="Select Date"
                 className="form-control h-56-px bg-neutral-50 radius-12"
               
             />
-             {errorsfield.jobtitle && <span className="text-danger" style={{ fontSize: "0.8rem", fontWeight: "bolder" }}>{errorsfield.jobtitle}</span>}
+             {errorsfield.dated && <span className="text-danger" style={{ fontSize: "0.8rem", fontWeight: "bolder" }}>{errorsfield.dated}</span>}
             </div>
             <div  style={{marginTop:"15px"}}>
             
@@ -225,7 +289,7 @@ const Testimonials = () => {
             id="description"
             name="description"
             value={description}
-            placeholder="Enter Testimonial here"
+            placeholder="Enter Horoscope Prediction here"
                 className="form-control bg-neutral-50 radius-12"
               style={{minHeight:"120px"}}
             />
@@ -261,59 +325,69 @@ const Testimonials = () => {
 
 
                                <p className="mb-32 text-secondary-light text-lg">
-                                   <b>Use the following datalist</b><br/>to modify / remove listed testimonials.
+                                   <b>Use the following datalist</b><br/>to modify / remove listed horoscope predictions.
                                </p>
+                               <div className="d-flex flex-wrap gap-2 mb-3">
+  {/* Date Filter */}
+  <input
+    type="date"
+    value={filterDate}
+    onChange={(e) => setFilterDate(e.target.value)}
+    className="form-control w-auto"
+    style={{ maxWidth: "200px", backgroundColor:"#fafafa" }}
+  />
+
+  {/* Category Filter */}
+  <select
+    value={filterCategory}
+    onChange={(e) => setFilterCategory(e.target.value)}
+    className="form-control w-auto"
+    style={{ maxWidth: "200px", backgroundColor:"#fafafa" }}
+  >
+    <option value="">Filter By Category</option>
+    {options.map(option => (
+      <option key={option.value} value={option.value}>
+        {option.label}
+      </option>
+    ))}
+  </select>
+</div>
                                <table className="table bordered-table sm-table mb-0">
                             <thead>
                                         <tr>
                                             <th scope="col">S No.</th>
-                                            <th scope="col">Full Name</th>
-                                            <th scope="col">Testimonial</th>
+                                            <th scope="col">Category</th>
+                                            <th scope="col">Prediction</th>
                                             <th scope="col">Options</th>
                                             
                                         </tr>
                                     </thead>
-  <tbody>
-    {clients.map(client => (
-      <tr key={client.Id} style={{ borderBottom: "1px solid #ddd", backgroundColor: "#f9f9f9", transition: "0.3s" }}>
-        <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor:"white" }}>{client.Sno}</td>
-        <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor:"white" }}>{client.Named}<br/>{client.Jobtitle}</td>
-        <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor:"white" }}>{client.Descriptions}</td>
-        <td style={{ padding: "10px" }}>
-          <Button 
-            className="btn-success btn-small" 
-            style={{
-              padding: "5px 10px", 
-              fontSize: "0.8rem", 
-              borderRadius: "5px", 
-              border: "none", 
-              cursor: "pointer",
-              transition: "0.3s"
-            }} 
-           >
-            Manage
-          </Button><br/>
-          <Button 
-            className="btn-danger btn-small" 
-            style={{
-              padding: "5px 10px", 
-              fontSize: "0.8rem", 
-              borderRadius: "5px", 
-              border: "none", 
-              cursor: "pointer",
-              transition: "0.3s"
-            }} 
-            onClick={() => {
-              if (window.confirm("You are removing a record permanently! Are you sure you want to delete this record?")) {
-                handleDelete(client.Id);
-              }
-            }}>
-            Remove
-          </Button>
-        </td>
-      </tr>
-    ))}
-  </tbody>
+                                    <tbody>
+  {filteredClients.map(client => (
+    <tr key={client.Id} style={{ borderBottom: "1px solid #ddd", backgroundColor: "#f9f9f9", transition: "0.3s" }}>
+      <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor: "white" }}>{client.Sno}</td>
+      <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor: "white" }}>{client.Hid} - {client.Hname}</td>
+      <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor: "white" }}>
+        <b>{client.Title}</b><br />{client.Descriptions}<br />{client.Dated}
+      </td>
+      <td style={{ padding: "10px" }}>
+        <Button className="btn-success btn-small" style={{ padding: "5px 10px", fontSize: "0.8rem", borderRadius: "5px", border: "none", cursor: "pointer", transition: "0.3s" }}>
+          Manage
+        </Button><br />
+        <Button 
+          className="btn-danger btn-small"
+          style={{ padding: "5px 10px", fontSize: "0.8rem", borderRadius: "5px", border: "none", cursor: "pointer", transition: "0.3s" }}
+          onClick={() => {
+            if (window.confirm("You are removing a record permanently! Are you sure you want to delete this record?")) {
+              handleDelete(client.Id);
+            }
+          }}>
+          Remove
+        </Button>
+      </td>
+    </tr>
+  ))}
+</tbody>
 </table>
 
              </div></div></div>
@@ -333,4 +407,4 @@ const Testimonials = () => {
     )
 }
 
-export default Testimonials
+export default Horoscopes

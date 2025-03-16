@@ -19,6 +19,8 @@ const [errorsfield, setErrorsfield] = useState({});
 
 const [sno, setSno] = useState("");
 const [title, setTitle] = useState("");
+const [qdesc, setQdesc] = useState("");
+const [fdesc, setFdesc] = useState("");
 const [values, setValues] = useState({
   image1: null, 
 });
@@ -54,6 +56,8 @@ const handleSubmit = (event) => {
   const newErrors = {
     ...validationnew("sno", sno),
     ...validationnew("title", title),
+    ...validationnew("qdesc", qdesc),
+    ...validationnew("fdesc", fdesc),
   };
 
   if (!values.image1) {
@@ -73,7 +77,8 @@ const handleSubmit = (event) => {
   formData.append('image1', values.image1);
   formData.append('sno', sno);
   formData.append('title', title);
-
+  formData.append('qdesc', qdesc);
+  formData.append('fdesc', fdesc);
   axios.post('https://adhigyanam-e92bf1bbbdb1.herokuapp.com/uploadastrocategory', formData)
     .then(res => {
       if (res.data === "Success") {
@@ -81,6 +86,8 @@ const handleSubmit = (event) => {
         setMessageerror("");
         setSno(""); // Reset Serial Number
         setTitle("");
+        setQdesc("");
+        setFdesc("");
         setValues({ image1: null }); // Reset File Input
         setIsSubmitting(false); 
         event.target.reset();
@@ -156,6 +163,34 @@ placeholder="Enter Service Title"
 />
  {errorsfield.title && <span className="text-danger" style={{ fontSize: "0.8rem", fontWeight: "bolder" }}>{errorsfield.title}</span>}
 </div>
+<div  style={{marginTop:"15px"}}>
+
+<input
+    onChange={(e) => setQdesc(e.target.value)}
+type="text"
+id="qdesc"
+name="qdesc"
+value={qdesc}
+placeholder="Enter Quick Info"
+    className="form-control h-56-px bg-neutral-50 radius-12"
+  
+/>
+ {errorsfield.qdesc && <span className="text-danger" style={{ fontSize: "0.8rem", fontWeight: "bolder" }}>{errorsfield.qdesc}</span>}
+</div>
+ <div  style={{marginTop:"15px"}}>
+            
+            <textarea
+                onChange={(e) => setFdesc(e.target.value)}
+            type="text"
+            id="fdesc"
+            name="fdesc"
+            value={fdesc}
+            placeholder="Enter Description here"
+                className="form-control bg-neutral-50 radius-12"
+              style={{minHeight:"120px"}}
+            />
+             {errorsfield.fdesc && <span className="text-danger" style={{ fontSize: "0.8rem", fontWeight: "bolder" }}>{errorsfield.fdesc}</span>}
+            </div>
                                <div style={{marginTop:"15px"}}>
                       <input onChange={(e) => handleFileChange(e, 1)}
                         type="file"
@@ -188,7 +223,7 @@ placeholder="Enter Service Title"
                                <table className="table bordered-table sm-table mb-0">
                             <thead>
                                         <tr>
-                                        <th scope="col">Id</th>
+                                       
                                             <th scope="col">S No.</th>
                                             <th scope="col">Service</th>
                                             <th scope="col">Options</th>
@@ -198,7 +233,6 @@ placeholder="Enter Service Title"
   <tbody>
     {clients.map(client => (
       <tr key={client.Id} style={{ borderBottom: "1px solid #ddd", backgroundColor: "#f9f9f9", transition: "0.3s" }}>
-      <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor:"white" }}>{client.Id}</td>
         <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor:"white" }}>{client.Sno}</td>
         <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor:"white" }}>{client.Named}<br/> <img src={client.Path1} alt="Not found" style={{ width: "150px", height: "auto", borderRadius: "4px", boxShadow: "0 2px 4px rgba(0,0,0,0.2)" }} /></td>
       

@@ -18,6 +18,9 @@ import Acategory from "./site/Dashboard-Sysadmin/Acategory";
 import Testimonials from "./site/Dashboard-Sysadmin/Testimonials";
 import Userdata from "./site/Dashboard-Sysadmin/Userdata";
 import Ascategory from "./site/Dashboard-Sysadmin/Ascategory";
+import Blogs from "./site/Dashboard-Sysadmin/Blogs";
+import Horoscopes from "./site/Dashboard-Sysadmin/Horoscopes";
+import Astrologers from "./site/Dashboard-Sysadmin/Astrologers";
 
 function App() {
   const [cookies] = useCookies(["token"]);
@@ -77,6 +80,18 @@ function App() {
            <Route
             path="/dashboardmss"
             element={isAuthenticated ? <Ascategory /> : <Navigate to="/sysadmin" />}
+          />
+           <Route
+            path="/dashboardbb"
+            element={isAuthenticated ? <Blogs /> : <Navigate to="/sysadmin" />}
+          />
+          <Route
+            path="/dashboardhp"
+            element={isAuthenticated ? <Horoscopes /> : <Navigate to="/sysadmin" />}
+          />
+          <Route
+            path="/dashboardala"
+            element={isAuthenticated ? <Astrologers /> : <Navigate to="/sysadmin" />}
           />
           <Route path="/" element={<MaintenancePage />} />
           <Route path="/loggedout" element={<LoggedOut />} />

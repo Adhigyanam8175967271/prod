@@ -65,7 +65,6 @@ const Userdata = () => {
             <table className="table bordered-table sm-table mb-0">
               <thead>
                 <tr>
-                  <th>Id</th>
                   <th>Full Name</th>
                   <th>Email Address</th>
                   <th>Contact No</th>
@@ -75,7 +74,6 @@ const Userdata = () => {
               <tbody>
                 {currentRecords.map(client => (
                   <tr key={client.Id} style={{ borderBottom: "1px solid #ddd", backgroundColor: "#f9f9f9" }}>
-                    <td style={{ padding: "10px" }}>{client.Id}</td>
                     <td style={{ padding: "10px" }}>{client.Named}</td>
                     <td style={{ padding: "10px" }}>{client.Email}</td>
                     <td style={{ padding: "10px" }}>91-{client.Cno}</td>
