@@ -69,6 +69,7 @@ const Userdata = () => {
                   <th>Email Address</th>
                   <th>Contact No</th>
                   <th>Registered On</th>
+                  <th>Reg. Mode</th>
                 </tr>
               </thead>
               <tbody>
@@ -78,6 +79,7 @@ const Userdata = () => {
                     <td style={{ padding: "10px" }}>{client.Email}</td>
                     <td style={{ padding: "10px" }}>91-{client.Cno}</td>
                     <td style={{ padding: "10px" }}>{client.Jdate}</td>
+                    <td style={{ padding: "10px" }}>{client.Regmode}</td>
                   </tr>
                 ))}
               </tbody>

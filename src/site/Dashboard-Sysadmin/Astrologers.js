@@ -62,9 +62,9 @@ const Astrologers = () => {
               <b>Please Note</b>: Passwords have been disabled from display due to privacy measures.
             </p>
             <Button color="primary" onClick={exportToExcel} style={{ marginBottom: "20px",backgroundColor:'#434342', borderColor:'#434342', float:'right' }}>Export to Excel</Button>
-            <NavLink color="primary" to="/dashboardacn" style={{ marginBottom: "20px",backgroundColor:'blue', borderColor:'blue', float:'right', padding: "0.5625rem 0.75rem", 
+            {/* <NavLink color="primary" to="/dashboardacn" style={{ marginBottom: "20px",backgroundColor:'blue', borderColor:'blue', float:'right', padding: "0.5625rem 0.75rem", 
     fontSize: "1rem", 
-    fontWeight: "500", borderRadius: "0.375rem", color:'white', marginRight:"10px" }}>Create New</NavLink>
+    fontWeight: "500", borderRadius: "0.375rem", color:'white', marginRight:"10px" }}></NavLink> */}
                   <table className="table bordered-table sm-table mb-0">
                                                <thead>
                                                    <tr>
@@ -73,8 +73,8 @@ const Astrologers = () => {
                                                        <th scope="col">Full Name</th>
                                                        <th scope="col">Registered On</th>
                                                        <th scope="col">Type</th>
-                                                       <th scope="col">Contact No</th>
-                                                       <th scope="col">Status</th>
+                                                       <th scope="col">Verification Status</th>
+                                                       <th scope="col">Network Status</th>
                                                    </tr>
                                                </thead>
                                                <tbody>
@@ -91,13 +91,13 @@ const Astrologers = () => {
 />
                                                                    <div className="flex-grow-1">
                                                                        <h6 className="text-md mb-0 fw-medium">{client.Named}</h6>
-                                                                       <span className="text-sm text-secondary-light fw-medium">{client.Email}</span>
+                                                                       <span className="text-sm text-secondary-light fw-medium">{client.Email}<br/>91-{client.Cno} - <b>{client.Gender}</b></span>
                                                                    </div>
                                                                </div>
                                                            </td>
                                                            <td style={{ padding: "10px" }}>{client.Regdate}</td>
                                                            <td style={{ padding: "10px" }}>{client.Ctype}</td>
-                                                           <td style={{ padding: "10px" }}>91-{client.Cno}</td>
+                                                           <td style={{ padding: "10px" }}><b>Email</b>: {client.Vemail}<br/><b>Contact</b>: {client.Vnumber}</td>
                                                            <td style={{ padding: "10px" }}>
                                                                <div className="d-flex align-items-center">
                                                                    <div className="flex-grow-1">

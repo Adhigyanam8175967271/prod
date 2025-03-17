@@ -174,6 +174,18 @@ function logout() {
                     All Astrologers
                   </NavLink>
                 </li>
+                
+                <li>
+                  <NavLink
+                    to='/dashboardal'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
+                    Languages
+                  </NavLink>
+                </li>
                 <li>
                   <NavLink
                     to='/dashboardacn'
@@ -182,10 +194,9 @@ function logout() {
                     }
                   >
                     <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
-                    Create New
+                    Reg. Requests
                   </NavLink>
                 </li>
-                
               </ul>
             </li>
 
