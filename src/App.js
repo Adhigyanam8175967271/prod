@@ -22,6 +22,7 @@ import Blogs from "./site/Dashboard-Sysadmin/Blogs";
 import Horoscopes from "./site/Dashboard-Sysadmin/Horoscopes";
 import Astrologers from "./site/Dashboard-Sysadmin/Astrologers";
 import Languages from "./site/Dashboard-Sysadmin/Languages";
+import RegRequests from "./site/Dashboard-Sysadmin/RegRequests";
 
 function App() {
   const [cookies] = useCookies(["token"]);
@@ -97,6 +98,10 @@ function App() {
             <Route
             path="/dashboardal"
             element={isAuthenticated ? <Languages /> : <Navigate to="/sysadmin" />}
+          />
+           <Route
+            path="/dashboardacn"
+            element={isAuthenticated ? <RegRequests /> : <Navigate to="/sysadmin" />}
           />
           <Route path="/" element={<MaintenancePage />} />
           <Route path="/loggedout" element={<LoggedOut />} />

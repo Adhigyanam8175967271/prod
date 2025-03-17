@@ -3,10 +3,8 @@ import MasterLayout from "../../masterLayout/MasterLayout";
 import BlankPageLayer from "../../components/BlankPageLayer";
 import { NavLink } from 'react-router-dom'
 import React, { useState, useEffect } from 'react'
-import { Col, Container, Row } from "reactstrap"
 import { Button } from "reactstrap";
 import axios from "axios";
-import CryptoJS from 'crypto-js';
 import validation from '../../Validations/Image.js';
 import validationnew from '../../Validations/Field.js';
 
@@ -181,7 +179,8 @@ const handleDelete = (clientId) => {
                                <p className="mb-32 text-secondary-light text-lg">
                                    Use the following modify / remove listed display banners.
                                </p>
-                               <table className="table bordered-table sm-table mb-0">
+                               <div style={{ overflowX: "auto", width: "100%" }}>
+                               <table className="table bordered-table sm-table mb-0" style={{width:"100%"}}>
                             <thead>
                                         <tr>
                                             <th scope="col">S No.</th>
@@ -199,6 +198,19 @@ const handleDelete = (clientId) => {
           <img src={client.Path1} alt="Not found" style={{ width: "150px", height: "auto", borderRadius: "4px", boxShadow: "0 2px 4px rgba(0,0,0,0.2)" }} />
         </td>
         <td style={{ padding: "10px" }}>
+        <Button 
+            className="btn-success btn-small" 
+            style={{
+              padding: "5px 10px", 
+              fontSize: "0.8rem", 
+              borderRadius: "5px", 
+              border: "none", 
+              cursor: "pointer",
+              transition: "0.3s"
+            }} 
+           >
+            Manage
+          </Button><br/>
           <Button 
             className="btn-danger btn-small" 
             style={{
@@ -214,13 +226,14 @@ const handleDelete = (clientId) => {
                 handleDelete(client.Id);
               }
             }}>
-            Delete
+            Remove
           </Button>
         </td>
       </tr>
     ))}
   </tbody>
 </table>
+</div>
                            </div>
                        </div>
                    </div>

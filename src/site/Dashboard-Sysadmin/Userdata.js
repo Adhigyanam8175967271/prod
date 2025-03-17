@@ -62,7 +62,8 @@ const Userdata = () => {
               <b>Please Note</b>: Passwords have been disabled from display due to privacy measures.
             </p>
             <Button color="primary" onClick={exportToExcel} style={{ marginBottom: "20px",backgroundColor:'#434342', borderColor:'#434342', float:'right' }}>Export to Excel</Button>
-            <table className="table bordered-table sm-table mb-0">
+            <div style={{ overflowX: "auto", width: "100%" }}>
+            <table className="table bordered-table sm-table mb-0" style={{width:"100%"}}>
               <thead>
                 <tr>
                   <th>Full Name</th>
@@ -84,7 +85,7 @@ const Userdata = () => {
                 ))}
               </tbody>
             </table>
-
+</div>
             {/* Pagination Controls */}
             <div style={{ marginTop: "20px", display: "flex", justifyContent: "center" }}>
               <Button color="secondary" onClick={prevPage} disabled={currentPage === 1} style={{ marginRight: "10px" }}>

@@ -280,7 +280,8 @@ placeholder="Enter Quick Info"
                                <p className="mb-32 text-secondary-light text-lg">
                                    Use the following modify / remove listed sub services.
                                </p>
-                               <table className="table bordered-table sm-table mb-0">
+                               <div style={{ overflowX: "auto", width: "100%" }}>
+                               <table className="table bordered-table sm-table mb-0" style={{ width: "100%" }}>
                             <thead>
                                         <tr>
                                             <th scope="col">S No.</th>
@@ -333,6 +334,7 @@ placeholder="Enter Quick Info"
     ))}
   </tbody>
 </table>
+</div>
                            </div>
                        </div>
                    </div>

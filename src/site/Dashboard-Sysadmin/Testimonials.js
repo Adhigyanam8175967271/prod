@@ -263,7 +263,8 @@ const Testimonials = () => {
                                <p className="mb-32 text-secondary-light text-lg">
                                    <b>Use the following datalist</b><br/>to modify / remove listed testimonials.
                                </p>
-                               <table className="table bordered-table sm-table mb-0">
+                               <div style={{ overflowX: "auto", width: "100%" }}>
+                               <table className="table bordered-table sm-table mb-0" style={{width:"100%"}}>
                             <thead>
                                         <tr>
                                             <th scope="col">S No.</th>
@@ -315,6 +316,7 @@ const Testimonials = () => {
     ))}
   </tbody>
 </table>
+</div>
 
              </div></div></div>
                                                                       

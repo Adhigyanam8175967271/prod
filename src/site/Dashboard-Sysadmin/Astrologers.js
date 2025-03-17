@@ -65,12 +65,13 @@ const Astrologers = () => {
             {/* <NavLink color="primary" to="/dashboardacn" style={{ marginBottom: "20px",backgroundColor:'blue', borderColor:'blue', float:'right', padding: "0.5625rem 0.75rem", 
     fontSize: "1rem", 
     fontWeight: "500", borderRadius: "0.375rem", color:'white', marginRight:"10px" }}></NavLink> */}
-                  <table className="table bordered-table sm-table mb-0">
+    <div style={{ overflowX: "auto", width: "100%" }}>
+                  <table className="table bordered-table sm-table mb-0" style={{width:"100%"}}>
                                                <thead>
                                                    <tr>
                                                        <th scope="col">ID</th>
                                                        <th scope="col">S No.</th>
-                                                       <th scope="col">Full Name</th>
+                                                       <th scope="col">Astrologer</th>
                                                        <th scope="col">Registered On</th>
                                                        <th scope="col">Type</th>
                                                        <th scope="col">Verification Status</th>
@@ -112,6 +113,7 @@ const Astrologers = () => {
                                                    ))}
                                                </tbody>
                                            </table>
+                                           </div>
 
             {/* Pagination Controls */}
             <div style={{ marginTop: "20px", display: "flex", justifyContent: "center" }}>
