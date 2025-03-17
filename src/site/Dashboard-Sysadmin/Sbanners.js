@@ -22,6 +22,7 @@ const [errors, setErrors] = useState({});
 const [errorsnew, setErrorsnew] = useState({});
 
 const [sno, setSno] = useState("");
+const [title, setTitle] = useState("");
 const [values, setValues] = useState({
   image1: null, 
 });
@@ -52,42 +53,45 @@ const handleFileChange = (event, imageNumber) => {
 
 const handleSubmit = (event) => {
   event.preventDefault();
+  
   setErrors(validation(values));
-  setErrorsnew(validationnew(sno));
- 
-    if (values.image1) {
-      setIsSubmitting(true);
-      const formData = new FormData();
-      formData.append('image1', values.image1);
-      formData.append('sno', sno);
+  
+  // Pass the correct field name along with its value to validationnew
+  setErrorsnew(validationnew("sno", sno || ""));
 
-      axios.post('https://adhigyanam-e92bf1bbbdb1.herokuapp.com/uploadsecondarybanner', formData)
-        .then(res => {
-          if (res.data === "Success") {
-            setMessage("Operation was Successfull! Uploaded successfully");
-            setMessageerror("");
-            setSno(""); // Reset Serial Number
-  setValues({ image1: null }); // Reset File Input
-  setIsSubmitting(false); 
-  event.target.reset();
-  fetchClients();
-          } else {
-            setMessageerror("An Error Occoured! Please Recheck or Try Again.");
-            setMessage("");
-            event.target.reset();
-            setIsSubmitting(false); 
-             // Refresh table data
-         
-          }
-        })
-        .catch(err => console.log(err));
-    } else {
-      setErrors(prev => ({
-        ...prev,
-        image1: !values.image1 ? "Please select a valid Image" : "",
-      }));
+  if (values.image1) {
+    setIsSubmitting(true);
+    const formData = new FormData();
+    formData.append('image1', values.image1);
+    formData.append('sno', sno);
+    formData.append('title', title);
+    
+    axios.post('https://adhigyanam-e92bf1bbbdb1.herokuapp.com/uploadsecondarybanner', formData)
+      .then(res => {
+        if (res.data === "Success") {
+          setMessage("Operation was Successful! Uploaded successfully");
+          setMessageerror("");
+          setSno(""); // Reset Serial Number
+          setTitle(""); 
+          setValues({ image1: null }); // Reset File Input
+          setIsSubmitting(false); 
+          event.target.reset();
+          fetchClients();
+        } else {
+          setMessageerror("An Error Occurred! Please Recheck or Try Again.");
+          setMessage("");
+          event.target.reset();
+          setIsSubmitting(false);
+        }
+      })
+      .catch(err => console.log(err));
+  } else {
+    setErrors(prev => ({
+      ...prev,
+      image1: !values.image1 ? "Please select a valid Image" : "",
+    }));
   }
-}
+};
    
 const handleDelete = (clientId) => {
   // Make an API call to delete the client
@@ -118,24 +122,35 @@ const handleDelete = (clientId) => {
                            
                                <p className="mb-6" style={{fontWeight:'bold',fontSize:"18px"}}>A. Add New Banner</p>
                                <p className="mb-32 text-secondary-light text-lg">
-                                   Use the following form to add secondary display banners to the website.<br/> <b>Recommended Resolution: 1500 X 350</b>
+                                   Use the following form to add secondary display banners to the website. You may leave the <b><i>Redirect URL as blank</i></b> in case no redirection is required.<br/> <b>Recommended Resolution: 1500 X 350</b>
                                </p>
                                {message && <p style={{padding:5, backgroundColor:"green", color:"white", borderRadius:2}}>{message}</p>}
                                  {messageerror && <p style={{padding:5, backgroundColor:"red", color:"white", borderRadius:2}}>{messageerror}</p>}
                                <form action="" onSubmit={handleSubmit}>
                                <div>
 
+                               <input
+  onChange={(e) => setSno(e.target.value || "")} 
+  type="number"
+  id="sno"
+  name="sno"
+  value={sno} placeholder="Enter Serial No"
+                                         className="form-control h-56-px bg-neutral-50 radius-12"
+/>
+                                      {errorsnew.sno && <span className="text-danger" style={{ fontSize: "0.8rem", fontWeight: "bolder" }}>{errorsnew.sno}</span>}
+                                 </div>
+                                 <div style={{marginTop:"15px"}}>
+
                                      <input
-                                         onChange={(e) => setSno(e.target.value)}
-                        type="number"
-                        id="sno"
-                        name="sno"
-                        value={sno}
-                        placeholder="Enter Serial No"
+                                         onChange={(e) => setTitle(e.target.value)}
+                        type="text"
+                        id="title"
+                        name="title"
+                        value={title}
+                        placeholder="Enter Redirect URL"
                                          className="form-control h-56-px bg-neutral-50 radius-12"
                                        
                                      />
-                                      {errorsnew.sno && <span className="text-danger" style={{ fontSize: "0.8rem", fontWeight: "bolder" }}>{errorsnew.sno}</span>}
                                  </div>
                                <div style={{marginTop:"15px"}}>
                       <input onChange={(e) => handleFileChange(e, 1)}
@@ -180,6 +195,7 @@ const handleDelete = (clientId) => {
       <tr key={client.Id} style={{ borderBottom: "1px solid #ddd", backgroundColor: "#f9f9f9", transition: "0.3s" }}>
         <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor:"white" }}>{client.Sno}</td>
         <td style={{ padding: "10px", backgroundColor:"white" }}>
+        <b>Redirect URL</b>: {client.Rurl}<br/>
           <img src={client.Path1} alt="Not found" style={{ width: "150px", height: "auto", borderRadius: "4px", boxShadow: "0 2px 4px rgba(0,0,0,0.2)" }} />
         </td>
         <td style={{ padding: "10px" }}>

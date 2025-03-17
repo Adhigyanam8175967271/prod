@@ -6,6 +6,8 @@ import React, { useState, useEffect } from 'react'
 import { Button } from "reactstrap";
 import axios from "axios";
 import validationnew from '../../Validations/Field.js';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 
 const Blogs = () => {
@@ -29,7 +31,9 @@ const [values, setValues] = useState({
   image1: null, 
 });
 
-  const [dated, setDated] = useState("");
+const [dated, setDated] = useState("");
+const [selectedCategory, setSelectedCategory] = useState(""); // Filter state
+const [filteredClients, setFilteredClients] = useState([]); // Filtered data
 
 
 const [clients, setClients] = useState([]);
@@ -48,6 +52,15 @@ const fetchClients = () => {
 useEffect(() => {
   fetchClients();
 }, []);
+
+useEffect(() => {
+  if (selectedCategory) {
+    setFilteredClients(clients.filter(client => client.Bid === selectedCategory));
+  } else {
+    setFilteredClients(clients);
+  }
+}, [selectedCategory, clients]);
+
 
 const handleFileChange = (event, imageNumber) => {
   const file = event.target.files[0];
@@ -252,20 +265,21 @@ placeholder="Enter Quick Description"
 />
  {errorsfield.qdesc && <span className="text-danger" style={{ fontSize: "0.8rem", fontWeight: "bolder" }}>{errorsfield.qdesc}</span>}
 </div>
- <div  style={{marginTop:"15px"}}>
-            
-            <textarea
-                onChange={(e) => setFdesc(e.target.value)}
-            type="text"
-            id="fdesc"
-            name="fdesc"
-            value={fdesc}
-            placeholder="Enter Full Article here"
-                className="form-control bg-neutral-50 radius-12"
-              style={{minHeight:"120px"}}
-            />
-             {errorsfield.fdesc && <span className="text-danger" style={{ fontSize: "0.8rem", fontWeight: "bolder" }}>{errorsfield.fdesc}</span>}
-            </div>
+<div style={{ marginTop: "15px" }}>
+  <ReactQuill
+    theme="snow" // You can use "bubble" for a different UI
+    value={fdesc}
+    onChange={setFdesc} // React Quill passes content directly
+    placeholder="Enter Full Article here"
+    className="bg-neutral-50 radius-12"
+    style={{ Height: "20px" }} // Adjust height if needed
+  />
+  {errorsfield.fdesc && (
+    <span className="text-danger" style={{ fontSize: "0.8rem", fontWeight: "bolder" }}>
+      {errorsfield.fdesc}
+    </span>
+  )}
+</div>
 
 
                                <div style={{marginTop:"15px"}}>
@@ -297,58 +311,69 @@ placeholder="Enter Quick Description"
                                <p className="mb-32 text-secondary-light text-lg">
                                    Use the following modify / remove listed blog articles.
                                </p>
-                               <table className="table bordered-table sm-table mb-0">
-                            <thead>
-                                        <tr>
-                                            <th scope="col">S No.</th>
-                                            <th scope="col">Blog</th>
-                                            <th scope="col">Options</th>
-                                            
-                                        </tr>
-                                    </thead>
-  <tbody>
-    {clients.map(client => (
-      <tr key={client.Id} style={{ borderBottom: "1px solid #ddd", backgroundColor: "#f9f9f9", transition: "0.3s" }}>
-        <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor:"white" }}>{client.Sno}</td>
-        
-        <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor:"white" }}>{client.Bid} - {client.Bname}<br/>{client.Title}<br/>{client.Dated}</td>
-
-        <td style={{ padding: "10px" }}>
-          <Button 
-            className="btn-success btn-small" 
-            style={{
-              padding: "5px 10px", 
-              fontSize: "0.8rem", 
-              borderRadius: "5px", 
-              border: "none", 
-              cursor: "pointer",
-              transition: "0.3s"
-            }} 
-           >
-            Manage
-          </Button><br/>
-          <Button 
-            className="btn-danger btn-small" 
-            style={{
-              padding: "5px 10px", 
-              fontSize: "0.8rem", 
-              borderRadius: "5px", 
-              border: "none", 
-              cursor: "pointer",
-              transition: "0.3s"
-            }} 
-            onClick={() => {
-              if (window.confirm("You are removing a record permanently! Are you sure you want to delete this record?")) {
-                handleDelete(client.Id);
-              }
-            }}>
-            Remove
-          </Button>
-        </td>
-      </tr>
-    ))}
-  </tbody>
-</table>
+                               <div style={{ marginBottom: "15px" }}>
+          <select
+            className="form-control h-56-px bg-neutral-50 radius-12"
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+          >
+            <option value="">-- Filter By Category --</option>
+            {options.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </div>
+        <table className="table bordered-table sm-table mb-0">
+          <thead>
+            <tr>
+              <th scope="col">S No.</th>
+              <th scope="col">Blog Title</th>
+              <th scope="col">Options</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredClients.map(client => (
+              <tr key={client.Id} style={{ borderBottom: "1px solid #ddd", backgroundColor: "#f9f9f9", transition: "0.3s" }}>
+                <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor: "white" }}>{client.Sno}</td>
+                <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor: "white" }}>{client.Bid} - {client.Bname}<br />{client.Title}<br />{client.Dated}</td>
+                <td style={{ padding: "10px" }}>
+                   <Button 
+                              className="btn-success btn-small" 
+                              style={{
+                                padding: "5px 10px", 
+                                fontSize: "0.8rem", 
+                                borderRadius: "5px", 
+                                border: "none", 
+                                cursor: "pointer",
+                                transition: "0.3s"
+                              }} 
+                             >
+                              Manage
+                            </Button><br/>
+                            <Button 
+                              className="btn-danger btn-small" 
+                              style={{
+                                padding: "5px 10px", 
+                                fontSize: "0.8rem", 
+                                borderRadius: "5px", 
+                                border: "none", 
+                                cursor: "pointer",
+                                transition: "0.3s"
+                              }} 
+                              onClick={() => {
+                                if (window.confirm("You are removing a record permanently! Are you sure you want to delete this record?")) {
+                                  handleDelete(client.Id);
+                                }
+                              }}>
+                              Remove
+                            </Button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
                            </div>
                        </div>
                    </div>
