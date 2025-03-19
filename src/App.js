@@ -5,7 +5,7 @@ import { useCookies } from "react-cookie";
 import ErrorPage from "./site/ErrorPage";
 import LoggedOut from "./site/LoggedOut";
 import SignInPage from "./site/SignInPage";
-import MaintenancePage from "./site/MaintenancePage";
+// import MaintenancePage from "./site/MaintenancePage";
 import Dashboard from "./site/Dashboard-Sysadmin/Dashboard";
 
 import Credentials from "./site/Dashboard-Sysadmin/Credentials";
@@ -37,12 +37,10 @@ function App() {
             path="/dashboard"
             element={isAuthenticated ? <Dashboard /> : <Navigate to="/sysadmin" />}
           />
-
           <Route
             path="/sysadmin"
             element={isAuthenticated ? <Navigate to="/dashboard" /> : <SignInPage />}
           />
-
           <Route
             path="/dashboardsc"
             element={isAuthenticated ? <Credentials /> : <Navigate to="/sysadmin" />}
@@ -103,7 +101,7 @@ function App() {
             path="/dashboardacn"
             element={isAuthenticated ? <RegRequests /> : <Navigate to="/sysadmin" />}
           />
-          <Route path="/" element={<MaintenancePage />} />
+          <Route path="/" element={<SignInPage />} />
           <Route path="/loggedout" element={<LoggedOut />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
