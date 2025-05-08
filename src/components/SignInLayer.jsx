@@ -64,7 +64,7 @@ const SignInLayer = () => {
     <section className='auth bg-base d-flex flex-wrap'>
       <div className='auth-left d-lg-block d-none'>
         <div className='d-flex align-items-center flex-column h-100 justify-content-center'>
-          <img src='siteimages/sysadmin.jpeg' alt='' />
+          <img src='siteimages/sysadm.jpg' alt='' />
         </div>
       </div>
       <div className='auth-right py-32 px-24 d-flex flex-column justify-content-center'>
