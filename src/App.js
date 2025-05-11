@@ -23,6 +23,10 @@ import Horoscopes from "./site/Dashboard-Sysadmin/Horoscopes";
 import Astrologers from "./site/Dashboard-Sysadmin/Astrologers";
 import Languages from "./site/Dashboard-Sysadmin/Languages";
 import RegRequests from "./site/Dashboard-Sysadmin/RegRequests";
+import Courses from "./site/Dashboard-Sysadmin/Courses";
+import CreateCourses from "./site/Dashboard-Sysadmin/CreateCourses";
+import CourseCategory from "./site/Dashboard-Sysadmin/CourseCategory";
+import CourseSubCategory from "./site/Dashboard-Sysadmin/CourseSubCategory";
 
 function App() {
   const [cookies] = useCookies(["token"]);
@@ -100,6 +104,22 @@ function App() {
            <Route
             path="/dashboardacn"
             element={isAuthenticated ? <RegRequests /> : <Navigate to="/sysadmin" />}
+          />
+           <Route
+            path="/dashboardcourses"
+            element={isAuthenticated ? <Courses /> : <Navigate to="/sysadmin" />}
+          />
+           <Route
+            path="/dashboardcreatecourse"
+            element={isAuthenticated ? <CreateCourses /> : <Navigate to="/sysadmin" />}
+          />
+           <Route
+            path="/dashboardcoursecategory"
+            element={isAuthenticated ? <CourseCategory /> : <Navigate to="/sysadmin" />}
+          />
+           <Route
+            path="/dashboardcoursesubcategory"
+            element={isAuthenticated ? <CourseSubCategory /> : <Navigate to="/sysadmin" />}
           />
           <Route path="/" element={<SignInPage />} />
           <Route path="/loggedout" element={<LoggedOut />} />

@@ -130,7 +130,7 @@ const handleDelete = (clientId) => {
                            
                                <p className="mb-6" style={{fontWeight:'bold',fontSize:"18px"}}>A. Create New Service</p>
                                <p className="mb-32 text-secondary-light text-lg">
-                                   Use the following form to add a new astrology service to the website.<br/> <b>Recommended Resolution: 500 X 500</b>
+                                   Use the following form to add a new astrology service to the website.<br/> <b>Recommended Resolution: 500 X 350</b>
                                </p>
                                {message && <p style={{padding:5, backgroundColor:"green", color:"white", borderRadius:2}}>{message}</p>}
                                  {messageerror && <p style={{padding:5, backgroundColor:"red", color:"white", borderRadius:2}}>{messageerror}</p>}

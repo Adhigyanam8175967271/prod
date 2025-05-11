@@ -8,7 +8,7 @@ import axios from "axios";
 import validationnew from '../../Validations/Field.js';
 
 
-const Ascategory = () => {
+const CourseSubCategory = () => {
 
 const [message, setMessage] = useState("");
 const [messageerror, setMessageerror] = useState("");
@@ -34,7 +34,7 @@ const [values, setValues] = useState({
 const [clients, setClients] = useState([]);
 
 const fetchClients = () => {
-  axios.get('https://adhigyanam-e92bf1bbbdb1.herokuapp.com/subastrocategories')
+  axios.get('https://adhigyanam-e92bf1bbbdb1.herokuapp.com/subcoursecategories')
     .then(response => {
       setClients(response.data);
     })
@@ -94,7 +94,7 @@ const handleSubmit = (event) => {
   formData.append('qdesc', qdesc);
   formData.append('fdesc', fdesc);
   axios
-    .post("https://adhigyanam-e92bf1bbbdb1.herokuapp.com/uploadsubastrocategory", formData)
+    .post("https://adhigyanam-e92bf1bbbdb1.herokuapp.com/uploadsubcoursecategory", formData)
     .then((res) => {
       if (res.data === "Success") {
         setMessage("Operation was Successful! Uploaded successfully");
@@ -120,7 +120,7 @@ const handleSubmit = (event) => {
    
 const handleDelete = (clientId) => {
   // Make an API call to delete the client
-  axios.delete(`https://adhigyanam-e92bf1bbbdb1.herokuapp.com/deletesubastrocategory/${clientId}`)
+  axios.delete(`https://adhigyanam-e92bf1bbbdb1.herokuapp.com/deletesubcoursecategory/${clientId}`)
     .then(response => {
       // If deletion is successful, update the clients array to remove the deleted client
       setClients(clients.filter(client => client.Id !== clientId));
@@ -135,7 +135,7 @@ const [options, setOptions] = useState([]);
 
 useEffect(() => {
 
-  axios.get('https://adhigyanam-e92bf1bbbdb1.herokuapp.com/astrocategories')
+  axios.get('https://adhigyanam-e92bf1bbbdb1.herokuapp.com/coursecategories')
     .then(response => {
       setOptions(response.data.map(item => ({ value: item.Id, label: item.Named })));
     })
@@ -153,7 +153,7 @@ useEffect(() => {
       {/* MasterLayout */}
       <MasterLayout>
       <p className="mb-12 text-secondary-light" style={{fontSize:"15px"}}>
-                                   <b>You are here</b>: <NavLink to="/dashboard" style={{color:'blueviolet', textDecoration:"underline"}}>Dashboard</NavLink> | <NavLink to="/dashboardms" style={{color:'blueviolet', textDecoration:"underline"}}>Astro Services</NavLink> | Sub Services
+                                   <b>You are here</b>: <NavLink to="/dashboard" style={{color:'blueviolet', textDecoration:"underline"}}>Dashboard</NavLink> | <NavLink to="/dashboardcoursecategory" style={{color:'blueviolet', textDecoration:"underline"}}>Course Categories</NavLink> | Sub Course Categories
                                </p>
       <section className="auth forgot-password-page bg-base d-flex flex-wrap">
      
@@ -161,9 +161,9 @@ useEffect(() => {
                     <div className="max-w-464-px mx-auto w-100">
                     <div>
                            
-                               <p className="mb-6" style={{fontWeight:'bold',fontSize:"18px"}}>A. Create New Sub Service</p>
+                               <p className="mb-6" style={{fontWeight:'bold',fontSize:"18px"}}>A. Create New Course Sub Category</p>
                                <p className="mb-32 text-secondary-light text-lg">
-                                   Use the following form to add a new astro sub service to the website.<br/> <b>Recommended Resolution: 500 X 350</b>
+                                   Use the following form to add a new course sub category to the website.<br/> <b>Recommended Resolution: 500 X 350</b>
                                </p>
                                {message && <p style={{padding:5, backgroundColor:"green", color:"white", borderRadius:2}}>{message}</p>}
                                  {messageerror && <p style={{padding:5, backgroundColor:"red", color:"white", borderRadius:2}}>{messageerror}</p>}
@@ -190,7 +190,7 @@ type="text"
 id="title"
 name="title"
 value={title}
-placeholder="Enter Sub Service Title"
+placeholder="Enter Title"
     className="form-control h-56-px bg-neutral-50 radius-12"
   
 />
@@ -262,7 +262,7 @@ placeholder="Enter Quick Info"
                     </div>
                     <div>
                                         <Button type="submit" disabled={isSubmitting} className="btn btn-primary text-sm btn-sm px-12 py-16 w-100 radius-12 mt-32">
-                                        {isSubmitting ? 'Please Wait...' : 'Create Sub Service'}
+                                        {isSubmitting ? 'Please Wait...' : 'Create Course Sub Category'}
                                         </Button>
                                         
                                       </div>
@@ -275,16 +275,16 @@ placeholder="Enter Quick Info"
                        <div className="max-w-464-px mx-auto w-100">
                            <div>
                                
-                           <p className="mb-6" style={{fontWeight:'bold',fontSize:"18px"}}>B. Manage Listed Sub Services</p>
+                           <p className="mb-6" style={{fontWeight:'bold',fontSize:"18px"}}>B. Manage Listed Sub Course Categories</p>
                                <p className="mb-32 text-secondary-light text-lg">
-                                   Use the following modify / remove listed sub services.
+                                   Use the following modify / remove listed sub course categories.
                                </p>
                                <div style={{ overflowX: "auto", width: "100%" }}>
                                <table className="table bordered-table sm-table mb-0" style={{ width: "100%" }}>
                             <thead>
                                         <tr>
                                             <th scope="col">S No.</th>
-                                            <th scope="col">Sub Service</th>
+                                            <th scope="col">Sub Category</th>
                                             <th scope="col">Parent</th>
                                             <th scope="col">Options</th>
                                             
@@ -347,4 +347,4 @@ placeholder="Enter Quick Info"
     )
 }
 
-export default Ascategory
+export default CourseSubCategory

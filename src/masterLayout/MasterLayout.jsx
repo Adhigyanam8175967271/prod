@@ -318,6 +318,61 @@ function logout() {
             </li>
 
             
+ <li className='dropdown'>
+              <Link to='#'>
+                <Icon icon='solar:document-text-outline' className='menu-icon' />
+                <span>Courses</span>
+              </Link>
+              <ul className='sidebar-submenu'>
+              
+               
+                <li>
+                  <NavLink
+                    to='/dashboardcoursecategory'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-info-main w-auto' />{" "}
+                    Course Categories
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to='/dashboardcoursesubcategory'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
+                   Sub Categories
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to='/dashboardcreatecourse'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
+                     Create Course
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to='/dashboardcourses'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-info-main w-auto' />{" "}
+                    Listed Courses
+                  </NavLink>
+                </li>
+              </ul>
+            </li>
+            
              <li className='dropdown'>
               <Link to='#'>
                 <Icon icon='mingcute:storage-line' className='menu-icon' />

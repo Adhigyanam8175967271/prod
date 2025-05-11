@@ -18,6 +18,9 @@ const UnitCountOne = () => {
     const [count9, setCount9] = useState(0);
     const [count10, setCount10] = useState(0);
     const [count11, setCount11] = useState(0);
+     const [count12, setCount12] = useState(0);
+      const [count13, setCount13] = useState(0);
+       const [count14, setCount14] = useState(0);
   
     useEffect(() => {
       const fetchCount = async () => {
@@ -127,6 +130,33 @@ const UnitCountOne = () => {
           console.error("Error fetching count:", err);
         }
       };
+
+       const fetchCount12 = async () => {
+        try {
+          const response = await axios.get("https://adhigyanam-e92bf1bbbdb1.herokuapp.com/countCourses"); // Adjust URL if needed
+          setCount12(response.data.count);
+        } catch (err) {
+          console.error("Error fetching count:", err);
+        }
+      };
+
+       const fetchCount13 = async () => {
+        try {
+          const response = await axios.get("https://adhigyanam-e92bf1bbbdb1.herokuapp.com/countCourseCategories"); // Adjust URL if needed
+          setCount13(response.data.count);
+        } catch (err) {
+          console.error("Error fetching count:", err);
+        }
+      };
+
+       const fetchCount14 = async () => {
+        try {
+          const response = await axios.get("https://adhigyanam-e92bf1bbbdb1.herokuapp.com/countCourseSubCategories"); // Adjust URL if needed
+          setCount14(response.data.count);
+        } catch (err) {
+          console.error("Error fetching count:", err);
+        }
+      };
   
       fetchCount();
       fetchCount1();
@@ -140,6 +170,9 @@ const UnitCountOne = () => {
       fetchCount9();
       fetchCount10();
       fetchCount11();
+      fetchCount12();
+       fetchCount13();
+      fetchCount14();
     }, []); // Runs only once on component mount
     return (
         <div className="row row-cols-xxxl-5 row-cols-lg-3 row-cols-sm-2 row-cols-1 gy-4">
@@ -407,6 +440,69 @@ const UnitCountOne = () => {
                             </div>
                         </div>
                         
+                    </div>
+                    </NavLink>
+                </div>
+                {/* card end */}
+            </div>
+             <div className="col">
+                <div className="card shadow-none border bg-gradient-start-1" style={{height:auto}}>
+                <NavLink to='/dashboardcoursecategory'>
+                    <div className="card-body" style={{padding:"5px 10px"}}>
+                        <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
+                            <div>
+                                <p className="fw-medium text-primary-light mb-0">Course Categories</p>
+                                <h6 className="mb-0">{count13}</h6>
+                            </div>
+                            <div className="w-50-px h-50-px bg-cyan rounded-circle d-flex justify-content-center align-items-center">
+                                <Icon
+                                    icon="solar:document-text-outline"
+                                    className="text-white text-2xl mb-0"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    </NavLink>
+                </div>
+                {/* card end */}
+            </div>
+             <div className="col">
+                <div className="card shadow-none border bg-gradient-start-1" style={{height:auto}}>
+                <NavLink to='/dashboardcoursesubcategory'>
+                    <div className="card-body" style={{padding:"5px 10px"}}>
+                        <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
+                            <div>
+                                <p className="fw-medium text-primary-light mb-0">Course Sub Categories</p>
+                                <h6 className="mb-0">{count14}</h6>
+                            </div>
+                            <div className="w-50-px h-50-px bg-cyan rounded-circle d-flex justify-content-center align-items-center">
+                                <Icon
+                                    icon="solar:document-text-outline"
+                                    className="text-white text-2xl mb-0"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    </NavLink>
+                </div>
+                {/* card end */}
+            </div>
+             <div className="col">
+                <div className="card shadow-none border bg-gradient-start-1" style={{height:auto}}>
+                <NavLink to='/dashboardcourses'>
+                    <div className="card-body" style={{padding:"5px 10px"}}>
+                        <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
+                            <div>
+                                <p className="fw-medium text-primary-light mb-0">Courses</p>
+                                <h6 className="mb-0">{count12}</h6>
+                            </div>
+                            <div className="w-50-px h-50-px bg-cyan rounded-circle d-flex justify-content-center align-items-center">
+                                <Icon
+                                    icon="solar:document-text-outline"
+                                    className="text-white text-2xl mb-0"
+                                />
+                            </div>
+                        </div>
                     </div>
                     </NavLink>
                 </div>
