@@ -67,6 +67,10 @@ const handleSubmit = (event) => {
     newErrors.clientnew1 = "Please select a valid category";
   }
 
+  if (!smat) {
+  newErrors.smat = "Please select course add-ons";
+}
+
   // Image validation
   if (!values.image1) {
     newErrors.image1 = "Please select a valid image";
@@ -222,7 +226,7 @@ placeholder="Enter Title"
     setClientAname(selectedAname);
   }}
 >
-  <option value="">Select Category</option>
+  <option value="">-- Select Category --</option>
   {options.map((option) => (
     <option key={option.value} value={option.value} data-name={option.label}>
       {option.value} - {option.label} {/* Aid - Aname */}
@@ -316,7 +320,7 @@ placeholder="Enter Quick Description"
     setClientAnamenew(selectedAname);
   }}
 >
-  <option value="">Select Language Mode</option>
+  <option value="">-- Select Language Mode --</option>
   {optionsnew.map((option) => (
     <option key={option.value} value={option.value} data-name={option.label}>
       {option.value} - {option.label} {/* Aid - Aname */}
@@ -330,12 +334,13 @@ placeholder="Enter Quick Description"
  <select
   id="smat"
   name="smat"
+  value={smat}
   className="form-control h-56-px bg-neutral-50 radius-12"
- onChange={(e) => setSmat(e.target.value)}
+  onChange={(e) => setSmat(e.target.value)}
 >
-  
-          <option value="Contains Study materials">Contains Study materials</option>
-          <option value="No Study Material">No Study Material</option>
+  <option value="">-- Select Study Material Option --</option>
+  <option value="Contains Study materials">Contains Study materials</option>
+  <option value="No Study Material">No Study Material</option>
 </select>
       {errorsfield.smat && <span className="text-danger" style={{fontSize:"0.8rem", fontWeight:"bolder"}}>{errorsfield.smat}</span>}
 </div>
