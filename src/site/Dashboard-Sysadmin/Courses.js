@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import MasterLayout from "../../masterLayout/MasterLayout";
 import BlankPageLayer from "../../components/BlankPageLayer";
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { Button } from "reactstrap";
 import axios from "axios";
 
@@ -34,6 +34,20 @@ const Courses = () => {
       // Handle error, such as displaying an error message
     });
 };
+
+ const navigate = useNavigate();
+
+  const handleManage1 = (clientId) => {
+    navigate(`/dashboardcurriculum/${clientId}`);
+  };
+
+  const handleManage2 = (clientId) => {
+    navigate(`/dashboardstudymaterial/${clientId}`);
+  };
+
+  const handleManage3 = (clientId) => {
+    navigate(`/dashboardvideo/${clientId}`);
+  };
 
   return (
     <MasterLayout>
@@ -88,7 +102,7 @@ const Courses = () => {
                                                                                      border: "none", 
                                                                                      cursor: "pointer",
                                                                                      transition: "0.3s", marginBottom:"5px"
-                                                                                   }} 
+                                                                                   }} onClick={() => handleManage1(client.Id)}
                                                                                   >
                                                                                    Curriculum
                                                                                  </Button> <Button 
@@ -100,7 +114,7 @@ const Courses = () => {
                                                                                      border: "none", 
                                                                                      cursor: "pointer",
                                                                                      transition: "0.3s", marginBottom:"5px"
-                                                                                   }} 
+                                                                                   }} onClick={() => handleManage3(client.Id)}
                                                                                   >
                                                                                    Videos
                                                                                  </Button> <Button 
@@ -112,7 +126,7 @@ const Courses = () => {
                                                                                      border: "none", 
                                                                                      cursor: "pointer",
                                                                                      transition: "0.3s", marginBottom:"5px"
-                                                                                   }} 
+                                                                                   }} onClick={() => handleManage2(client.Id)}
                                                                                   >
                                                                                    Add-Ons
                                                                                  </Button><br/> <Button 

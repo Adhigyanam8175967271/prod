@@ -123,17 +123,17 @@ function logout() {
         <div>
           <Link to='/' className='sidebar-logo'>
             <img
-              src='siteimages/logo.png'
+              src='https://cms.adhigyanam.com/siteimages/logo.png'
               alt='site logo'
               className='light-logo'
             />
             <img
-              src='siteimages/logowhite.png'
+              src='https://cms.adhigyanam.com/siteimages/logowhite.png'
               alt='site logo'
               className='dark-logo'
             />
             <img
-              src='siteimages/favicon.png'
+              src='https://cms.adhigyanam.com/siteimages/favicon.png'
               alt='site logo'
               className='logo-icon'
             />
@@ -487,7 +487,7 @@ function logout() {
                     data-bs-toggle='dropdown'
                   >
                     <img
-                      src='siteimages/favicon.png'
+                      src='https://cms.adhigyanam.com/siteimages/favicon.png'
                       alt='image_user'
                       className='w-40-px h-40-px object-fit-cover rounded-circle'
                     />
