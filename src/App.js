@@ -30,6 +30,7 @@ import CourseSubCategory from "./site/Dashboard-Sysadmin/CourseSubCategory";
 import Curriculum from "./site/Dashboard-Sysadmin/Curriculum";
 import StudyMaterial from "./site/Dashboard-Sysadmin/StudyMaterial";
 import Video from "./site/Dashboard-Sysadmin/Video";
+import Questions from "./site/Dashboard-Sysadmin/Questions";
 
 function App() {
   const [cookies] = useCookies(["token"]);
@@ -135,6 +136,10 @@ function App() {
           <Route
             path="/dashboardvideo/:clientId"
             element={isAuthenticated ? <Video /> : <Navigate to="/sysadmin" />}
+          />
+          <Route
+            path="/dashboardquestion/:clientId"
+            element={isAuthenticated ? <Questions /> : <Navigate to="/sysadmin" />}
           />
           <Route path="/" element={<SignInPage />} />
           <Route path="/loggedout" element={<LoggedOut />} />

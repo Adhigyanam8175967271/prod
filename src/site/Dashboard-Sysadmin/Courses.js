@@ -49,6 +49,10 @@ const Courses = () => {
     navigate(`/dashboardvideo/${clientId}`);
   };
 
+  const handleManage4 = (clientId) => {
+    navigate(`/dashboardquestion/${clientId}`);
+  };
+
   return (
     <MasterLayout>
       <p className="mb-12 text-secondary-light" style={{ fontSize: "15px" }}>
@@ -65,9 +69,8 @@ const Courses = () => {
                   <table className="table bordered-table sm-table mb-0" style={{width:"100%"}}>
                                                <thead>
                                                    <tr>
-                                                       <th scope="col">Course</th>
-                                                       <th scope="col">List Price</th>
-                                                       <th scope="col">Add-On Fee</th>
+                                                       <th scope="col">Listed Courses</th>
+                                                       <th scope="col">Fee Structure</th>
                                                        <th scope="col">Management Options</th>
                                                    </tr>
                                                </thead>
@@ -80,16 +83,15 @@ const Courses = () => {
                                                                <img 
     src={client.Path1 && client.Path1.trim() !== "" ? client.Path1 : "siteimages/favicon.png"} 
     alt="Profile"
-    className="w-40-px h-40-px rounded-circle flex-shrink-0 me-12 overflow-hidden" 
+    className="w-60-px h-60-px rounded-circle flex-shrink-0 me-12 overflow-hidden" 
 />
                                                                    <div className="flex-grow-1">
-                                                                       <h6 className="text-md mb-0 fw-medium">#{client.Id} - {client.Title}</h6>
-                                                                       <span className="text-sm text-secondary-light fw-medium">{client.Csname}<br/><b>{client.Ename}</b></span>
+                                                                       <h6 className="text-md mb-4 fw-medium">#{client.Id} - {client.Title}</h6>
+                                                                       <span className="text-sm text-secondary-light fw-medium"><b>Language</b>: {client.Lname} - <b>Validity</b>: {client.Validity} Days<br/><b>Educator</b>: {client.Ename}</span>
                                                                    </div>
                                                                </div>
                                                            </td>
-                                                           <td style={{ padding: "10px" }}>{client.Price1} INR</td>
-                                                           <td style={{ padding: "10px" }}>{client.Price2} INR</td>
+                                                           <td className="text-sm text-secondary-light fw-medium" style={{ padding: "10px" }}><b>Course Fee</b>: {client.Price1} INR<br/><b>Add-On Fee</b>: {client.Price2} INR</td>
                                                            <td style={{ padding: "10px" }}>
                                                                <div className="d-flex align-items-center">
                                                                    <div className="flex-grow-1">
@@ -106,7 +108,7 @@ const Courses = () => {
                                                                                   >
                                                                                    Curriculum
                                                                                  </Button> <Button 
-                                                                                   className="btn-warning btn-small" 
+                                                                                   className="btn-success btn-small" 
                                                                                    style={{
                                                                                      padding: "5px 10px", 
                                                                                      fontSize: "0.8rem", 
@@ -118,7 +120,7 @@ const Courses = () => {
                                                                                   >
                                                                                    Videos
                                                                                  </Button> <Button 
-                                                                                   className="btn-blue btn-small" 
+                                                                                   className="btn-success btn-small" 
                                                                                    style={{
                                                                                      padding: "5px 10px", 
                                                                                      fontSize: "0.8rem", 
@@ -130,6 +132,18 @@ const Courses = () => {
                                                                                   >
                                                                                    Add-Ons
                                                                                  </Button><br/> <Button 
+                                                                                   className="btn-success btn-small" 
+                                                                                   style={{
+                                                                                     padding: "5px 10px", 
+                                                                                     fontSize: "0.8rem", 
+                                                                                     borderRadius: "5px", 
+                                                                                     border: "none", 
+                                                                                     cursor: "pointer",
+                                                                                     transition: "0.3s"
+                                                                                   }} onClick={() => handleManage4(client.Id)}
+                                                                                  >
+                                                                                   Q & A
+                                                                                 </Button> <Button 
                                                                                    className="btn-dark btn-small" 
                                                                                    style={{
                                                                                      padding: "5px 10px", 
