@@ -14,7 +14,7 @@ const Video = () => {
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   
-  
+  const [smat, setSmat] = useState("");
   const [errorsfield, setErrorsfield] = useState({});
   
   
@@ -25,6 +25,7 @@ const Video = () => {
 const [videoFile, setVideoFile] = useState(null);
   
 const [clients, setClients] = useState([]);
+const [uploadProgress, setUploadProgress] = useState(0);
 
 const fetchClients = (clientId) => {
   axios.get(`https://adhigyanam-e92bf1bbbdb1.herokuapp.com/video/${clientId}`)
@@ -42,62 +43,80 @@ useEffect(() => {
   }
 }, [clientId]);
   
-  
-const handleSubmit = (event) => {
+const handleSubmit = async (event) => {
   event.preventDefault();
 
-  // Client-side validation
   const newErrors = {
     ...validationnew("sno", sno),
     ...validationnew("title", title),
     ...validationnew("description", description),
   };
-
   setErrorsfield(newErrors);
   if (Object.keys(newErrors).length > 0) return;
 
-  // Check PDF validity
- if (!videoFile || !videoFile.type.startsWith("video/")) {
-  setMessageerror("Please upload a valid video file.");
-  return;
+  if (!videoFile || !videoFile.type.startsWith("video/")) {
+    setMessageerror("Please upload a valid video file.");
+    return;
+  }
+
+  if (!smat) {
+  newErrors.smat = "Please select video access status";
 }
 
   setIsSubmitting(true);
+  setUploadProgress(0);  // Reset progress
+  setMessage("");
+  setMessageerror("");
 
-  const formData = new FormData();
-  formData.append("sno", sno);
-  formData.append("title", title);
-  formData.append("description", description);
-  formData.append("clientId", clientId);
-  formData.append("video", videoFile); // match this name with backend multer field
+  try {
+    const fileExtension = videoFile.name.split('.').pop();
+    const uniqueKey = `videos/${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExtension}`;
 
-  axios
-    .post('https://adhigyanam-e92bf1bbbdb1.herokuapp.com/createvideo', formData)
-    .then((res) => {
-      if (res.data === "Success") {
-        setMessage("Operation was Successful!");
-        setMessageerror("");
-        setSno("");
-        setTitle("");
-        setDescription("");
-        setVideoFile(null);
-        setIsSubmitting(false);
-        fetchClients(clientId);
-      } else {
-        setMessageerror("Unexpected server response.");
-        setIsSubmitting(false);
-      }
-    })
-    .catch((err) => {
-      const serverMessage =
-        err.response?.data?.error || "An error occurred! Please try again.";
-      console.error("Upload Error:", err);
-      setMessageerror(serverMessage);
-      setMessage("");
-      setIsSubmitting(false);
+    const presignResponse = await axios.post(
+      "https://adhigyanam-e92bf1bbbdb1.herokuapp.com/get-presigned-url",
+      { key: uniqueKey, fileType: videoFile.type },
+      { headers: { "Content-Type": "application/json" } }
+    );
+
+    const uploadURL = presignResponse.data.uploadURL;
+
+    // 🟡 Upload with progress tracking
+    await axios.put(uploadURL, videoFile, {
+      headers: { "Content-Type": videoFile.type },
+      onUploadProgress: (progressEvent) => {
+        const percent = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+        setUploadProgress(percent);
+      },
     });
+
+    const s3Url = uploadURL.split("?")[0];
+
+    const dbResponse = await axios.post(
+      "https://adhigyanam-e92bf1bbbdb1.herokuapp.com/createvideo-presigned",
+      { sno, title, description, clientId, smat, s3Url }
+    );
+
+    if (dbResponse.data === "Success") {
+      setMessage("Video uploaded and saved successfully!");
+      setSno("");
+      setTitle("");
+      setSmat("");
+      setDescription("");
+      setVideoFile(null);
+      setUploadProgress(0);
+      fetchClients(clientId);
+    } else {
+      setMessageerror("Unexpected server response.");
+    }
+  } catch (err) {
+    const errorMsg = err.response?.data?.error || "An error occurred! Please try again.";
+    console.error("Upload Error:", err);
+    setMessageerror(errorMsg);
+  }
+
+  setIsSubmitting(false);
 };
-     
+
   const handleDelete = (clientId) => {
     // Make an API call to delete the client
     axios.delete(`https://adhigyanam-e92bf1bbbdb1.herokuapp.com/deletevideo/${clientId}`)
@@ -239,6 +258,22 @@ const handleSubmit = (event) => {
              {errorsfield.description && <span className="text-danger" style={{ fontSize: "0.8rem", fontWeight: "bolder" }}>{errorsfield.description}</span>}
             </div>
 
+            <div  style={{marginTop:"15px"}}>
+
+ <select
+  id="smat"
+  name="smat"
+  value={smat}
+  className="form-control h-56-px bg-neutral-50 radius-12"
+  onChange={(e) => setSmat(e.target.value)}
+>
+  <option value="">-- Select Video Access Rights --</option>
+  <option value="Free">Free</option>
+  <option value="Paid">Paid</option>
+</select>
+      {errorsfield.smat && <span className="text-danger" style={{fontSize:"0.8rem", fontWeight:"bolder"}}>{errorsfield.smat}</span>}
+</div>
+
            <div style={{ marginTop: "15px" }}>
 <input
   type="file"
@@ -247,6 +282,24 @@ const handleSubmit = (event) => {
   className="form-control h-56-px bg-neutral-50 radius-12"
 />
 </div>
+{uploadProgress > 0 && (
+  <div style={{ marginTop: "10px" }}>
+    <div style={{
+      height: "10px",
+      backgroundColor: "#e0e0e0",
+      borderRadius: "5px",
+      overflow: "hidden"
+    }}>
+      <div style={{
+        width: `${uploadProgress}%`,
+        height: "100%",
+        backgroundColor: "#4caf50",
+        transition: "width 0.3s"
+      }} />
+    </div>
+    <small>{uploadProgress}% uploaded</small>
+  </div>
+)}
                                           
                                 <div>
                                                     <Button type="submit" disabled={isSubmitting} className="btn btn-primary text-sm btn-sm px-12 py-16 w-100 radius-12 mt-32">
@@ -285,7 +338,7 @@ const handleSubmit = (event) => {
                             <thead>
                                         <tr>
                                             <th scope="col">S No.</th>
-                                            <th scope="col">Display Details</th>
+                                            <th scope="col">Course Video</th>
                                             <th scope="col">Options</th>
                                             
                                         </tr>
@@ -294,7 +347,7 @@ const handleSubmit = (event) => {
   {clients.map(client => (
     <tr key={client.Id} style={{ borderBottom: "1px solid #ddd", backgroundColor: "#f9f9f9", transition: "0.3s" }}>
       <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor: "white" }}>{client.Sno}</td>
-      <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor: "white" }}><b>{client.Title}</b><br/>{client.Qdesc}</td>
+      <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor: "white" }}><b>{client.Title}</b> [{client.Vstatus}]</td>
 
       <td style={{ padding: "10px" }}>
        <a
