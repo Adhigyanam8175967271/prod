@@ -51,17 +51,22 @@ const handleSubmit = async (event) => {
     ...validationnew("title", title),
     ...validationnew("description", description),
   };
-  setErrorsfield(newErrors);
-  if (Object.keys(newErrors).length > 0) return;
 
-  if (!videoFile || !videoFile.type.startsWith("video/")) {
-    setMessageerror("Please upload a valid video file.");
+if (!smat) {
+  newErrors.smat = "Please select video access status";
+}
+
+ if (!videoFile || !videoFile.type.startsWith("video/")) {
+    setMessageerror("Please select a valid video file.");
     return;
   }
 
-  if (!smat) {
-  newErrors.smat = "Please select video access status";
-}
+  setErrorsfield(newErrors);
+  if (Object.keys(newErrors).length > 0) return;
+
+ 
+
+  
 
   setIsSubmitting(true);
   setUploadProgress(0);  // Reset progress
@@ -347,7 +352,7 @@ const handleSubmit = async (event) => {
   {clients.map(client => (
     <tr key={client.Id} style={{ borderBottom: "1px solid #ddd", backgroundColor: "#f9f9f9", transition: "0.3s" }}>
       <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor: "white" }}>{client.Sno}</td>
-      <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor: "white" }}><b>{client.Title}</b> [{client.Vstatus}]</td>
+      <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor: "white" }}><b>{client.Title}</b> [{client.Vstatus}]<br/><b>Video URL</b>: {client.Path1} </td>
 
       <td style={{ padding: "10px" }}>
        <a

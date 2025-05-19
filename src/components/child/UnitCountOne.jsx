@@ -21,6 +21,7 @@ const UnitCountOne = () => {
      const [count12, setCount12] = useState(0);
       const [count13, setCount13] = useState(0);
        const [count14, setCount14] = useState(0);
+        const [count15, setCount15] = useState(0);
   
     useEffect(() => {
       const fetchCount = async () => {
@@ -157,6 +158,15 @@ const UnitCountOne = () => {
           console.error("Error fetching count:", err);
         }
       };
+
+      const fetchCount15 = async () => {
+        try {
+          const response = await axios.get("https://adhigyanam-e92bf1bbbdb1.herokuapp.com/countbauthors"); // Adjust URL if needed
+          setCount15(response.data.count);
+        } catch (err) {
+          console.error("Error fetching count:", err);
+        }
+      };
   
       fetchCount();
       fetchCount1();
@@ -173,6 +183,7 @@ const UnitCountOne = () => {
       fetchCount12();
        fetchCount13();
       fetchCount14();
+      fetchCount15();
     }, []); // Runs only once on component mount
     return (
         <div className="row row-cols-xxxl-5 row-cols-lg-3 row-cols-sm-2 row-cols-1 gy-4">
@@ -231,6 +242,29 @@ const UnitCountOne = () => {
                                     Blog Categories
                                 </p>
                                 <h6 className="mb-0">{count4}</h6>
+                            </div>
+                            <div className="w-50-px h-50-px bg-success-main rounded-circle d-flex justify-content-center align-items-center">
+                                <Icon
+                                    icon="simple-line-icons:vector"
+                                    className="text-white text-2xl mb-0"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    </NavLink>
+                </div>
+                {/* card end */}
+            </div>
+             <div className="col">
+            <div className="card shadow-none border bg-gradient-start-1" style={{height:auto}}>
+                <NavLink to='/dashboardbauthors'>
+                <div className="card-body" style={{padding:"5px 10px"}}>
+                        <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
+                            <div>
+                                <p className="fw-medium text-primary-light mb-0">
+                                    Blog Authors
+                                </p>
+                                <h6 className="mb-0">{count15}</h6>
                             </div>
                             <div className="w-50-px h-50-px bg-success-main rounded-circle d-flex justify-content-center align-items-center">
                                 <Icon

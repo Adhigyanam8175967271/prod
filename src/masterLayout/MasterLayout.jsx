@@ -121,7 +121,7 @@ function logout() {
           <Icon icon='radix-icons:cross-2' />
         </button>
         <div>
-          <Link to='/' className='sidebar-logo'>
+          <Link to='/dashboard' className='sidebar-logo'>
             <img
               src='https://cms.adhigyanam.com/siteimages/logo.png'
               alt='site logo'
@@ -301,6 +301,17 @@ function logout() {
                   >
                     <i className='ri-circle-fill circle-icon text-info-main w-auto' />{" "}
                     Categories
+                  </NavLink>
+                </li>
+                 <li>
+                  <NavLink
+                    to='/dashboardbauthors'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
+                    Authors
                   </NavLink>
                 </li>
                 <li>

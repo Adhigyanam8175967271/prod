@@ -53,6 +53,10 @@ const Courses = () => {
     navigate(`/dashboardquestion/${clientId}`);
   };
 
+   const handleManage5 = (clientId) => {
+    navigate(`/dashboardvideourl/${clientId}`);
+  };
+
   return (
     <MasterLayout>
       <p className="mb-12 text-secondary-light" style={{ fontSize: "15px" }}>
@@ -119,6 +123,18 @@ const Courses = () => {
                                                                                    }} onClick={() => handleManage3(client.Id)}
                                                                                   >
                                                                                    Videos
+                                                                                 </Button> <Button 
+                                                                                   className="btn-success btn-small" 
+                                                                                   style={{
+                                                                                     padding: "5px 10px", 
+                                                                                     fontSize: "0.8rem", 
+                                                                                     borderRadius: "5px", 
+                                                                                     border: "none", 
+                                                                                     cursor: "pointer",
+                                                                                     transition: "0.3s", marginBottom:"5px"
+                                                                                   }} onClick={() => handleManage5(client.Id)}
+                                                                                  >
+                                                                                   URL Videos
                                                                                  </Button> <Button 
                                                                                    className="btn-success btn-small" 
                                                                                    style={{

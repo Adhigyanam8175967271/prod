@@ -20,11 +20,13 @@ const [isSubmitting, setIsSubmitting] = useState(false);
 const [errorsfield, setErrorsfield] = useState({});
 
 const [sno, setSno] = useState("");
-
+const [smat, setSmat] = useState("");
 const [title, setTitle] = useState("");
 const [clientnew, setClientnew] = useState(""); 
 const [clientAid, setClientAid] = useState("");  // Stores Aid (Id)
 const [clientAname, setClientAname] = useState(""); // Stores Aname (Named)
+const [clientAidnew, setClientAidnew] = useState("");  // Stores Aid (Id)
+const [clientAnamenew, setClientAnamenew] = useState(""); // Stores Aname (Named)
 const [qdesc, setQdesc] = useState("");
 const [fdesc, setFdesc] = useState("");
 const [values, setValues] = useState({
@@ -86,6 +88,14 @@ const handleSubmit = (event) => {
     newErrors.clientnew = "Please select a valid category";
   }
 
+   if (!clientAidnew || !clientAnamenew) {
+    newErrors.clientlatest = "Please select an author";
+  }
+
+  if (!smat) {
+  newErrors.smat = "Please select Expert Advice Selection";
+}
+
   // Image validation
   if (!values.image1) {
     newErrors.image1 = "Please select a valid image";
@@ -109,6 +119,8 @@ const handleSubmit = (event) => {
   formData.append('qdesc', qdesc);
   formData.append('fdesc', fdesc);
   formData.append('dated', dated);
+  formData.append('smat', smat);
+  formData.append("clientAidnew", clientAidnew); // Lid (Id)
   axios
     .post("https://adhigyanam-e92bf1bbbdb1.herokuapp.com/uploadblog", formData)
     .then((res) => {
@@ -119,6 +131,9 @@ const handleSubmit = (event) => {
         setTitle("");
         setClientAid(""); // Reset Aid
         setClientAname(""); // Reset Aname
+         setClientAidnew(""); // Reset Aid
+        setClientAnamenew(""); // Reset Aname
+        setSmat("");
         setQdesc("");
         setFdesc("");
         setDated("");
@@ -159,9 +174,19 @@ useEffect(() => {
     .catch(error => {
       console.error('Error fetching data:', error);
     });
+}, []); 
 
-   
+const [optionsnew, setOptionsnew] = useState([]);
 
+useEffect(() => {
+
+  axios.get('https://adhigyanam-e92bf1bbbdb1.herokuapp.com/bauthors')
+    .then(response => {
+      setOptionsnew(response.data.map(item => ({ value: item.Id, label: item.Aname })));
+    })
+    .catch(error => {
+      console.error('Error fetching data:', error);
+    });
 }, []); 
 
 
@@ -236,6 +261,45 @@ placeholder="Enter Title"
   ))}
 </select>
       {errorsfield.clientnew && <span className="text-danger" style={{fontSize:"0.8rem", fontWeight:"bolder"}}>{errorsfield.clientnew}</span>}
+</div>
+ <div  style={{marginTop:"15px"}}>
+
+ <select
+  id="clientlatest"
+  name="clientlatest"
+  className="form-control h-56-px bg-neutral-50 radius-12"
+  onChange={(e) => {
+    const selectedIndex = e.target.selectedIndex;
+    const selectedAidnew = e.target.value; // Gets Aid (Id)
+    const selectedAnamenew = e.target.options[selectedIndex].getAttribute("data-name"); // Gets Named (Aname)
+    
+    setClientAidnew(selectedAidnew);
+    setClientAnamenew(selectedAnamenew);
+  }}
+>
+  <option value="">Select Blog Author</option>
+  {optionsnew.map((option) => (
+    <option key={option.value} value={option.value} data-name={option.label}>
+      {option.value} - {option.label} {/* Aid - Aname */}
+    </option>
+  ))}
+</select>
+      {errorsfield.clientlatest && <span className="text-danger" style={{fontSize:"0.8rem", fontWeight:"bolder"}}>{errorsfield.clientlatest}</span>}
+</div>
+<div  style={{marginTop:"15px"}}>
+
+ <select
+  id="smat"
+  name="smat"
+  value={smat}
+  className="form-control h-56-px bg-neutral-50 radius-12"
+  onChange={(e) => setSmat(e.target.value)}
+>
+  <option value="">-- Expert Advice Selection --</option>
+  <option value="1">Yes</option>
+  <option value="0">No</option>
+</select>
+      {errorsfield.smat && <span className="text-danger" style={{fontSize:"0.8rem", fontWeight:"bolder"}}>{errorsfield.smat}</span>}
 </div>
 <div  style={{marginTop:"15px"}}>
             
