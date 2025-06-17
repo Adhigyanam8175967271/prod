@@ -22,6 +22,7 @@ const Videourl = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [path, setPath] = useState("");
+   const [pathnew, setPathnew] = useState("");
 
 
   
@@ -53,6 +54,7 @@ useEffect(() => {
         ...validationnew("title", title),
         ...validationnew("description", description),
         ...validationnew("path", path),
+         ...validationnew("path", pathnew),
     };
 
       if (!smat) {
@@ -68,7 +70,7 @@ useEffect(() => {
 
     axios.post(
         'https://adhigyanam-e92bf1bbbdb1.herokuapp.com/createvideourl',
-        { sno, title, description, clientId, path, smat },  // Sending as JSON
+        { sno, title, description, clientId, path, smat, pathnew },  // Sending as JSON
         { headers: { 'Content-Type': 'application/json' } } // Set JSON header
     )
     .then(res => {
@@ -78,8 +80,9 @@ useEffect(() => {
             setSno(""); 
             setTitle("");
             setDescription("");
-              setSmat("");
+            setSmat("");
             setPath("");
+            setPathnew("");
             setIsSubmitting(false);
             fetchClients(clientId);
         }
@@ -251,6 +254,20 @@ useEffect(() => {
 </select>
       {errorsfield.smat && <span className="text-danger" style={{fontSize:"0.8rem", fontWeight:"bolder"}}>{errorsfield.smat}</span>}
 </div>
+<div  style={{marginTop:"15px"}}>
+            
+            <input
+                onChange={(e) => setPathnew(e.target.value)}
+            type="text"
+            id="pathnew"
+            name="pathnew"
+            value={pathnew}
+            placeholder="Enter Banner URL"
+                className="form-control h-56-px bg-neutral-50 radius-12"
+              
+            />
+             {errorsfield.pathnew && <span className="text-danger" style={{ fontSize: "0.8rem", fontWeight: "bolder" }}>{errorsfield.pathnew}</span>}
+            </div>
 
  <div  style={{marginTop:"15px"}}>
             
@@ -314,7 +331,7 @@ useEffect(() => {
   {clients.map(client => (
     <tr key={client.Id} style={{ borderBottom: "1px solid #ddd", backgroundColor: "#f9f9f9", transition: "0.3s" }}>
       <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor: "white" }}>{client.Sno}</td>
-      <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor: "white" }}><b>{client.Title}</b> [{client.Vstatus}]<br/><b>Video URL</b>: {client.Path1} </td>
+      <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor: "white" }}><b>{client.Title}</b> [{client.Vstatus}]<br/><b>Video URL</b>: {client.Path1}<br/><b>Banner URL</b>: {client.Path2} </td>
 
       <td style={{ padding: "10px" }}>
        <a

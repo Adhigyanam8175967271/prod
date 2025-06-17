@@ -22,6 +22,8 @@ const UnitCountOne = () => {
       const [count13, setCount13] = useState(0);
        const [count14, setCount14] = useState(0);
         const [count15, setCount15] = useState(0);
+         const [count16, setCount16] = useState(0);
+           const [count17, setCount17] = useState(0);
   
     useEffect(() => {
       const fetchCount = async () => {
@@ -167,6 +169,24 @@ const UnitCountOne = () => {
           console.error("Error fetching count:", err);
         }
       };
+
+      const fetchCount16 = async () => {
+        try {
+          const response = await axios.get("https://adhigyanam-e92bf1bbbdb1.herokuapp.com/countTestimonialspending"); // Adjust URL if needed
+          setCount16(response.data.count);
+        } catch (err) {
+          console.error("Error fetching count:", err);
+        }
+      };
+
+      const fetchCount17 = async () => {
+        try {
+          const response = await axios.get("https://adhigyanam-e92bf1bbbdb1.herokuapp.com/countSupport"); // Adjust URL if needed
+          setCount17(response.data.count);
+        } catch (err) {
+          console.error("Error fetching count:", err);
+        }
+      };
   
       fetchCount();
       fetchCount1();
@@ -181,12 +201,36 @@ const UnitCountOne = () => {
       fetchCount10();
       fetchCount11();
       fetchCount12();
-       fetchCount13();
+      fetchCount13();
       fetchCount14();
       fetchCount15();
+      fetchCount16();
+       fetchCount17();
     }, []); // Runs only once on component mount
     return (
         <div className="row row-cols-xxxl-5 row-cols-lg-3 row-cols-sm-2 row-cols-1 gy-4">
+        <div className="col">
+            <div className="card shadow-none border bg-gradient-start-1" style={{height:auto}}>
+                <NavLink to='/dashboardsupport'>
+                <div className="card-body" style={{padding:"5px 10px"}}>
+                        <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
+                            <div>
+                                <p className="fw-medium text-primary-light mb-0">Support Requests</p>
+                                <h6 className="mb-0">{count17}</h6>
+                            </div>
+                            <div className="w-50-px h-50-px bg-red rounded-circle d-flex justify-content-center align-items-center">
+                                <Icon
+                                    icon="bi:chat-dots"
+                                    className="text-white text-2xl mb-0"
+                                />
+                            </div>
+                        </div>
+                       
+                    </div>
+                    </NavLink>
+                </div>
+                {/* card end */}
+            </div>
             <div className="col">
                 <div className="card shadow-none border bg-gradient-start-1" style={{height:auto}}>
                 <NavLink to='/dashboardala'>
@@ -308,6 +352,28 @@ const UnitCountOne = () => {
                             <div>
                                 <p className="fw-medium text-primary-light mb-0">Testimonials</p>
                                 <h6 className="mb-0">{count8}</h6>
+                            </div>
+                            <div className="w-50-px h-50-px bg-red rounded-circle d-flex justify-content-center align-items-center">
+                                <Icon
+                                    icon="bi:chat-dots"
+                                    className="text-white text-2xl mb-0"
+                                />
+                            </div>
+                        </div>
+                       
+                    </div>
+                    </NavLink>
+                </div>
+                {/* card end */}
+            </div>
+            <div className="col">
+            <div className="card shadow-none border bg-gradient-start-1" style={{height:auto}}>
+                <NavLink to='/dashboardfeedbacks'>
+                <div className="card-body" style={{padding:"5px 10px"}}>
+                        <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
+                            <div>
+                                <p className="fw-medium text-primary-light mb-0">Testimonial Requests</p>
+                                <h6 className="mb-0">{count16}</h6>
                             </div>
                             <div className="w-50-px h-50-px bg-red rounded-circle d-flex justify-content-center align-items-center">
                                 <Icon

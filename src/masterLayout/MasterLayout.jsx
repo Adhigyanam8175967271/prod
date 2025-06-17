@@ -414,7 +414,41 @@ function logout() {
                     Astro Sub Services
                   </NavLink>
                 </li>
+               
                 <li>
+                  <NavLink
+                    to='/dashboardmru'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-info-main w-auto' />{" "}
+                    Registered Users
+                  </NavLink>
+                </li>
+                  <li>
+                  <NavLink
+                    to='/dashboardpolicies'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
+                    Policies
+                  </NavLink>
+                </li>
+                 <li>
+                  <NavLink
+                    to='/dashboardfeedbacks'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-info-main w-auto' />{" "}
+                   Testimonial Requests
+                  </NavLink>
+                </li>
+                 <li>
                   <NavLink
                     to='/dashboardmt'
                     className={(navData) =>
@@ -425,15 +459,15 @@ function logout() {
                     Testimonials
                   </NavLink>
                 </li>
-                <li>
+                 <li>
                   <NavLink
-                    to='/dashboardmru'
+                    to='/dashboardsupport'
                     className={(navData) =>
                       navData.isActive ? "active-page" : ""
                     }
                   >
                     <i className='ri-circle-fill circle-icon text-info-main w-auto' />{" "}
-                    Registered Users
+                   Support Requests
                   </NavLink>
                 </li>
               </ul>

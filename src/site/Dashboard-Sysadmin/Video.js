@@ -26,6 +26,7 @@ const [videoFile, setVideoFile] = useState(null);
   
 const [clients, setClients] = useState([]);
 const [uploadProgress, setUploadProgress] = useState(0);
+const [imageFile, setImageFile] = useState(null);
 
 const fetchClients = (clientId) => {
   axios.get(`https://adhigyanam-e92bf1bbbdb1.herokuapp.com/video/${clientId}`)
@@ -61,12 +62,13 @@ if (!smat) {
     return;
   }
 
+  if (!imageFile || !imageFile.type.startsWith("image/")) {
+  setMessageerror("Please select a valid image file.");
+  return;
+}
+
   setErrorsfield(newErrors);
   if (Object.keys(newErrors).length > 0) return;
-
- 
-
-  
 
   setIsSubmitting(true);
   setUploadProgress(0);  // Reset progress
@@ -74,32 +76,39 @@ if (!smat) {
   setMessageerror("");
 
   try {
-    const fileExtension = videoFile.name.split('.').pop();
-    const uniqueKey = `videos/${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExtension}`;
+    // Prepare keys for video and image
+const videoExt = videoFile.name.split('.').pop();
+const imageExt = imageFile.name.split('.').pop();
 
-    const presignResponse = await axios.post(
-      "https://adhigyanam-e92bf1bbbdb1.herokuapp.com/get-presigned-url",
-      { key: uniqueKey, fileType: videoFile.type },
-      { headers: { "Content-Type": "application/json" } }
-    );
+const videoKey = `videos/${Date.now()}-${Math.random().toString(36).substring(2)}.${videoExt}`;
+const imageKey = `thumbnails/${Date.now()}-${Math.random().toString(36).substring(2)}.${imageExt}`;
 
-    const uploadURL = presignResponse.data.uploadURL;
+// Get presigned URLs
+const [videoPresign, imagePresign] = await Promise.all([
+  axios.post("https://adhigyanam-e92bf1bbbdb1.herokuapp.com/get-presigned-url", { key: videoKey, fileType: videoFile.type }),
+  axios.post("https://adhigyanam-e92bf1bbbdb1.herokuapp.com/get-presigned-url", { key: imageKey, fileType: imageFile.type }),
+]);
 
-    // 🟡 Upload with progress tracking
-    await axios.put(uploadURL, videoFile, {
-      headers: { "Content-Type": videoFile.type },
-      onUploadProgress: (progressEvent) => {
-        const percent = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-        setUploadProgress(percent);
-      },
-    });
+// Upload files to S3
+await axios.put(videoPresign.data.uploadURL, videoFile, {
+  headers: { "Content-Type": videoFile.type },
+  onUploadProgress: (e) => {
+    const percent = Math.round((e.loaded * 100) / e.total);
+    setUploadProgress(percent);
+  },
+});
+await axios.put(imagePresign.data.uploadURL, imageFile, {
+  headers: { "Content-Type": imageFile.type }
+});
 
-    const s3Url = uploadURL.split("?")[0];
+const videoS3Url = videoPresign.data.uploadURL.split("?")[0];
+const imageS3Url = imagePresign.data.uploadURL.split("?")[0];
 
-    const dbResponse = await axios.post(
-      "https://adhigyanam-e92bf1bbbdb1.herokuapp.com/createvideo-presigned",
-      { sno, title, description, clientId, smat, s3Url }
-    );
+// Send to DB
+const dbResponse = await axios.post(
+  "https://adhigyanam-e92bf1bbbdb1.herokuapp.com/createvideo-presigned",
+  { sno, title, description, clientId, smat, s3Url: videoS3Url, imageUrl: imageS3Url }
+);
 
     if (dbResponse.data === "Success") {
       setMessage("Video uploaded and saved successfully!");
@@ -278,8 +287,18 @@ if (!smat) {
 </select>
       {errorsfield.smat && <span className="text-danger" style={{fontSize:"0.8rem", fontWeight:"bolder"}}>{errorsfield.smat}</span>}
 </div>
+<div style={{ marginTop: "15px" }}>
+<p style={{marginBottom:"0.5rem", fontWeight:"bold"}}>Choose a Video Banner</p>
+  <input
+    type="file"
+    accept="image/*"
+    onChange={(e) => setImageFile(e.target.files[0])}
+    className="form-control h-56-px bg-neutral-50 radius-12"
+  />
+</div>
 
            <div style={{ marginTop: "15px" }}>
+           <p style={{marginBottom:"0.5rem", fontWeight:"bold"}}>Choose a Video File</p>
 <input
   type="file"
   accept="video/*"
@@ -352,7 +371,7 @@ if (!smat) {
   {clients.map(client => (
     <tr key={client.Id} style={{ borderBottom: "1px solid #ddd", backgroundColor: "#f9f9f9", transition: "0.3s" }}>
       <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor: "white" }}>{client.Sno}</td>
-      <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor: "white" }}><b>{client.Title}</b> [{client.Vstatus}]<br/><b>Video URL</b>: {client.Path1} </td>
+      <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor: "white" }}><b>{client.Title}</b> [{client.Vstatus}]<br/><b>Video URL</b>: {client.Path1}<br/><b>Banner URL</b>: {client.Path2} </td>
 
       <td style={{ padding: "10px" }}>
        <a

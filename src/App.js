@@ -33,6 +33,9 @@ import Video from "./site/Dashboard-Sysadmin/Video";
 import Videourl from "./site/Dashboard-Sysadmin/Videourl";
 import Questions from "./site/Dashboard-Sysadmin/Questions";
 import Bauthors from "./site/Dashboard-Sysadmin/Bauthors";
+import Policies from "./site/Dashboard-Sysadmin/Policies";
+import Feedbacks from "./site/Dashboard-Sysadmin/Feedbacks";
+import Support from "./site/Dashboard-Sysadmin/Support";
 
 function App() {
   const [cookies] = useCookies(["token"]);
@@ -150,6 +153,18 @@ function App() {
            <Route
             path="/dashboardbauthors"
             element={isAuthenticated ? <Bauthors /> : <Navigate to="/sysadmin" />}
+          />
+           <Route
+            path="/dashboardpolicies"
+            element={isAuthenticated ? <Policies /> : <Navigate to="/sysadmin" />}
+          />
+          <Route
+            path="/dashboardfeedbacks"
+            element={isAuthenticated ? <Feedbacks /> : <Navigate to="/sysadmin" />}
+          />
+           <Route
+            path="/dashboardsupport"
+            element={isAuthenticated ? <Support /> : <Navigate to="/sysadmin" />}
           />
           <Route path="/" element={<SignInPage />} />
           <Route path="/loggedout" element={<LoggedOut />} />
