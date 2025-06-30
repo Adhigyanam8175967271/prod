@@ -11,6 +11,9 @@ const Support = () => {
   const [clients, setClients] = useState([]);
   const [clientsnew, setClientsnew] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+
+  const [activeTicketId, setActiveTicketId] = useState(null);
+const [closeReason, setCloseReason] = useState("");
   
   const fetchClients = () => {
     axios.get('https://adhigyanam-e92bf1bbbdb1.herokuapp.com/supportpending')
@@ -38,24 +41,29 @@ const Support = () => {
     fetchClientsnew();
   }, []);
   
-   const handleApprove = (clientId) => {
-  if (!clientId) {
-    console.error("Invalid client ID sent:", clientId);
+const submitCloseTicket = (clientId) => {
+  if (!closeReason.trim()) {
+    alert("Please enter a reason before submitting.");
     return;
   }
 
-  axios.post("https://adhigyanam-e92bf1bbbdb1.herokuapp.com/approvesupport", { id: clientId })
-    .then(response => {
-      if (response.data === "Success") {
-        setClients(prevClients => prevClients.filter(client => client.id !== clientId));
-      } else {
-        alert("Approval failed. Try again.");
-      }
-    })
-    .catch(error => {
-      console.error("Error approving support:", error);
-      alert("An error occurred while approving.");
-    });
+  axios.post("https://adhigyanam-e92bf1bbbdb1.herokuapp.com/approvesupport", {
+    id: clientId,
+    reason: closeReason
+  })
+  .then(response => {
+    if (response.data === "Success") {
+      setClients(prev => prev.filter(client => client.id !== clientId));
+      setActiveTicketId(null);
+      setCloseReason("");
+    } else {
+      alert("Failed to close ticket.");
+    }
+  })
+  .catch(error => {
+    console.error("Error closing ticket:", error);
+    alert("Error occurred.");
+  });
 };
 
 const filteredClients = clients.filter(client =>
@@ -70,6 +78,16 @@ const filteredClientsNew = clientsnew.filter(client =>
   client.contact.toLowerCase().includes(searchTerm.toLowerCase())
 );
   
+const formatDate = (isoString) => {
+  const date = new Date(isoString);
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0'); // months are 0-indexed
+  const year = date.getFullYear();
+  const hours = String(date.getHours()).padStart(2, '0');
+  const minutes = String(date.getMinutes()).padStart(2, '0');
+
+  return `${day}/${month}/${year} ${hours}:${minutes}`;
+};
   
 
     return (
@@ -161,21 +179,41 @@ const filteredClientsNew = clientsnew.filter(client =>
    {filteredClients.map(client => (
       <tr key={client.id} style={{ borderBottom: "1px solid #ddd", backgroundColor: "#f9f9f9", transition: "0.3s" }}>
         <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor:"white" }}><b>Full Name</b>: {client.fullName}<br/><b>Email Address</b>: {client.email}<br/><b>Contact No</b>: {client.contact}<br/><b>Department</b>: {client.department}</td>
-        <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor:"white" }}><b>Subject Of Concern</b>: {client.subject}<br/><span style={{maxWidth:"500px"}}>{client.message}</span><br/><b>Dated</b>: {client.submitted_at}</td>
+        <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor:"white" }}><b>Subject Of Concern</b>: {client.subject}<br/><span style={{maxWidth:"500px"}}>{client.message}</span><br/><b>Dated</b>: {formatDate(client.submitted_at)}</td>
         <td style={{ padding: "10px" }}>
-          <Button 
-            className="btn-success btn-small" 
-            style={{
-              padding: "5px 10px", 
-              fontSize: "0.8rem", 
-              borderRadius: "5px", 
-              border: "none", 
-              cursor: "pointer",
-              transition: "0.3s"
-            }} onClick={() => handleApprove(client.id)}
-           >
-            Close This Ticket
-          </Button>
+          {activeTicketId === client.id ? (
+  <div style={{ marginTop: "10px" }}>
+    <input
+      type="text"
+      placeholder="Please Add Comment"
+      value={closeReason}
+      onChange={(e) => setCloseReason(e.target.value)}
+      style={{ padding: "5px", fontSize: "0.8rem", marginRight: "10px", border:"solid silver thin" }}
+    />
+    <Button 
+      className="btn-danger btn-small"
+      style={{ padding: "5px 10px", fontSize: "0.8rem", borderRadius: "5px" }}
+      onClick={() => submitCloseTicket(client.id)}
+    >
+      Confirm Close
+    </Button>
+  </div>
+) : (
+  <Button 
+    className="btn-success btn-small" 
+    style={{
+      padding: "5px 10px", 
+      fontSize: "0.8rem", 
+      borderRadius: "5px", 
+      border: "none", 
+      cursor: "pointer",
+      transition: "0.3s"
+    }} 
+    onClick={() => setActiveTicketId(client.id)}
+  >
+    Close This Ticket
+  </Button>
+)}
         </td>
       </tr>
     ))}
@@ -221,7 +259,7 @@ const filteredClientsNew = clientsnew.filter(client =>
    {filteredClientsNew.map(client => (
       <tr key={client.id} style={{ borderBottom: "1px solid #ddd", backgroundColor: "#f9f9f9", transition: "0.3s" }}>
                <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor:"white" }}><b>Full Name</b>: {client.fullName}<br/><b>Email Address</b>: {client.email}<br/><b>Contact No</b>: {client.contact}<br/><b>Department</b>: {client.department}</td>
-        <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor:"white" }}><b>Subject Of Concern</b>: {client.subject}<br/><span style={{maxWidth:"500px"}}>{client.message}</span><br/><b>Dated</b>: {client.submitted_at}</td>
+        <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor:"white" }}><b>Subject Of Concern</b>: {client.subject}<br/><span style={{maxWidth:"500px"}}>{client.message}</span><br/><b>Dated</b>: {formatDate(client.submitted_at)}<br/><span style={{maxWidth:"500px"}}><b>Case Closed</b><br/>Comments: {client.CloseReason}</span></td>
       
       </tr>
     ))}
