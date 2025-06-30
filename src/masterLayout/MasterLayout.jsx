@@ -175,6 +175,73 @@ function logout() {
                     Web Routes
                   </NavLink>
                 </li>
+                 <li>
+                  <NavLink
+                    to='/dashboardmru'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-info-main w-auto' />{" "}
+                    Registered Users
+                  </NavLink>
+                </li>
+                 
+                 <li>
+                  <NavLink
+                    to='/dashboardfeedbacks'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-info-main w-auto' />{" "}
+                   Testimonial Requests
+                  </NavLink>
+                </li>
+                 <li>
+                  <NavLink
+                    to='/dashboardsupport'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-info-main w-auto' />{" "}
+                   Support Requests
+                  </NavLink>
+                </li>
+                 <li>
+                  <NavLink
+                    to='/dashboardmt'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
+                    Testimonials
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to='/faq'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
+                    FAQs
+                  </NavLink>
+                </li>
+                 <li>
+                  <NavLink
+                    to='/dashboardpolicies'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
+                    Policies
+                  </NavLink>
+                </li>
               </ul>
             </li>
            
@@ -411,7 +478,7 @@ function logout() {
              <li className='dropdown'>
               <Link to='#'>
                 <Icon icon='mingcute:storage-line' className='menu-icon' />
-                <span>Miscellaneos</span>
+                <span>Consultation</span>
               </Link>
               <ul className='sidebar-submenu'>
               
@@ -439,61 +506,7 @@ function logout() {
                   </NavLink>
                 </li>
                
-                <li>
-                  <NavLink
-                    to='/dashboardmru'
-                    className={(navData) =>
-                      navData.isActive ? "active-page" : ""
-                    }
-                  >
-                    <i className='ri-circle-fill circle-icon text-info-main w-auto' />{" "}
-                    Registered Users
-                  </NavLink>
-                </li>
-                  <li>
-                  <NavLink
-                    to='/dashboardpolicies'
-                    className={(navData) =>
-                      navData.isActive ? "active-page" : ""
-                    }
-                  >
-                    <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
-                    Policies
-                  </NavLink>
-                </li>
-                 <li>
-                  <NavLink
-                    to='/dashboardfeedbacks'
-                    className={(navData) =>
-                      navData.isActive ? "active-page" : ""
-                    }
-                  >
-                    <i className='ri-circle-fill circle-icon text-info-main w-auto' />{" "}
-                   Testimonial Requests
-                  </NavLink>
-                </li>
-                 <li>
-                  <NavLink
-                    to='/dashboardmt'
-                    className={(navData) =>
-                      navData.isActive ? "active-page" : ""
-                    }
-                  >
-                    <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
-                    Testimonials
-                  </NavLink>
-                </li>
-                 <li>
-                  <NavLink
-                    to='/dashboardsupport'
-                    className={(navData) =>
-                      navData.isActive ? "active-page" : ""
-                    }
-                  >
-                    <i className='ri-circle-fill circle-icon text-info-main w-auto' />{" "}
-                   Support Requests
-                  </NavLink>
-                </li>
+               
               </ul>
             </li>
             

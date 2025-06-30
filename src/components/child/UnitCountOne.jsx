@@ -25,6 +25,7 @@ const UnitCountOne = () => {
          const [count16, setCount16] = useState(0);
            const [count17, setCount17] = useState(0);
             const [count18, setCount18] = useState(0);
+            const [count19, setCount19] = useState(0);
   
     useEffect(() => {
       const fetchCount = async () => {
@@ -196,6 +197,14 @@ const UnitCountOne = () => {
           console.error("Error fetching count:", err);
         }
       };
+       const fetchCount19 = async () => {
+        try {
+          const response = await axios.get("https://adhigyanam-e92bf1bbbdb1.herokuapp.com/countfaq"); // Adjust URL if needed
+          setCount19(response.data.count);
+        } catch (err) {
+          console.error("Error fetching count:", err);
+        }
+      };
   
       fetchCount();
       fetchCount1();
@@ -216,6 +225,7 @@ const UnitCountOne = () => {
       fetchCount16();
       fetchCount17();
       fetchCount18();
+       fetchCount19();
     }, []); // Runs only once on component mount
     return (
         <div className="row row-cols-xxxl-5 row-cols-lg-3 row-cols-sm-2 row-cols-1 gy-4">
@@ -260,6 +270,74 @@ const UnitCountOne = () => {
                             </div>
                         </div>
                        
+                    </div>
+                    </NavLink>
+                </div>
+                {/* card end */}
+            </div>
+             <div className="col">
+            <div className="card shadow-none border bg-gradient-start-1" style={{height:auto}}>
+                <NavLink to='/dashboardfeedbacks'>
+                <div className="card-body" style={{padding:"5px 10px"}}>
+                        <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
+                            <div>
+                                <p className="fw-medium text-primary-light mb-0">Testimonial Requests</p>
+                                <h6 className="mb-0">{count16}</h6>
+                            </div>
+                            <div className="w-50-px h-50-px bg-red rounded-circle d-flex justify-content-center align-items-center">
+                                <Icon
+                                    icon="bi:chat-dots"
+                                    className="text-white text-2xl mb-0"
+                                />
+                            </div>
+                        </div>
+                       
+                    </div>
+                    </NavLink>
+                </div>
+                {/* card end */}
+            </div>
+            <div className="col">
+            <div className="card shadow-none border bg-gradient-start-1" style={{height:auto}}>
+                <NavLink to='/dashboardmt'>
+                <div className="card-body" style={{padding:"5px 10px"}}>
+                        <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
+                            <div>
+                                <p className="fw-medium text-primary-light mb-0">Testimonials</p>
+                                <h6 className="mb-0">{count8}</h6>
+                            </div>
+                            <div className="w-50-px h-50-px bg-red rounded-circle d-flex justify-content-center align-items-center">
+                                <Icon
+                                    icon="bi:chat-dots"
+                                    className="text-white text-2xl mb-0"
+                                />
+                            </div>
+                        </div>
+                       
+                    </div>
+                    </NavLink>
+                </div>
+                {/* card end */}
+            </div>
+            <div className="col">
+            <div className="card shadow-none border bg-gradient-start-1" style={{height:auto}}>
+                <NavLink to='/faq'>
+                <div className="card-body" style={{padding:"5px 10px"}}>
+                        <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
+                            <div>
+                                <p className="fw-medium text-primary-light mb-0">
+                                    FAQs
+                                </p>
+                                <h6 className="mb-0">{count19}</h6>
+                            </div>
+                            <div className="w-50-px h-50-px bg-orange rounded-circle d-flex justify-content-center align-items-center">
+                                <Icon
+                                    icon="mingcute:storage-line"
+                                    className="text-white text-2xl mb-0"
+                                />
+                            </div>
+                        </div>
+                        
                     </div>
                     </NavLink>
                 </div>
@@ -378,50 +456,7 @@ const UnitCountOne = () => {
                 </div>
                 {/* card end */}
             </div>
-            <div className="col">
-            <div className="card shadow-none border bg-gradient-start-1" style={{height:auto}}>
-                <NavLink to='/dashboardmt'>
-                <div className="card-body" style={{padding:"5px 10px"}}>
-                        <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
-                            <div>
-                                <p className="fw-medium text-primary-light mb-0">Testimonials</p>
-                                <h6 className="mb-0">{count8}</h6>
-                            </div>
-                            <div className="w-50-px h-50-px bg-red rounded-circle d-flex justify-content-center align-items-center">
-                                <Icon
-                                    icon="bi:chat-dots"
-                                    className="text-white text-2xl mb-0"
-                                />
-                            </div>
-                        </div>
-                       
-                    </div>
-                    </NavLink>
-                </div>
-                {/* card end */}
-            </div>
-            <div className="col">
-            <div className="card shadow-none border bg-gradient-start-1" style={{height:auto}}>
-                <NavLink to='/dashboardfeedbacks'>
-                <div className="card-body" style={{padding:"5px 10px"}}>
-                        <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
-                            <div>
-                                <p className="fw-medium text-primary-light mb-0">Testimonial Requests</p>
-                                <h6 className="mb-0">{count16}</h6>
-                            </div>
-                            <div className="w-50-px h-50-px bg-red rounded-circle d-flex justify-content-center align-items-center">
-                                <Icon
-                                    icon="bi:chat-dots"
-                                    className="text-white text-2xl mb-0"
-                                />
-                            </div>
-                        </div>
-                       
-                    </div>
-                    </NavLink>
-                </div>
-                {/* card end */}
-            </div>
+            
             <div className="col">
             <div className="card shadow-none border bg-gradient-start-1" style={{height:auto}}>
                 <NavLink to='/dashboardpb'>
