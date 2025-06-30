@@ -36,6 +36,7 @@ import Bauthors from "./site/Dashboard-Sysadmin/Bauthors";
 import Policies from "./site/Dashboard-Sysadmin/Policies";
 import Feedbacks from "./site/Dashboard-Sysadmin/Feedbacks";
 import Support from "./site/Dashboard-Sysadmin/Support";
+import WebRoutes from "./site/Dashboard-Sysadmin/WebRoutes";
 
 function App() {
   const [cookies] = useCookies(["token"]);
@@ -165,6 +166,10 @@ function App() {
            <Route
             path="/dashboardsupport"
             element={isAuthenticated ? <Support /> : <Navigate to="/sysadmin" />}
+          />
+          <Route
+            path="/webroutes"
+            element={isAuthenticated ? <WebRoutes /> : <Navigate to="/sysadmin" />}
           />
           <Route path="/" element={<SignInPage />} />
           <Route path="/loggedout" element={<LoggedOut />} />

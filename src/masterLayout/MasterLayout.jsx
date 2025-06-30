@@ -143,15 +143,39 @@ function logout() {
           <ul className='sidebar-menu' id='sidebar-menu'>
            
 
-            <li className='sidebar-menu-group-title'>Navigation Links</li>
-            <li style={{height:"60px"}}>
-              <NavLink
-                to='/dashboard'
-                className={(navData) => (navData.isActive ? "active-page" : "")}
-              >
-                <Icon icon='solar:document-text-outline' className='menu-icon' />
+        
+             <li className='dropdown'>
+              <Link to='#'>
+             <Icon icon='solar:document-text-outline' className='menu-icon' />
                 <span>Dashboard</span>
-              </NavLink>
+              </Link>
+              <ul className='sidebar-submenu'>
+              
+               
+                <li>
+                  <NavLink
+                    to='/dashboard'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-info-main w-auto' />{" "}
+                    Home
+                  </NavLink>
+                </li>
+                
+                <li>
+                  <NavLink
+                    to='/webroutes'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
+                    Web Routes
+                  </NavLink>
+                </li>
+              </ul>
             </li>
            
         
