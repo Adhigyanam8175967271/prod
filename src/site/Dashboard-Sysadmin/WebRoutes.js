@@ -179,15 +179,14 @@ placeholder="Enter Quick Info"
 </div>
  <div  style={{marginTop:"15px"}}>
             
-            <textarea
+            <input
                 onChange={(e) => setFdesc(e.target.value)}
             type="text"
             id="fdesc"
             name="fdesc"
             value={fdesc}
-            placeholder="Enter Description here"
-                className="form-control bg-neutral-50 radius-12"
-              style={{minHeight:"120px"}}
+            placeholder="Redirect URL"
+                 className="form-control h-56-px bg-neutral-50 radius-12"
             />
              {errorsfield.fdesc && <span className="text-danger" style={{ fontSize: "0.8rem", fontWeight: "bolder" }}>{errorsfield.fdesc}</span>}
             </div>
