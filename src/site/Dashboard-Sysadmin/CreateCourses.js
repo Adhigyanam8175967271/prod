@@ -34,6 +34,8 @@ const [price2, setPrice2] = useState("");
 const [values, setValues] = useState({
   image1: null, 
 });
+const [a11, setA11] = useState("");
+const [a22, setA22] = useState("");
 
 const handleFileChange = (event, imageNumber) => {
   const file = event.target.files[0];
@@ -71,6 +73,14 @@ const handleSubmit = (event) => {
   newErrors.smat = "Please select course add-ons";
 }
 
+if (!a11) {
+  newErrors.a11 = "Please select Doubt Clearing Status";
+}
+
+if (!a22) {
+  newErrors.a22 = "Please select Quiz Status";
+}
+
   // Image validation
   if (!values.image1) {
     newErrors.image1 = "Please select a valid image";
@@ -101,6 +111,8 @@ const handleSubmit = (event) => {
   formData.append('price1', price1);
   formData.append('price2', price2);
   formData.append('validity', validity);
+  formData.append('a11', a11);
+  formData.append('a22', a22);
   axios
     .post("https://adhigyanam-e92bf1bbbdb1.herokuapp.com/uploadcourse", formData)
     .then((res) => {
@@ -117,6 +129,8 @@ const handleSubmit = (event) => {
         setSdesc("");
         setFdesc("");
         setSmat("");
+        setA11("");
+        setA22("");
         setEname("");
         setPrice1("");
         setPrice2("");
@@ -344,6 +358,43 @@ placeholder="Enter Quick Description"
 </select>
       {errorsfield.smat && <span className="text-danger" style={{fontSize:"0.8rem", fontWeight:"bolder"}}>{errorsfield.smat}</span>}
 </div>
+
+
+<div  style={{marginTop:"15px"}}>
+
+ <select
+  id="a11"
+  name="a11"
+  value={a11}
+  className="form-control h-56-px bg-neutral-50 radius-12"
+  onChange={(e) => setA11(e.target.value)}
+>
+  <option value="">-- Doubt Clearing Session --</option>
+  <option value="Included">Included</option>
+  <option value="Not Applicable">Not Applicable</option>
+</select>
+      {errorsfield.a11 && <span className="text-danger" style={{fontSize:"0.8rem", fontWeight:"bolder"}}>{errorsfield.a11}</span>}
+</div>
+
+<div  style={{marginTop:"15px"}}>
+
+ <select
+  id="a22"
+  name="a22"
+  value={a22}
+  className="form-control h-56-px bg-neutral-50 radius-12"
+  onChange={(e) => setA22(e.target.value)}
+>
+  <option value="">-- Quiz Status --</option>
+  <option value="Available after the videos">Available after the videos</option>
+  <option value="Not Applicable">Not Applicable</option>
+</select>
+      {errorsfield.a22 && <span className="text-danger" style={{fontSize:"0.8rem", fontWeight:"bolder"}}>{errorsfield.a22}</span>}
+</div>
+
+
+
+
  <div  style={{marginTop:"15px"}}>
 
 <input
