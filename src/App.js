@@ -38,6 +38,7 @@ import Feedbacks from "./site/Dashboard-Sysadmin/Feedbacks";
 import Support from "./site/Dashboard-Sysadmin/Support";
 import WebRoutes from "./site/Dashboard-Sysadmin/WebRoutes";
 import Faq from "./site/Dashboard-Sysadmin/Faq";
+import Help from "./site/Dashboard-Sysadmin/Help";
 
 function App() {
   const [cookies] = useCookies(["token"]);
@@ -175,6 +176,10 @@ function App() {
            <Route
             path="/faq"
             element={isAuthenticated ? <Faq /> : <Navigate to="/sysadmin" />}
+          />
+           <Route
+            path="/help"
+            element={isAuthenticated ? <Help /> : <Navigate to="/sysadmin" />}
           />
           <Route path="/" element={<SignInPage />} />
           <Route path="/loggedout" element={<LoggedOut />} />

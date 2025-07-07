@@ -186,7 +186,17 @@ function logout() {
                     Registered Users
                   </NavLink>
                 </li>
-                 
+                   <li>
+                  <NavLink
+                    to='/help'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-info-main w-auto' />{" "}
+                   User Support Requests
+                  </NavLink>
+                </li>
                  <li>
                   <NavLink
                     to='/dashboardfeedbacks'
