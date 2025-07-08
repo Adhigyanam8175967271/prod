@@ -358,7 +358,7 @@ placeholder="Enter Quick Description"
                     </div>
                     <div>
                                         <Button type="submit" disabled={isSubmitting} className="btn btn-primary text-sm btn-sm px-12 py-16 w-100 radius-12 mt-32">
-                                        {isSubmitting ? 'Please Wait...' : 'Create Sub Service'}
+                                        {isSubmitting ? 'Please Wait...' : 'Publish Blog Article'}
                                         </Button>
                                         
                                       </div>
