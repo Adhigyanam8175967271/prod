@@ -297,28 +297,41 @@ const Promocodesuser = () => {
                                     </thead>
                                     <tbody>
   {clients.map(client => (
-    <tr key={client.Id} style={{ borderBottom: "1px solid #ddd", backgroundColor: "#f9f9f9", transition: "0.3s" }}>
+  <tr key={client.Id} style={{ borderBottom: "1px solid #ddd", backgroundColor: "#f9f9f9", transition: "0.3s" }}>
+  
+    <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor: "white", textTransform:"uppercase" }}>
+      {client.Code}
+    </td>
     
-      <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor: "white", textTransform:"uppercase" }}>{client.Code}</td>
-      <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor: "white" }}>{client.Discount}</td>
+    <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor: "white" }}>
+      {client.Discount}
+    </td>
 
-        <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor: "white" }}><b>{client.Userid || "N.A"}</b> / {client.Orderid || "N.A"}</td>
-              <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor: "white" }}>{client.Expiry}</td>
-      <td style={{ padding: "10px" }}>
-        
-        <Button 
-          className="btn-danger btn-small"
-          style={{ padding: "5px 10px", fontSize: "0.8rem", borderRadius: "5px", border: "none", cursor: "pointer", transition: "0.3s" }}
-          onClick={() => {
-            if (window.confirm("You are removing a record permanently! Are you sure you want to delete this record?")) {
-              handleDelete(client.Id);
-            }
-          }}>
-          Remove
-        </Button>
-      </td>
-    </tr>
-  ))}
+    <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor: "white" }}>
+      <b>{client.Userid || "N.A"}</b>
+      {client.Userid && client.Userid !== "N.A" && (
+        <> / {client.Orderid || "N.A"}</>
+      )}
+    </td>
+
+    <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor: "white" }}>
+      {client.Expiry}
+    </td>
+
+    <td style={{ padding: "10px" }}>
+      <Button 
+        className="btn-danger btn-small"
+        style={{ padding: "5px 10px", fontSize: "0.8rem", borderRadius: "5px", border: "none", cursor: "pointer", transition: "0.3s" }}
+        onClick={() => {
+          if (window.confirm("You are removing a record permanently! Are you sure you want to delete this record?")) {
+            handleDelete(client.Id);
+          }
+        }}>
+        Remove
+      </Button>
+    </td>
+  </tr>
+))}
 </tbody>
 </table>
 </div>
