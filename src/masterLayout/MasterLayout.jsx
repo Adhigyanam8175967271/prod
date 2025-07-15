@@ -521,7 +521,38 @@ function logout() {
             </li>
             
 
-           
+            <li className='dropdown'>
+              <Link to='#'>
+                <Icon icon='simple-line-icons:vector' className='menu-icon' />
+                <span>Promocodes</span>
+              </Link>
+              <ul className='sidebar-submenu'>
+              
+               
+                <li>
+                  <NavLink
+                    to='/promocodes'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-info-main w-auto' />{" "}
+                    Regular Codes
+                  </NavLink>
+                </li>
+                 <li>
+                  <NavLink
+                    to='/promocodesuser'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
+                    User Specific Codes
+                  </NavLink>
+                </li>
+              </ul>
+            </li>
 
             
 

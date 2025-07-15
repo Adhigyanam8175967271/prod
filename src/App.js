@@ -40,6 +40,9 @@ import WebRoutes from "./site/Dashboard-Sysadmin/WebRoutes";
 import Faq from "./site/Dashboard-Sysadmin/Faq";
 import Help from "./site/Dashboard-Sysadmin/Help";
 
+import Promocodes from "./site/Dashboard-Sysadmin/Promocodes";
+import Promocodesuser from "./site/Dashboard-Sysadmin/Promocodesuser";
+
 function App() {
   const [cookies] = useCookies(["token"]);
   const isAuthenticated = cookies.token !== undefined;
@@ -180,6 +183,14 @@ function App() {
            <Route
             path="/help"
             element={isAuthenticated ? <Help /> : <Navigate to="/sysadmin" />}
+          />
+          <Route
+            path="/promocodes"
+            element={isAuthenticated ? <Promocodes /> : <Navigate to="/sysadmin" />}
+          />
+          <Route
+            path="/promocodesuser"
+            element={isAuthenticated ? <Promocodesuser /> : <Navigate to="/sysadmin" />}
           />
           <Route path="/" element={<SignInPage />} />
           <Route path="/loggedout" element={<LoggedOut />} />

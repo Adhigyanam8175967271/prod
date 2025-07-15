@@ -27,6 +27,7 @@ const UnitCountOne = () => {
             const [count18, setCount18] = useState(0);
             const [count19, setCount19] = useState(0);
              const [count20, setCount20] = useState(0);
+              const [count21, setCount21] = useState(0);
   
     useEffect(() => {
       const fetchCount = async () => {
@@ -214,6 +215,14 @@ const UnitCountOne = () => {
           console.error("Error fetching count:", err);
         }
       };
+      const fetchCount21 = async () => {
+        try {
+          const response = await axios.get("https://adhigyanam-e92bf1bbbdb1.herokuapp.com/countPromo"); // Adjust URL if needed
+          setCount21(response.data.count);
+        } catch (err) {
+          console.error("Error fetching count:", err);
+        }
+      };
   
       fetchCount();
       fetchCount1();
@@ -236,6 +245,7 @@ const UnitCountOne = () => {
       fetchCount18();
        fetchCount19();
         fetchCount20();
+        fetchCount21();
     }, []); // Runs only once on component mount
     return (
         <div className="row row-cols-xxxl-5 row-cols-lg-3 row-cols-sm-2 row-cols-1 gy-4">
@@ -700,6 +710,29 @@ const UnitCountOne = () => {
                             <div className="w-50-px h-50-px bg-cyan rounded-circle d-flex justify-content-center align-items-center">
                                 <Icon
                                     icon="solar:document-text-outline"
+                                    className="text-white text-2xl mb-0"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    </NavLink>
+                </div>
+                {/* card end */}
+            </div>
+             <div className="col">
+            <div className="card shadow-none border bg-gradient-start-1" style={{height:auto}}>
+                <NavLink to='/promocodes'>
+                <div className="card-body" style={{padding:"5px 10px"}}>
+                        <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
+                            <div>
+                                <p className="fw-medium text-primary-light mb-0">
+                                    Promocodes
+                                </p>
+                                <h6 className="mb-0">{count21}</h6>
+                            </div>
+                            <div className="w-50-px h-50-px bg-success-main rounded-circle d-flex justify-content-center align-items-center">
+                                <Icon
+                                    icon="simple-line-icons:vector"
                                     className="text-white text-2xl mb-0"
                                 />
                             </div>
