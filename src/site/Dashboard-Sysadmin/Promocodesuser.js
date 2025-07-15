@@ -220,7 +220,8 @@ const Promocodesuser = () => {
                                                  />
                                                   {errorsfield.sno && <span className="text-danger" style={{ fontSize: "0.8rem", fontWeight: "bolder" }}>{errorsfield.sno}</span>}
                                              </div>
-                                              <div style={{marginTop:"15px"}}>
+                                             <p style={{marginTop:"20px"}}><b>Optional Parameters</b></p>
+                                              <div style={{marginTop:"10px"}}>
             
                                                  <input
                                                      onChange={(e) => setSnonew(e.target.value)}
@@ -286,10 +287,10 @@ const Promocodesuser = () => {
                             <thead>
                                         <tr>
                                         
-                                            <th scope="col">Coupon</th>
+                                            <th scope="col">Coupon Code</th>
                                             <th scope="col">Discount %</th>
-                                            <th scope="col">Expiry</th>
-                                             <th scope="col">User Specifics</th>
+                                            <th scope="col">User Specs</th>
+                                             <th scope="col">Expiry</th>
                                             <th scope="col">Options</th>
                                             
                                         </tr>
@@ -300,8 +301,9 @@ const Promocodesuser = () => {
     
       <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor: "white", textTransform:"uppercase" }}>{client.Code}</td>
       <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor: "white" }}>{client.Discount}</td>
-      <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor: "white" }}>{client.Expiry}</td>
-        <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor: "white" }}><b>UID: {client.Userid}</b> / {client.Usagep} / {client.Orderid}</td>
+
+        <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor: "white" }}><b>{client.Userid || "N.A"}</b> / {client.Orderid || "N.A"}</td>
+              <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor: "white" }}>{client.Expiry}</td>
       <td style={{ padding: "10px" }}>
         
         <Button 

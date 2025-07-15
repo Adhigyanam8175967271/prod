@@ -721,7 +721,7 @@ const UnitCountOne = () => {
             </div>
              <div className="col">
             <div className="card shadow-none border bg-gradient-start-1" style={{height:auto}}>
-                <NavLink to='/promocodes'>
+                <NavLink to='/promocodesuser'>
                 <div className="card-body" style={{padding:"5px 10px"}}>
                         <div className="d-flex flex-wrap align-items-center justify-content-between gap-3">
                             <div>
