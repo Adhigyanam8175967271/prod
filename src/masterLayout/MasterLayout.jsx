@@ -164,17 +164,7 @@ function logout() {
                   </NavLink>
                 </li>
                 
-                <li>
-                  <NavLink
-                    to='/webroutes'
-                    className={(navData) =>
-                      navData.isActive ? "active-page" : ""
-                    }
-                  >
-                    <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
-                    Web Routes
-                  </NavLink>
-                </li>
+               
                  <li>
                   <NavLink
                     to='/dashboardmru'
@@ -182,7 +172,7 @@ function logout() {
                       navData.isActive ? "active-page" : ""
                     }
                   >
-                    <i className='ri-circle-fill circle-icon text-info-main w-auto' />{" "}
+                    <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
                     Registered Users
                   </NavLink>
                 </li>
@@ -204,7 +194,7 @@ function logout() {
                       navData.isActive ? "active-page" : ""
                     }
                   >
-                    <i className='ri-circle-fill circle-icon text-info-main w-auto' />{" "}
+                    <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
                    Testimonial Requests
                   </NavLink>
                 </li>
@@ -219,39 +209,7 @@ function logout() {
                    Support Requests
                   </NavLink>
                 </li>
-                 <li>
-                  <NavLink
-                    to='/dashboardmt'
-                    className={(navData) =>
-                      navData.isActive ? "active-page" : ""
-                    }
-                  >
-                    <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
-                    Testimonials
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to='/faq'
-                    className={(navData) =>
-                      navData.isActive ? "active-page" : ""
-                    }
-                  >
-                    <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
-                    FAQs
-                  </NavLink>
-                </li>
-                 <li>
-                  <NavLink
-                    to='/dashboardpolicies'
-                    className={(navData) =>
-                      navData.isActive ? "active-page" : ""
-                    }
-                  >
-                    <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
-                    Policies
-                  </NavLink>
-                </li>
+              
               </ul>
             </li>
            
@@ -524,31 +482,64 @@ function logout() {
             <li className='dropdown'>
               <Link to='#'>
                 <Icon icon='simple-line-icons:vector' className='menu-icon' />
-                <span>Promocodes</span>
+                <span>Miscellaneous</span>
               </Link>
               <ul className='sidebar-submenu'>
               
                
                 <li>
                   <NavLink
-                    to='/promocodes'
-                    className={(navData) =>
-                      navData.isActive ? "active-page" : ""
-                    }
-                  >
-                    <i className='ri-circle-fill circle-icon text-info-main w-auto' />{" "}
-                    Regular Codes
-                  </NavLink>
-                </li>
-                 <li>
-                  <NavLink
                     to='/promocodesuser'
                     className={(navData) =>
                       navData.isActive ? "active-page" : ""
                     }
                   >
+                    <i className='ri-circle-fill circle-icon text-info-main w-auto' />{" "}
+                    Coupon Codes
+                  </NavLink>
+                </li>
+                   <li>
+                  <NavLink
+                    to='/dashboardmt'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
                     <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
-                    User Specific Codes
+                    Testimonials
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to='/faq'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-info-main w-auto' />{" "}
+                    FAQs
+                  </NavLink>
+                </li>
+                 <li>
+                  <NavLink
+                    to='/dashboardpolicies'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-danger-main w-auto' />{" "}
+                    Policies
+                  </NavLink>
+                </li>
+                 <li>
+                  <NavLink
+                    to='/webroutes'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-info-main w-auto' />{" "}
+                    Web Routes
                   </NavLink>
                 </li>
               </ul>

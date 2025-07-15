@@ -46,9 +46,13 @@ const Promocodesuser = () => {
 
   const newErrors = {
     ...validationnew("sno", sno),
-     ...validationnew("snonew", snonew),
     ...validationnew("title", title),
   };
+
+  // Only validate snonew if it's provided
+  if (snonew && snonew.trim() !== "") {
+    Object.assign(newErrors, validationnew("snonew", snonew));
+  }
 
   setErrorsfield(newErrors);
   if (Object.keys(newErrors).length > 0) return;
@@ -58,15 +62,22 @@ const Promocodesuser = () => {
   axios
     .post(
       "https://adhigyanam-e92bf1bbbdb1.herokuapp.com/createpromouser",
-      { sno, title, dated, snonew },
-      { headers: { "Content-Type": "application/json" } }
+      {
+        sno,
+        title,
+        dated,
+        snonew: snonew && snonew.trim() !== "" ? snonew : null, // send null if blank
+      },
+      {
+        headers: { "Content-Type": "application/json" },
+      }
     )
     .then((res) => {
       if (res.data === "Success") {
         setMessage("Operation was Successful!");
         setMessageerror("");
         setSno("");
-         setSnonew("");
+        setSnonew("");
         setTitle("");
         setDated("");
         fetchClients();
@@ -74,7 +85,7 @@ const Promocodesuser = () => {
     })
     .catch((err) => {
       if (err.response && err.response.status === 409) {
-        setMessageerror("User ID already exists! Please choose another.");
+        setMessageerror(err.response.data.error || "Duplicate entry. Try another.");
       } else {
         setMessageerror("An error occurred! Please try again.");
       }
@@ -105,7 +116,7 @@ const Promocodesuser = () => {
       <MasterLayout>
         {/* Breadcrumb */}
          <p className="mb-12 text-secondary-light" style={{fontSize:"15px"}}>
-                                           <b>You are here</b>: <NavLink to="/dashboard" style={{color:'blueviolet', textDecoration:"underline"}}>Dashboard</NavLink> | Promocodes (User Specific)
+                                           <b>You are here</b>: <NavLink to="/dashboard" style={{color:'blueviolet', textDecoration:"underline"}}>Dashboard</NavLink> | Promocodes
                                        </p>
                                        <div className="col-xxl-12 col-xl-12">
                                                    <div className="card h-100">
@@ -127,7 +138,7 @@ const Promocodesuser = () => {
                                                                            aria-controls="pills-to-do-list"
                                                                            aria-selected="true"
                                                                        >
-                                                                            A. Add New Promocodes (User)
+                                                                            A. Add New Coupon
                                                                        </button>
                                                                    </li>
                                                                    <li className="nav-item" role="presentation">
@@ -142,7 +153,7 @@ const Promocodesuser = () => {
                                                                            aria-selected="false"
                                                                            tabIndex={-1}
                                                                        >
-                                                                           B. Review Existing (User)
+                                                                           B. Review Existing
                                                                        </button>
                                                                    </li>
                                                                </ul>
@@ -173,7 +184,7 @@ const Promocodesuser = () => {
              <div>
            
                                            <p className="mb-32 text-secondary-light text-lg">
-                                               <b>Use the following form</b> to add a new user specific promocode to the website.
+                                               <b>Use the following form</b> to add a new promocode to the website.
                                            </p>
                                            {message && <p style={{padding:5, backgroundColor:"green", color:"white", borderRadius:2}}>{message}</p>}
                                              {messageerror && <p style={{padding:5, backgroundColor:"red", color:"white", borderRadius:2}}>{messageerror}</p>}
@@ -189,7 +200,7 @@ const Promocodesuser = () => {
             id="title"
             name="title"
             value={title}
-            placeholder="Enter Discount Code"
+            placeholder="Enter Coupon Code"
                 className="form-control h-56-px bg-neutral-50 radius-12"
                style={{textTransform:"uppercase"}}
             />
@@ -221,7 +232,6 @@ const Promocodesuser = () => {
                                                      className="form-control h-56-px bg-neutral-50 radius-12"
                                                    
                                                  />
-                                                  {errorsfield.snonew && <span className="text-danger" style={{ fontSize: "0.8rem", fontWeight: "bolder" }}>{errorsfield.snonew}</span>}
                                              </div>
             <div  style={{marginTop:"15px"}}>
             
@@ -268,18 +278,18 @@ const Promocodesuser = () => {
 
 
                                <p className="mb-32 text-secondary-light text-lg">
-                                   <b>Use the following datalist</b> to review / remove listed user promocodes.
+                                   <b>Use the following datalist</b> to review / remove listed promocodes.
                                </p>
                               
  <div style={{ overflowX: "auto", width: "100%" }}>
                                <table className="table bordered-table sm-table mb-0" style={{width:"100%"}}>
                             <thead>
                                         <tr>
-                                         <th scope="col">User ID</th>
-                                            <th scope="col">Promocode</th>
+                                        
+                                            <th scope="col">Coupon</th>
                                             <th scope="col">Discount %</th>
                                             <th scope="col">Expiry</th>
-                                             <th scope="col">Status</th>
+                                             <th scope="col">User Specifics</th>
                                             <th scope="col">Options</th>
                                             
                                         </tr>
@@ -287,11 +297,11 @@ const Promocodesuser = () => {
                                     <tbody>
   {clients.map(client => (
     <tr key={client.Id} style={{ borderBottom: "1px solid #ddd", backgroundColor: "#f9f9f9", transition: "0.3s" }}>
-      <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor: "white" }}>{client.Userid}</td>
+    
       <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor: "white", textTransform:"uppercase" }}>{client.Code}</td>
       <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor: "white" }}>{client.Discount}</td>
       <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor: "white" }}>{client.Expiry}</td>
-       <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor: "white" }}>{client.Usagep} - {client.Orderid}</td>
+        <td style={{ padding: "10px", fontSize: "0.9rem", color: "#333", backgroundColor: "white" }}><b>UID: {client.Userid}</b> / {client.Usagep} / {client.Orderid}</td>
       <td style={{ padding: "10px" }}>
         
         <Button 

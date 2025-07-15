@@ -39,8 +39,6 @@ import Support from "./site/Dashboard-Sysadmin/Support";
 import WebRoutes from "./site/Dashboard-Sysadmin/WebRoutes";
 import Faq from "./site/Dashboard-Sysadmin/Faq";
 import Help from "./site/Dashboard-Sysadmin/Help";
-
-import Promocodes from "./site/Dashboard-Sysadmin/Promocodes";
 import Promocodesuser from "./site/Dashboard-Sysadmin/Promocodesuser";
 
 function App() {
@@ -183,10 +181,6 @@ function App() {
            <Route
             path="/help"
             element={isAuthenticated ? <Help /> : <Navigate to="/sysadmin" />}
-          />
-          <Route
-            path="/promocodes"
-            element={isAuthenticated ? <Promocodes /> : <Navigate to="/sysadmin" />}
           />
           <Route
             path="/promocodesuser"
